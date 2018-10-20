@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.hznu.islab.entity.ResearchEntity" table="research" schema="is_lab">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+            <generator class="native"/>
+        </id>
+        <property name="researchDirection">
+            <column name="research_direction" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="introduction">
+            <column name="introduction" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="level">
+            <column name="level" sql-type="int(11)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

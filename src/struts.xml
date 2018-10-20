@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.action.excludePattern" value="/ueditor/jsp/controller.jsp" />
+    <!-- 上传文件的最大值 -->
+    <constant name="struts.multipart.maxSize" value="209715200" />
+
+    <package name="user" extends="struts-default" namespace="/">
+        <action name="user_addUser" class="userAction" method="addUser">
+            <result name="success" type="redirect">jsp/addNotice.jsp</result>
+            <result name="input">jsp/error.jsp</result>
+        </action>
+    </package>
+    <package name="notice" extends="struts-default" namespace="/">
+        <action name="notice_addNotice" class="noticeAction" method="addNotice">
+            <result name="success">jsp/success.jsp</result>
+            <result name="input">jsp/error.jsp</result>
+        </action>
+    </package>
+
+</struts>

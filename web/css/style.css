@@ -1,0 +1,93 @@
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+body {
+	font-size: 14px;
+    font-family: "微软雅黑",sans-serif;
+    background-color: #f4f4f4;
+}
+a:link, a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+.top {
+	width: 100%;
+	height: 80px;
+}
+.top .header {
+	margin: 0 auto;
+	width: 1080px;
+	height: 100%;
+	background-color: #ffffff;
+	font-size: 12px;
+}
+.top .header .logo {
+	float: left;
+	width: 80px;
+	height: 80px;
+}
+.top .header .left {
+	height: 100%;
+	float: left;
+}
+
+.top .header .hznu {
+	margin-left: 10px;
+	line-height: 80px;
+	font-family: "楷体";
+	font-weight: 700;
+	font-size: 50px;
+}
+
+.top .header .islab {
+	position: relative;
+	top: 30%;
+
+	margin-left: 7px;
+	font-size: 30px;
+}
+
+#nav {
+	width: 1080px;
+}
+#nav .nav {
+	background-color: #efefef;
+	width: 1080px;
+	height: 45px;
+}
+#nav .nav li {
+	display: block;
+	cursor: pointer;
+	text-align: center;
+	float: left;
+}
+#nav .nav li a {
+	display: block;
+
+	padding-top: 10px; 
+	width: 135px;
+	height: 35px;
+	font-size: 18px;
+	font-weight: 600;
+	text-decoration: none;
+	color: #000000;
+}
+
+#nav .nav li .color_in {
+	color: #ff0000;
+	background-color: #ffffff;	
+}
+
+#nav .nav li a:hover {
+	color: #ff0000;
+	background-color: #ffffff;
+}
+#footer {
+	width: 980px;
+	text-align: center;
+}
+

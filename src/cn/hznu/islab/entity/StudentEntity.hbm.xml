@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.hznu.islab.entity.StudentEntity" table="student" schema="is_lab">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+            <generator class="native"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="photo">
+            <column name="photo" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="gender">
+            <column name="gender" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="grade">
+            <column name="grade" sql-type="int(11)" not-null="false"/>
+        </property>
+        <property name="telephone">
+            <column name="telephone" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="qq">
+            <column name="qq" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="homepage">
+            <column name="homepage" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="company">
+            <column name="company" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="post">
+            <column name="post" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="salary">
+            <column name="salary" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="intro">
+            <column name="intro" sql-type="varchar(255)" not-null="false"/>
+        </property>
+        <property name="status">
+            <column name="status" sql-type="int(11)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
