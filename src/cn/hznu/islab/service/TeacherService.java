@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface TeacherService {
     //添加指导老师
-    void addUser(TeacherEntity teacherEntity);
+    void addTeacher(TeacherEntity teacherEntity);
     //更新指导老师
-    void updateUser(TeacherEntity teacherEntity);
+    void updateTeacher(TeacherEntity teacherEntity);
     //删除指导老师
-    void deleteUser(TeacherEntity teacherEntity);
-    //通过某些字段查找特定指导老师
-    TeacherEntity findUserByProperties(HashMap<String ,String> queryMap);
+    void deleteTeacher(TeacherEntity teacherEntity);
+    //通过某些字段查找特定一个或多个老师
+    List<TeacherEntity> findTeachersByProperties(HashMap<String ,String> queryMap);
     //所有指导老师
-    List<TeacherEntity> findAllUsers();
+    List<TeacherEntity> findAllTeachers();
 }

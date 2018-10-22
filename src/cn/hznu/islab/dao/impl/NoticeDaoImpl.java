@@ -50,7 +50,6 @@ public class NoticeDaoImpl extends HibernateDaoSupport implements NoticeDao {
         }
         return null;
     }
-
     //返回所有通知
     @Override
     public  List<NoticeEntity> findAllNotices(){
@@ -58,7 +57,7 @@ public class NoticeDaoImpl extends HibernateDaoSupport implements NoticeDao {
         Query query = session.createQuery("from NoticeEntity order by date desc");
 
         List<NoticeEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
@@ -75,7 +74,7 @@ public class NoticeDaoImpl extends HibernateDaoSupport implements NoticeDao {
         }
         List<NoticeEntity> list = (List<NoticeEntity>)this.getHibernateTemplate().findByCriteria(criteria);
         //查找返回结果判断
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
@@ -85,10 +84,10 @@ public class NoticeDaoImpl extends HibernateDaoSupport implements NoticeDao {
     public List<NoticeEntity> findNoticesByDate(Date starttime , Date endtime){
         Session session = this.currentSession();
         String hql = "from NoticeEntity where date >= '" + sdf.format(starttime)
-                + "' and date <= '" + sdf.format(endtime) + "'";
+                + "' and date <= '" + sdf.format(endtime) + "' order by date desc ";
         Query query = session.createQuery(hql);
         List<NoticeEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;

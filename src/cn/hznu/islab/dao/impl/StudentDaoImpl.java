@@ -41,25 +41,8 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
     public StudentEntity findStudentById(int id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(StudentEntity.class);
         criteria.add(Restrictions.eq("id",id));
-
-        List<StudentEntity> list = (List<StudentEntity>)this.getHibernateTemplate().findByCriteria(criteria);
-        if(list.size() > 0){
-            return list.get(0);
-        }
-        return null;
-    }
-    //根据一个或多个字段查找特定学生
-    @Override
-    public StudentEntity findStudentByProperties(HashMap<String ,String> queryMap) {
-        DetachedCriteria criteria = DetachedCriteria.forClass(StudentEntity.class);
-        //查询条件
-        for(String key : queryMap.keySet()) {
-            String property = key;
-            String value = queryMap.get(key);
-            criteria.add(Restrictions.eq(property, value));
-        }
-        List<StudentEntity> list = (List<StudentEntity>)this.getHibernateTemplate().findByCriteria(criteria);
-        if(list.size() > 0){
+        List<StudentEntity> list = (List<StudentEntity>) this.getHibernateTemplate().findByCriteria(criteria);
+        if(!list.isEmpty()){
             return list.get(0);
         }
         return null;
@@ -70,7 +53,7 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
         Session session = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
         Query query = session.createQuery("from StudentEntity where status != -1");
         List<StudentEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
@@ -80,18 +63,16 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
     public List<StudentEntity> findStudentsByProperties(HashMap<String, String> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(StudentEntity.class);
         //设置查找条件字段
-        for(String key : queryMap.keySet()){
+        for (String key : queryMap.keySet()) {
             String property = key;
             String value = queryMap.get(key);
-            criteria.add(Restrictions.eq(property,value));
+            criteria.add(Restrictions.eq(property, value));
         }
-        List<StudentEntity> list = (List<StudentEntity>)this.getHibernateTemplate().findByCriteria(criteria);
+        List<StudentEntity> list = (List<StudentEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         //查找结果判断
-        if(list.size() > 0){
+        if (!list.isEmpty()) {
             return list;
         }
         return null;
     }
-
-
 }

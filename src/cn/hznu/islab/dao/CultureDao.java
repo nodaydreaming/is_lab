@@ -21,4 +21,6 @@ public interface CultureDao {
     List<CultureEntity> findCulturesByProperties(HashMap<String ,String> queryMap);
     //返回某个时间段内的实验室文化
     List<CultureEntity> findCulturesByDate(Date starttime , Date endtime);
+    //返回某个类型的实验室文化
+    List<CultureEntity> findCulturesByTypes(int type);
 }

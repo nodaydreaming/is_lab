@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -46,6 +47,21 @@ public class ResearchDaoImpl extends HibernateDaoSupport implements ResearchDao 
         }
         return null;
     }
+    //返回根据一个或多个字段查找一个或多个研究方向
+    @Override
+    public List<ResearchEntity> findResearchsByProperties(HashMap<String, String> queryMap) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(ResearchEntity.class);
+        for(String key : queryMap.keySet()){
+            String property = key;
+            String value = queryMap.get(key);
+            criteria.add(Restrictions.eq(property,value));
+        }
+        List<ResearchEntity> list = (List<ResearchEntity>) this.getHibernateTemplate().findByCriteria(criteria);
+        if(!list.isEmpty()){
+            return list;
+        }
+        return null;
+    }
     //返回所有研究方向
     @Override
     public  List<ResearchEntity> findAllResearchs(){
@@ -53,7 +69,7 @@ public class ResearchDaoImpl extends HibernateDaoSupport implements ResearchDao 
         Query query = session.createQuery("from ResearchEntity");
 
         List<ResearchEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;

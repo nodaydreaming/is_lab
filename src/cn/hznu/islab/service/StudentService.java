@@ -12,8 +12,8 @@ public interface StudentService {
     void updateStudent(StudentEntity studentEntity);
     //删除学生
     void deleteStudent(StudentEntity studentEntity);
-    //通过某些字段查找特定学生
-    StudentEntity findStudentByProperties(HashMap<String ,String> queryMap);
+    //通过某些字段查找一个或多个学生
+    List<StudentEntity> findStudentsByProperties(HashMap<String ,String> queryMap);
     //所有学生
     List<StudentEntity> findAllStudents();
 }

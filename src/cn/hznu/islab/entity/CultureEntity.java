@@ -16,6 +16,11 @@ public class CultureEntity {
     private Date date;
     private String author;
     private String content;
+    /**
+     * 1 生活剪影（实验室环境及平时工作照片）
+     * 2 团建活动
+     * 3 毕业时分
+     */
     private Integer type;
     private Integer status;
 

@@ -58,12 +58,12 @@ public class CultureDaoImpl extends HibernateDaoSupport implements CultureDao {
         Query query = session.createQuery("from CultureEntity order by date desc");
 
         List<CultureEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
     }
-    //返回根据一个或多个字段查找某些实验室文化
+    //返回根据一个或多个字段查找一个或多个实验室文化
     @Override
     public List<CultureEntity> findCulturesByProperties(HashMap<String, String> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(CultureEntity.class);
@@ -75,7 +75,7 @@ public class CultureDaoImpl extends HibernateDaoSupport implements CultureDao {
         }
         List<CultureEntity> list = (List<CultureEntity>)this.getHibernateTemplate().findByCriteria(criteria);
         //查找返回结果判断
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
@@ -85,10 +85,23 @@ public class CultureDaoImpl extends HibernateDaoSupport implements CultureDao {
     public List<CultureEntity> findCulturesByDate(Date starttime , Date endtime){
         Session session = this.currentSession();
         String hql = "from CultureEntity where date >= '" + sdf.format(starttime)
-                + "' and date <= '" + sdf.format(endtime) + "'";
+                + "' and date <= '" + sdf.format(endtime) + "' order by date desc ";
         Query query = session.createQuery(hql);
         List<CultureEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
+            return list;
+        }
+        return null;
+    }
+    //返回该类型的实验室文化
+    @Override
+    public List<CultureEntity> findCulturesByTypes(int type) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(CultureEntity.class);
+        criteria.add(Restrictions.eq("type",type));
+
+        List<CultureEntity> list = (List<CultureEntity>) this.getHibernateTemplate().findByCriteria(criteria);
+
+        if(!list.isEmpty()){
             return list;
         }
         return null;

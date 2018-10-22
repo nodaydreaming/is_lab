@@ -50,26 +50,6 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
         }
         return null;
     }
-    //根据一个或多个字段查找特定用户
-    @Override
-    public UserEntity findUserByProperties(HashMap<String ,String> queryMap) {
-
-        DetachedCriteria criteria = DetachedCriteria.forClass(UserEntity.class);
-        //查询的条件
-        for(String key : queryMap.keySet()) {
-            String property = key;
-            String value = queryMap.get(key);
-            criteria.add(Restrictions.eq(property, value));
-        }
-        List<UserEntity> list = (List<UserEntity>)this.getHibernateTemplate().findByCriteria(criteria);
-
-        //判断返回结果
-        if(!list.isEmpty()){
-            System.out.println(list.get(0));
-            return list.get(0);
-        }
-        return null;
-    }
     //返回所有用户
     @Override
     public  List<UserEntity> findAllUsers(){
@@ -77,7 +57,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
         Query query = session.createQuery("from UserEntity where status = 1");
 
         List<UserEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
@@ -94,7 +74,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
         }
         List<UserEntity> list = (List<UserEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         //查询结果判断
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;

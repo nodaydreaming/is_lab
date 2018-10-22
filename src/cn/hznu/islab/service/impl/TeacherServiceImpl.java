@@ -22,27 +22,27 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void addUser(TeacherEntity teacherEntity) {
+    public void addTeacher(TeacherEntity teacherEntity) {
         teacherDao.addTeacher(teacherEntity);
     }
 
     @Override
-    public void updateUser(TeacherEntity teacherEntity) {
+    public void updateTeacher(TeacherEntity teacherEntity) {
         teacherDao.updateTeacher(teacherEntity);
     }
 
     @Override
-    public void deleteUser(TeacherEntity teacherEntity) {
+    public void deleteTeacher(TeacherEntity teacherEntity) {
         teacherDao.deleteTeacher(teacherEntity);
     }
 
     @Override
-    public TeacherEntity findUserByProperties(HashMap<String, String> queryMap) {
-        return teacherDao.findTeacherByProperties(queryMap);
+    public List<TeacherEntity> findTeachersByProperties(HashMap<String, String> queryMap) {
+        return teacherDao.findTeachersByProperties(queryMap);
     }
 
     @Override
-    public List<TeacherEntity> findAllUsers() {
+    public List<TeacherEntity> findAllTeachers() {
         return teacherDao.findAllTeachers();
     }
 }

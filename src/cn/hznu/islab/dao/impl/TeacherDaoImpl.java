@@ -21,7 +21,6 @@ import java.util.List;
  **/
 @Transactional
 public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
-
     //添加指导老师
     @Override
     public void addTeacher(TeacherEntity teacherEntity) {
@@ -50,31 +49,13 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
         }
         return null;
     }
-    //根据一个或多个字段查找特定指导老师
-    @Override
-    public TeacherEntity findTeacherByProperties(HashMap<String ,String> queryMap) {
-        DetachedCriteria criteria = DetachedCriteria.forClass(TeacherEntity.class);
-        //查询条件
-        for(String key : queryMap.keySet()) {
-            String property = key;
-            String value = queryMap.get(key);
-            criteria.add(Restrictions.eq(property, value));
-        }
-        List<TeacherEntity> list = (List<TeacherEntity>)this.getHibernateTemplate().findByCriteria(criteria);
-        //判断返回结果
-        if(!list.isEmpty()){
-            System.out.println(list.get(0));
-            return list.get(0);
-        }
-        return null;
-    }
     //返回所有指导老师
     @Override
     public List<TeacherEntity> findAllTeachers() {
         Session session = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
         Query query = session.createQuery("from TeacherEntity");
         List<TeacherEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
@@ -91,7 +72,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
         }
         List<TeacherEntity> list = (List<TeacherEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         //查询结果判断
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;

@@ -38,8 +38,8 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public NoticeEntity findNoticeByProperties(HashMap<String, String> queryMap) {
-        return noticeDao.findNoticeByProperties(queryMap);
+    public List<NoticeEntity> findNoticesByProperties(HashMap<String, String> queryMap) {
+        return noticeDao.findNoticesByProperties(queryMap);
     }
 
     @Override

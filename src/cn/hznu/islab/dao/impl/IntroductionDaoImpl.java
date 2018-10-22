@@ -40,7 +40,6 @@ public class IntroductionDaoImpl extends HibernateDaoSupport implements Introduc
         DetachedCriteria criteria = DetachedCriteria.forClass(IntroductionEntity.class);
         criteria.add(Restrictions.eq("id",id));
         List<IntroductionEntity> list = (List<IntroductionEntity>)this.getHibernateTemplate().findByCriteria(criteria);
-
         //判断返回结果
         if(!list.isEmpty()){
             System.out.println(list.get(0));
@@ -48,9 +47,9 @@ public class IntroductionDaoImpl extends HibernateDaoSupport implements Introduc
         }
         return null;
     }
-    //根据一个或多个字段查找特定介绍
+    //根据一个或多个字段查找一个或多个介绍
     @Override
-    public IntroductionEntity findIntroductionByProperties(HashMap<String ,String> queryMap) {
+    public IntroductionEntity findIntroductionsByProperties(HashMap<String ,String> queryMap) {
 
         DetachedCriteria criteria = DetachedCriteria.forClass(IntroductionEntity.class);
         //查询的条件
@@ -73,9 +72,8 @@ public class IntroductionDaoImpl extends HibernateDaoSupport implements Introduc
     public  List<IntroductionEntity> findAllIntroductions(){
         Session session = this.currentSession();
         Query query = session.createQuery("from IntroductionEntity");
-
         List<IntroductionEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;

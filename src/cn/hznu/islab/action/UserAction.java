@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @ClassName UserAction
@@ -37,10 +38,10 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         HashMap<String ,String> queryMap = new HashMap<>();
         queryMap.put("telephone",userEntity.getTelephone());
 
-        if(userService.findUserByProperties(queryMap) != null) {
+        if(userService.findUsersByProperties(queryMap) != null) {
             System.out.println("用户添加成功！");
-            System.out.println(userService.findUserByProperties(queryMap));
-            addActionError("用户添加成功！");
+            System.out.println(userService.findUsersByProperties(queryMap));
+
             return SUCCESS;
         }else{
             addActionError("用户添加失败，请重试！");
@@ -51,16 +52,20 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
 
     //更新用户
     public String updateUser(){
+        boolean flag = false;
         userService.updateUser(userEntity);
         //检验是否更新成功
         HashMap<String ,String> queryMap = new HashMap<>();
         queryMap.put("telephone",userEntity.getTelephone());
-        UserEntity user = userService.findUserByProperties(queryMap);
-        boolean flag = user.equals(userEntity);
+        List<UserEntity> list = userService.findUsersByProperties(queryMap);
+        for(UserEntity u : list) {
+            if(!flag) {
+                flag = u.equals(userEntity);
+            }
+        }
         if(flag) {
             System.out.println("用户更新成功！");
-            System.out.println(userService.findUserByProperties(queryMap));
-            addActionError("用户更新成功！");
+
             return SUCCESS;
         }else{
             addActionError("用户更新失败，请重试！");

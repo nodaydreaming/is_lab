@@ -14,6 +14,11 @@ public class StudentEntity {
     private String name;
     private String photo;
     private String gender;
+    /**
+     * 1 大一 2 大二 3 大三 4 大四
+     * 5 研一 6 研二 7 研三
+     * 8 博一 9 博二
+     */
     private Integer grade;
     private String telephone;
     private String qq;
@@ -23,6 +28,13 @@ public class StudentEntity {
     private String post;
     private String salary;
     private String intro;
+    /**
+     * 1 本科生
+     * 2 硕士生
+     * 3 博士生
+     * 0 已毕业
+     * -1 已退出
+     */
     private int status;
 
     public int getId() {

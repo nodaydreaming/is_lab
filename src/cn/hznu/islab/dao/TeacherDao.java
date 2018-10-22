@@ -14,10 +14,8 @@ public interface TeacherDao {
     void updateTeacher(TeacherEntity teacherEntity);
     //根据id查找指导老师
     TeacherEntity findTeacherById(int id);
-    //根据一个或多个字段查找特定指导老师
-    TeacherEntity findTeacherByProperties(HashMap<String ,String> queryMap);
     //返回所有指导老师
     List<TeacherEntity> findAllTeachers();
-    //返回根据一个或多个字段查找的某些指导老师
+    //返回根据一个或多个字段查找的一个或多个指导老师
     List<TeacherEntity> findTeachersByProperties(HashMap<String ,String> queryMap);
 }

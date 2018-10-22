@@ -37,8 +37,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentEntity findStudentByProperties(HashMap<String, String> queryMap) {
-        return studentDao.findStudentByProperties(queryMap);
+    public List<StudentEntity> findStudentsByProperties(HashMap<String, String> queryMap) {
+        return studentDao.findStudentsByProperties(queryMap);
     }
 
     @Override

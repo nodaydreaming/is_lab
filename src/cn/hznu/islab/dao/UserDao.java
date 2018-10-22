@@ -14,8 +14,6 @@ public interface UserDao {
     void updateUser(UserEntity userEntity);
     //根据id查找用户
     UserEntity findUserById(int id);
-    //根据一个或多个字段查找特定用户
-    UserEntity findUserByProperties(HashMap<String,String> queryMap);
     //返回所有用户
     List<UserEntity> findAllUsers();
     //返回根据一个或多个字段查找的某些用户

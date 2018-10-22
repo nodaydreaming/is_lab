@@ -57,7 +57,7 @@ public class NewsDaoImpl extends HibernateDaoSupport implements NewsDao {
         Query query = session.createQuery("from NewsEntity order by date desc ");
 
         List<NewsEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
@@ -74,7 +74,7 @@ public class NewsDaoImpl extends HibernateDaoSupport implements NewsDao {
         }
         List<NewsEntity> list = (List<NewsEntity>)this.getHibernateTemplate().findByCriteria(criteria);
         //查找返回结果判断
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
@@ -84,10 +84,10 @@ public class NewsDaoImpl extends HibernateDaoSupport implements NewsDao {
     public List<NewsEntity> findNewsByDate(Date starttime , Date endtime){
         Session session = this.currentSession();
         String hql = "from NewsEntity where date >= '" + sdf.format(starttime)
-                + "' and date <= '" + sdf.format(endtime) + "'";
+                + "' and date <= '" + sdf.format(endtime) + "' order by date desc ";
         Query query = session.createQuery(hql);
         List<NewsEntity> list = query.list();
-        if(list.size() > 0){
+        if(!list.isEmpty()){
             return list;
         }
         return null;
