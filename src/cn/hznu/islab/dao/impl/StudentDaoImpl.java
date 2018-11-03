@@ -50,7 +50,8 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
     //返回所有学生
     @Override
     public List<StudentEntity> findAllStudents() {
-        Session session = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
+
+        Session session = this.currentSession();
         Query query = session.createQuery("from StudentEntity where status != -1");
         List<StudentEntity> list = query.list();
         if(!list.isEmpty()){

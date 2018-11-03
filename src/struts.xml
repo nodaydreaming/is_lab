@@ -4,9 +4,14 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <constant name="struts.action.excludePattern" value="/ueditor/jsp/controller.jsp" />
     <!-- 上传文件的最大值 -->
     <constant name="struts.multipart.maxSize" value="209715200" />
+
+    <package name="index" extends="json-default" namespace="/">
+        <action name="index" class="indexAction">
+            <result name="success" type="json"></result>
+        </action>
+    </package>
 
     <package name="user" extends="struts-default" namespace="/">
         <action name="user_addUser" class="userAction" method="addUser">
@@ -20,5 +25,6 @@
             <result name="input">jsp/error.jsp</result>
         </action>
     </package>
+
 
 </struts>

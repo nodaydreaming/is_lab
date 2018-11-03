@@ -4,41 +4,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>信息安全实验室</title>
-
-    <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/style.css">
-    <script src="${ pageContext.request.contextPath }/js/script.js"></script>
+    <title>testAjax+Json</title>
+    <script src="js/script.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
-<!-- 头部模块 -->
-<div class="top">
-    <div class="header">
-        <img class="logo" src="${ pageContext.request.contextPath }/images/hznuLogo.png" />
-        <div class="left"><div class="hznu">杭州师范大学</div></div>
-        <div class="left"><div class="islab">信息安全实验室</div></div>
-    </div>
-</div>
-<!-- 导航模块 -->
-<div id="nav">
-    <ul class="nav">
-        <li><a href="#">首页</a></li>
-        <li><a href="#">实验室简介</a></li>
-        <li><a href="#">实验室成员</a></li>
-        <li><a href="#">成果导览</a></li>
-        <li><a href="#">公告通知</a></li>
-        <li><a href="#">专业资讯</a></li>
-        <li><a href="#">实验室文化</a></li>
-        <li><a href="#">关于我们</a></li>
-    </ul>
-</div>
-
-<div>
-    <a href="jsp/addNotice.jsp" style="width: 50px;size: 50px;color: #000000">添加</a>
-</div>
-
-<!-- 底部模块 -->
-<div id="footer">
-    杭州师范大学信息安全实验室 版权所有 &copy; 2017-2018&nbsp;&nbsp;&nbsp;&nbsp;
-</div>
+    <h1>TestAjaxJson</h1>
+    <div style="width: 100px; height: 200px;">123456</div>
+    <button>TestAjax</button>
 </body>
+<script type="text/javascript">
+         console.log($("button").text());
+            $.ajax({
+                url: 'index.action',
+                type: 'Post',
+                dataType: 'json',
+                async: false,
+                success: function (jsonArray) {
+                    console.log(jsonArray.result);
+                    var text = "";
+                    console.log(eval(jsonArray.result).length);
+                    var list = JSON.parse(jsonArray.result);
+                    console.log(list);
+                    for (var i = 0; i < eval(jsonArray.result).length; i++) {
+                        console.log(eval(jsonArray.result)[i]);
+
+                        var student = eval(jsonArray.result)[i];
+                        text += eval(jsonArray.result)[i];
+                    }
+                    $("div").text(text);
+                }
+            });
+</script>
 </html>

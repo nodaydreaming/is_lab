@@ -5,18 +5,21 @@
 body {
 	font-size: 14px;
     font-family: "微软雅黑",sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
+    text-align: center;
 }
 a:link, a:visited {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
 }
 a:hover {
     text-decoration: none;
 }
 .top {
+	padding-top: 10px;
+	padding-bottom: 10px;
 	width: 100%;
-	height: 80px;
+	height: 100px;
 }
 .top .header {
 	margin: 0 auto;
@@ -27,35 +30,41 @@ a:hover {
 }
 .top .header .logo {
 	float: left;
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 }
 .top .header .left {
-	height: 100%;
 	float: left;
 }
-
 .top .header .hznu {
 	margin-left: 10px;
-	line-height: 80px;
-	font-family: "楷体";
+	padding-top: 15px;
+	font-size: 48px;
+	font-family: "华文行楷";
+	color: #0078BF;
+}
+.top .header .lab {
+	margin-left: 5px;
+	padding-top: 15px;
+	font-size: 48px;
+	font-family: "华文行楷";
 	font-weight: 700;
-	font-size: 50px;
+	color: #000000;
 }
 
-.top .header .islab {
-	position: relative;
-	top: 30%;
-
-	margin-left: 7px;
-	font-size: 30px;
+.top .header .ename {
+	margin-top: 2px;
+	margin-left: 12px;
+	font-size: 25px;
+	font-family: Arial;
+	color: #000000;
 }
 
 #nav {
-	width: 1080px;
+	width: 100%;
+	background-color: #0078BF;
 }
 #nav .nav {
-	background-color: #efefef;
 	width: 1080px;
 	height: 45px;
 }
@@ -72,9 +81,9 @@ a:hover {
 	width: 135px;
 	height: 35px;
 	font-size: 18px;
-	font-weight: 600;
+	font-weight: 500;
 	text-decoration: none;
-	color: #000000;
+	color: #ffffff;
 }
 
 #nav .nav li .color_in {
@@ -86,8 +95,21 @@ a:hover {
 	color: #ff0000;
 	background-color: #ffffff;
 }
+
+#iframe1 {
+	margin: 10px auto;
+	width: 1080px;
+}
+
+
+
+
 #footer {
-	width: 980px;
+	width: 100%;
+	height: 35px;
+	padding-top: 16px;
 	text-align: center;
+	background: #0078BF;
+	color: #ffffff;
 }
 

@@ -58,6 +58,9 @@
     </bean>
 
     <!-- Action的配置 -->
+    <bean id="indexAction" class="cn.hznu.islab.action.IndexAction">
+        <property name="studentService" ref="studentService"/>
+    </bean>
     <bean id="userAction" class="cn.hznu.islab.action.UserAction">
         <property name="userService" ref="userService"/>
     </bean>

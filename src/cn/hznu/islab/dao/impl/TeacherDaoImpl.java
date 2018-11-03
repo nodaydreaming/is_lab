@@ -52,7 +52,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
     //返回所有指导老师
     @Override
     public List<TeacherEntity> findAllTeachers() {
-        Session session = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
+        Session session = this.currentSession();
         Query query = session.createQuery("from TeacherEntity");
         List<TeacherEntity> list = query.list();
         if(!list.isEmpty()){
