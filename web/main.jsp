@@ -7,6 +7,7 @@
     <title>杭州师范大学网络与信息安全实验室</title>
 
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/style.css">
+    <script type="text/javascript" src="${ pageContext.request.contextPath }/js/jquery-1.10.2.min.js"></script>
     <script src="${ pageContext.request.contextPath }/js/script.js"></script>
 </head>
 <body>
@@ -37,11 +38,18 @@
     </ul>
 </div>
 <!-- 插入页面 -->
-<iframe id = "iframe1" src="index.jsp" frameborder="0" style="width: 1080px;"></iframe>
-<div>
+<iframe id = "iframe1" src="index.jsp" frameborder="0" scrolling="no"></iframe>
 
+<!-- 底部模块 -->
+<div id="footer">
+    <div style="width: 1200px; text-align: center;">
+        <div style="width: 36%;float: left;">联系方式：15990019420&nbsp;&nbsp;&nbsp;邮箱：805297781@qq.com</div>
+
+        <div style="width: 34%;float: left;">Copyright©2017-2018&nbsp;杭州师范大学网络与信息安全实验室</div>
+
+        <div style="width: 30%;float: right;">地址：杭州师范大学仓前校区勤园13号楼301</div>
+    </div>
 </div>
-
-
 </body>
+
 </html>

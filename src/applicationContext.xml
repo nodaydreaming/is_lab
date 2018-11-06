@@ -49,6 +49,7 @@
                 <value>cn/hznu/islab/entity/NewsEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/ResearchEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/TeacherEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/LinkEntity.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -87,6 +88,21 @@
     <bean id="noticeService" class="cn.hznu.islab.service.impl.NoticeServiceImpl">
         <property name="noticeDao" ref="noticeDao"/>
     </bean>
+    <bean id="cultureService" class="cn.hznu.islab.service.impl.CultureServiceImpl">
+        <property name="cultureDao" ref="cultureDao"/>
+    </bean>
+    <bean id="introductionService" class="cn.hznu.islab.service.impl.IntroductionServiceImpl">
+        <property name="introductionDao" ref="introductionDao"/>
+    </bean>
+    <bean id="newsService" class="cn.hznu.islab.service.impl.NewsServiceImpl">
+        <property name="newsDao" ref="newsDao"/>
+    </bean>
+    <bean id="researchService" class="cn.hznu.islab.service.impl.ResearchServiceImpl">
+        <property name="researchDao" ref="researchDao"/>
+    </bean>
+    <bean id="linkService" class="cn.hznu.islab.service.impl.LinkServiceImpl">
+        <property name="linkDao" ref="linkDao"/>
+    </bean>
 
     <!-- DAO的配置 -->
     <bean id="userDao" class="cn.hznu.islab.dao.impl.UserDaoImpl" scope="prototype">
@@ -99,6 +115,21 @@
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
     <bean id="noticeDao" class="cn.hznu.islab.dao.impl.NoticeDaoImpl" scope="prototype">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="cultureDao" class="cn.hznu.islab.dao.impl.CultureDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="introductionDao" class="cn.hznu.islab.dao.impl.IntroductionDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="newsDao" class="cn.hznu.islab.dao.impl.NewsDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="researchDao" class="cn.hznu.islab.dao.impl.ResearchDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="linkDao" class="cn.hznu.islab.dao.impl.LinkDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 

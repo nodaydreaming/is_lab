@@ -49,7 +49,7 @@ public class IntroductionDaoImpl extends HibernateDaoSupport implements Introduc
     }
     //根据一个或多个字段查找一个或多个介绍
     @Override
-    public IntroductionEntity findIntroductionsByProperties(HashMap<String ,String> queryMap) {
+    public List<IntroductionEntity> findIntroductionsByProperties(HashMap<String ,String> queryMap) {
 
         DetachedCriteria criteria = DetachedCriteria.forClass(IntroductionEntity.class);
         //查询的条件
@@ -62,8 +62,7 @@ public class IntroductionDaoImpl extends HibernateDaoSupport implements Introduc
 
         //判断返回结果
         if(!list.isEmpty()){
-            System.out.println(list.get(0));
-            return list.get(0);
+            return list;
         }
         return null;
     }
