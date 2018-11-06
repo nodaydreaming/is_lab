@@ -1,11 +1,12 @@
 package cn.hznu.islab.action;
 
-import cn.hznu.islab.entity.StudentEntity;
-import cn.hznu.islab.service.StudentService;
+import cn.hznu.islab.entity.UserEntity;
+import cn.hznu.islab.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,12 +18,11 @@ import java.util.List;
  **/
 public class IndexAction extends ActionSupport {
     private String result;
-    private StudentEntity studentEntity;
-    private StudentService studentService;
 
+    private UserService userService;
 
-    public void setStudentService(StudentService studentService) {
-        this.studentService = studentService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     public String getResult() {
@@ -35,23 +35,18 @@ public class IndexAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        List<String> list = new ArrayList<>();
+        HashMap<String,List> map = new HashMap<>();
 
-        list.add("aaa");
-        list.add("bbb");
-        list.add("ccc");
-        System.out.println(list);
+        List<UserEntity> userEntityList = userService.findAllUsers();
+        List<String> stringList = new ArrayList<>();
+        stringList.add("aaa");
+        stringList.add("bbb");
+        stringList.add("ccc");
+        map.put("user",userEntityList);
+        map.put("abc",stringList);
 
-        List<StudentEntity> studentEntities = studentService.findAllStudents();
-        System.out.println(studentEntities);
-        try {
-            JSONArray jsonArray = JSONArray.fromObject(list);
-            result = jsonArray.toString();
-//            response.getWriter().print(result);
-            System.out.println("result:"+result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        JSONArray jsonArray = JSONArray.fromObject(map);
+        result = jsonArray.toString();
 
         return SUCCESS;
     }

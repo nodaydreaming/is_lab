@@ -5,35 +5,26 @@
 <head>
     <meta charset="UTF-8">
     <title>testAjax+Json</title>
-    <script src="js/script.js"></script>
-    <script src="js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/footer.css"/>
+    <script src="${ pageContext.request.contextPath }/js/jquery-1.10.2.min.js"></script>
+    <script src="${ pageContext.request.contextPath }/js/index.js"></script>
 </head>
 <body>
     <h1>TestAjaxJson</h1>
     <div style="width: 100px; height: 200px;">123456</div>
     <button>TestAjax</button>
-</body>
-<script type="text/javascript">
-         console.log($("button").text());
-            $.ajax({
-                url: 'index.action',
-                type: 'Post',
-                dataType: 'json',
-                async: false,
-                success: function (jsonArray) {
-                    console.log(jsonArray.result);
-                    var text = "";
-                    console.log(eval(jsonArray.result).length);
-                    var list = JSON.parse(jsonArray.result);
-                    console.log(list);
-                    for (var i = 0; i < eval(jsonArray.result).length; i++) {
-                        console.log(eval(jsonArray.result)[i]);
 
-                        var student = eval(jsonArray.result)[i];
-                        text += eval(jsonArray.result)[i];
-                    }
-                    $("div").text(text);
-                }
-            });
-</script>
+
+    <!-- 底部模块 -->
+    <div id="footer">
+        <div style="width: 1200px; text-align: center;">
+            <div style="float: left;">联系方式：15990019420&nbsp;&nbsp;&nbsp;邮箱：805297781@qq.com</div>
+
+            <div style="float: left; margin-left: 94px;">Copyright©2017-2018&nbsp;杭州师范大学网络与信息安全实验室</div>
+
+            <div style="float: right;">地址：杭州师范大学仓前校区勤园13号楼301</div>
+        </div>
+    </div>
+</body>
+
 </html>

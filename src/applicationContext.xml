@@ -59,7 +59,8 @@
 
     <!-- Action的配置 -->
     <bean id="indexAction" class="cn.hznu.islab.action.IndexAction">
-        <property name="studentService" ref="studentService"/>
+        <!--<property name="linkService" ref="linkService"/>-->
+        <property name="userService" ref="userService"/>
     </bean>
     <bean id="userAction" class="cn.hznu.islab.action.UserAction">
         <property name="userService" ref="userService"/>
@@ -86,17 +87,18 @@
     <bean id="noticeService" class="cn.hznu.islab.service.impl.NoticeServiceImpl">
         <property name="noticeDao" ref="noticeDao"/>
     </bean>
+
     <!-- DAO的配置 -->
-    <bean id="userDao" class="cn.hznu.islab.dao.impl.UserDaoImpl">
+    <bean id="userDao" class="cn.hznu.islab.dao.impl.UserDaoImpl" scope="prototype">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
-    <bean id="teacherDao" class="cn.hznu.islab.dao.impl.TeacherDaoImpl">
+    <bean id="teacherDao" class="cn.hznu.islab.dao.impl.TeacherDaoImpl" scope="prototype">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
-    <bean id="studentDao" class="cn.hznu.islab.dao.impl.StudentDaoImpl">
+    <bean id="studentDao" class="cn.hznu.islab.dao.impl.StudentDaoImpl" scope="prototype">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
-    <bean id="noticeDao" class="cn.hznu.islab.dao.impl.NoticeDaoImpl">
+    <bean id="noticeDao" class="cn.hznu.islab.dao.impl.NoticeDaoImpl" scope="prototype">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 

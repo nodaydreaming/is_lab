@@ -54,7 +54,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
     @Override
     public  List<UserEntity> findAllUsers(){
         Session session = this.currentSession();
-        Query query = session.createQuery("from UserEntity where status = 1");
+        Query query = session.createQuery("from UserEntity");
 
         List<UserEntity> list = query.list();
         if(!list.isEmpty()){
