@@ -1,0 +1,89 @@
+function btn_login() {
+
+    console.log("123456");
+    console.log($("#username").val());
+    console.log($("#password").val());
+
+    var account = $("#username").val();
+    var pwd = $("#password").val();
+
+    if(account == null || account == ""){
+        layer.open({
+            type: 1,
+            offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+            id: 'layerDemo1', //防止重复弹出
+            content: '<div style="padding: 20px 100px;">' + "请输入账号！" + '</div>',
+            btn: '关闭',
+            btnAlign: 'c', //按钮居中
+            shade: 0.5, //不显示遮罩
+            title: "信息安全实验室",
+            yes: function () {
+                layer.closeAll();
+            }
+            // title: '在线调试'
+            // ,content: '可以填写任意的layer代码'
+        });
+    }
+    else if(pwd == null || pwd == ""){
+        layer.open({
+            type: 1,
+            offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+            id: 'layerDemo1', //防止重复弹出
+            content: '<div style="padding: 20px 100px;">' + "请输入密码！" + '</div>',
+            btn: '关闭',
+            btnAlign: 'c', //按钮居中
+            shade: 0.5, //不显示遮罩
+            title: "信息安全实验室",
+            yes: function () {
+                layer.closeAll();
+            }
+            // title: '在线调试'
+            // ,content: '可以填写任意的layer代码'
+        });
+    }
+    else{
+        var mydata={
+            username : $("#username").val(),
+            password : $("#password").val()
+        };
+        console.log(mydata);
+        //验证账号和密码
+        $.ajax({
+            url : 'user_login.action',
+            type : 'post',
+            data : mydata,
+            success : function (result) {
+                console.log(result);
+                console.log(eval(result));
+                console.log(result.error);
+                console.log(result.newpage);
+                //账号和密码正确，跳转页面
+                if(result.newpage != null){
+                    window.location.href = result.newpage;
+                }
+                //账号或密码错误，提示错误信息
+                else if (result.error != null) {
+                    var textError = result.error.toString();
+                    console.log(textError);
+
+                    layer.open({
+                        type: 1,
+                        offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                        id: 'layerDemo1', //防止重复弹出
+                        content: '<div style="padding: 20px 100px;">' + textError + '</div>',
+                        btn: '关闭',
+                        btnAlign: 'c', //按钮居中
+                        shade: 0.5, //不显示遮罩
+                        title: "信息安全实验室",
+                        yes: function () {
+                            layer.closeAll();
+                        }
+                        // title: '在线调试'
+                        // ,content: '可以填写任意的layer代码'
+                    });
+                }
+            }
+        });
+    }
+
+}

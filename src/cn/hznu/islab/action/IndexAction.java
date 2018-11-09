@@ -4,7 +4,10 @@ import cn.hznu.islab.entity.UserEntity;
 import cn.hznu.islab.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
+import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,26 +20,19 @@ import java.util.List;
  * @Version 1.0
  **/
 public class IndexAction extends ActionSupport {
-    private String result;
-
     private UserService userService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
     @Override
     public String execute() throws Exception {
-        HashMap<String,List> map = new HashMap<>();
+        HttpServletResponse response = ServletActionContext.getResponse();
+        PrintWriter writer = response.getWriter();
 
+        HashMap<String,List> map = new HashMap<>();
+        System.out.println("查询所有用户。。。");
         List<UserEntity> userEntityList = userService.findAllUsers();
         List<String> stringList = new ArrayList<>();
         stringList.add("aaa");
@@ -46,8 +42,13 @@ public class IndexAction extends ActionSupport {
         map.put("abc",stringList);
 
         JSONArray jsonArray = JSONArray.fromObject(map);
-        result = jsonArray.toString();
+        response.setContentType("application/json;charset=utf-8");
+        response.setHeader("Cache-Control", "no-cache"); //取消浏览器缓存
 
-        return SUCCESS;
+        writer.print(jsonArray);
+        writer.flush();
+        writer.close();
+
+        return NONE;
     }
 }

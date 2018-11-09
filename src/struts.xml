@@ -7,13 +7,18 @@
     <!-- 上传文件的最大值 -->
     <constant name="struts.multipart.maxSize" value="209715200" />
 
-    <package name="index" extends="json-default" namespace="/">
+    <package name="index" extends="json-default">
         <action name="index" class="indexAction">
-            <result name="success" type="json"></result>
+
         </action>
     </package>
 
-    <package name="user" extends="struts-default" namespace="/">
+    <package name="user" extends="json-default">
+        <!-- 登陆Action -->
+        <action name="user_login" class="loginAction" method="login">
+            <result type="json"></result>
+        </action>
+
         <action name="user_addUser" class="userAction" method="addUser">
             <result name="success" type="redirect">jsp/addNotice.jsp</result>
             <result name="input">jsp/error.jsp</result>
