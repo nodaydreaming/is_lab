@@ -91,7 +91,7 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserEntity
 
                 Gson gson = new Gson();
                 HashMap<String,String> map = new HashMap<>();
-                map.put("newpage","../main.jsp");
+                map.put("newpage","main.html");
                 String result = gson.toJson(map);
 
                 writer.print(result);

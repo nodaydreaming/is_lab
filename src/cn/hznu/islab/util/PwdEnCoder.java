@@ -33,7 +33,7 @@ public class PwdEnCoder {
                 cs[i + 4] = hashResult.charAt(i / 5 * 4 + 3);
             }
             hashResult = new String(cs);
-            System.out.println(hashResult);
+//            System.out.println(hashResult);
             return hashResult;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
