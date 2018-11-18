@@ -14,8 +14,10 @@
   <link rel="stylesheet" href="../../layui/css/global.css" media="all">
   <link rel="stylesheet" href="../../layui/css/modules/code.css" media="all">
   <link rel="stylesheet" href="../../layui/css/modules/layer/default/layer.css" media="all">
-  <!-- <script type="text/javascript" src="../layui/lay/modules/jquery.js"></script> -->
   <script type="text/javascript" src="../js/main.js"></script>
+  <script type="text/javascript" src="../../layui/layui.js"></script>
+  <script type="text/javascript" src="../../layui/lay/modules/jquery.js"></script>
+
   <script type="text/javascript" src="../../js/jquery-1.10.2.js"></script>
 <style>
 .layui-nav-tree{vertical-align: top;}
@@ -25,22 +27,29 @@
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header header header-demo" winter="">
   <div class="layui-main">
-    <a class="" href="../../index.html" style="font-size: 17px;color: white; line-height: 55px; font-weight: 550">
+    <a class="" href="../main.html" style="font-size: 17px;color: white; line-height: 55px; font-weight: 550">
       网络与信息安全实验室
     </a>
     <ul class="layui-nav">
- 
-      <li class="layui-nav-item" lay-unselect="">
-        <a href="javascript:;" onmouseover="showDl()">
-          <img src="../../images/user_default.jpg" class="layui-nav-img">我
+
+      <li class="layui-nav-item">
+        <a href="../../index.html"">返回首页</a>
+      </li>
+
+      <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="showDl()" onmouseout="closeDl()">
+        <a href="javascript:;">
+          <img src="../../images/user_default.jpg" class="layui-nav-img">
+          我
           <span class="layui-nav-more"></span>
         </a>
         <dl class="layui-nav-child layui-anim layui-anim-upbit" >
-          <dd><a href="../user_info/updateUser.html" onmouseover="dlShow()" onmouseout="noShowDl()">修改信息</a></dd>
-          <dd><a href="../login.html" onmouseover="dlShow()" onmouseout="noShowDl()">退了</a></dd>
+          <dd><a href="../user_info/updateUser.html" onmouseover="showDl()" onmouseout="noShowDl()">修改信息</a></dd>
+          <dd><a href="../../login.html" onmouseover="showDl()" onmouseout="noShowDl()">退出</a></dd>
         </dl>
       </li>
-    <span class="layui-nav-bar" style="left: 6.01px; top: 55px; width: 0px; opacity: 0;"></span></ul>
+      
+    <span class="layui-nav-bar" style="left: 6.01px; top: 55px; width: 0px; opacity: 0;"></span>
+  </ul>
   </div>
 </div>
   <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -65,13 +74,16 @@
                 <a class="aHover" href="awards.html">获奖情况</a>
               </dd>
               <dd class="">
-                <a class="aHover" href="researchDirection.html">研究方向</a>
+                <a class="aHover" href="researchDirection">研究方向</a>
               </dd>
               <dd class="">
                 <a class="aHover" href="teacher.html">指导老师</a>
               </dd>
               <dd class="layui-this">
                 <a class="aHover" href="#">规章制度</a>
+              </dd>
+              <dd class="">
+                <a class="aHover" href="registration.html">报名情况</a>
               </dd>
             </dl>
           </li>

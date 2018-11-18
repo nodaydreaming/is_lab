@@ -71,7 +71,7 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserEntity
         if(list != null){
             userEntity = list.get(0);
             //输出用户
-            System.out.println("用户输入账号对应的用户信息" + userEntity);
+//            System.out.println("用户输入账号对应的用户信息" + userEntity);
             /**
              * 把用户手机号的前8为作为“盐”对口令进行加密
              * 默认“盐”为“12345678”
@@ -87,11 +87,11 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserEntity
 
             if(hashPwd.equals(userEntity.getPassword())){
                 //密码正确，将用户储存在session中
-                ActionContext.getContext().getSession().put("user",userEntity);
+                ActionContext.getContext().getSession().put("loginUser",userEntity);
 
                 Gson gson = new Gson();
                 HashMap<String,String> map = new HashMap<>();
-                map.put("newpage","main.html");
+                map.put("newpage","admin/main.html");
                 String result = gson.toJson(map);
 
                 writer.print(result);

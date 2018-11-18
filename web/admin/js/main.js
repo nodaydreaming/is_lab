@@ -1,3 +1,4 @@
+
 window.onload = function(){
 	var listAForHover = document.getElementsByClassName("aHover");
 	// console.log(listAForHover);
@@ -16,7 +17,7 @@ function aOnHover() {
 	var offtop = targetA.offsetTop;
 	var obj = targetA;
 	while(obj = obj.offsetParent){
-		offtop += obj.offsetTop
+		offtop += obj.offsetTop;
 	}
 	// console.log(offtop);
 	offtop -= 60;
@@ -45,35 +46,112 @@ function aClick(){
 }
 // 展示屏幕右上角“我”的下拉菜单
 function showDl(){
-	var a = window.event.target;
-	var li = a.parentNode;
-	var dl = li.childNodes[3];
+	var obj= window.event.target;
+	while(obj.id != "showDlLi"){
+		obj = obj.parentNode;
+	}
+	var dl = obj.childNodes[3];
+	var span = obj.childNodes[1].childNodes[3];
 
-	var span = a.childNodes[3];
 	span.className = "layui-nav-more layui-nav-mored";
-
 	//显示dl
 	dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
+	// var width1 = obj.offsetWidth;
+	// var height1 = obj.offsetHeight;
+	
+	// var width2 = dl.offsetWidth;
+	// var height2 = dl.offsetHeight;
 
-}
-function dlShow(){
-	var a = window.event.target;
-	var dl = a.parentNode.parentNode;
-	var li = dl.parentNode;
-	var span = li.childNodes[1].childNodes[3];
-	span.className = "layui-nav-more layui-nav-mored";
+	// var offleft1 = obj.offsetLeft;
+	// var offleft2 = dl.offsetLeft;
+	// var i = obj;
+	// while(i = i.offsetParent){
+	// 	offleft1 += i.offsetLeft;
+	// }
+	// i = dl;
+	// while(i = i.offsetParent){
+	// 	offleft2 += i.offsetLeft;
+	// }
+	// var x1 = offleft1 + width1;
+	// var y1 = height1;
 
-	dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
+	// var x2 = offleft2 + width2 + 10;
+	// var y2 = y1 + height2 + 10;
+
+	// console.log(x1);
+	// console.log(y1);
+	// console.log(x2);
+	// console.log(y2);
+
+	// var e = event || window.event;
+	// var x = e.clientX
+	// var y = e.clientY;
+
+	// if((x > offleft1 && x < x1 && y > 0 && y < y1) || (x > offleft2 && x < x2 && y > y1 && y < y2)){
+	// 	span.className = "layui-nav-more layui-nav-mored";
+	// 	//显示dl
+	// 	dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
+	// }else {
+	// 	span.className = "layui-nav-more";
+	// 	//显示dl
+	// 	dl.className = "layui-nav-child layui-anim layui-anim-upbit";
+	// }
+	
 }
+function closeDl(){
+	var obj= window.event.target;
+	while(obj.id != "showDlLi"){
+		obj = obj.parentNode;
+	}
+	var dl = obj.childNodes[3];
+	var span = obj.childNodes[1].childNodes[3];
+
+	if(dl.className === "layui-nav-child layui-anim layui-anim-upbit layui-show"){
+		var e = event || window.event;
+		var x = e.clientX
+		var y = e.clientY;
+		var width = dl.offsetWidth;
+		var height = dl.offsetHeight;
+
+		var offleft = dl.offsetLeft;
+		var i = dl;
+		while(i = i.offsetParent){
+			offleft += i.offsetLeft;
+		}
+
+		if(x > offleft && x < (width+offleft+10) && y > 0 && y < (height+70)){
+			span.className = "layui-nav-more layui-nav-mored";
+			//显示dl
+			dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
+		}
+		else {
+			span.className = "layui-nav-more";
+			//隐藏dl
+			dl.className = "layui-nav-child layui-anim layui-anim-upbit";
+		}
+	}
+}
+
 // 隐藏屏幕右上角“我”的下拉菜单
 function noShowDl(){
-	var a = window.event.target;
-	var dl = a.parentNode.parentNode;
-	var li = dl.parentNode;
-	var span = li.childNodes[1].childNodes[3];
-	span.className = "layui-nav-more";
-	var classes = dl.className;
 
+	var obj= window.event.target;
+	while(obj.id != "showDlLi"){
+		obj = obj.parentNode;
+	}
+	var dl = obj.childNodes[3];
+	var span = obj.childNodes[1].childNodes[3];
+
+	span.className = "layui-nav-more";
+	//隐藏dl
 	dl.className = "layui-nav-child layui-anim layui-anim-upbit";
 
+	obj.className = "layui-nav-item";
+}
+function showBar(){
+	var obj= window.event.target;
+	while(obj.className != "layui-nav-item"){
+		obj = obj.parentNode;
+	}
+	obj.className += " layui-this";
 }
