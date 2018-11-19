@@ -5,14 +5,13 @@
 
 <struts>
     <!-- 上传文件的最大值 -->
+    <constant name="struts.action.excludePattern" value="/ueditor/.*" />
     <constant name="struts.multipart.maxSize" value="209715200" />
 
     <package name="index" extends="json-default">
         <action name="index" class="indexAction">
-
         </action>
     </package>
-
     <package name="user" extends="json-default">
         <!-- 登陆Action -->
         <action name="user_login" class="loginAction" method="login">
@@ -30,6 +29,9 @@
             <result name="input">jsp/error.jsp</result>
         </action>
     </package>
-
+    <package name="libInfo" extends="json-default">
+        <action name="info_update" class="cn.hznu.islab.action.LibInfoAction" method="updateInfo">
+        </action>
+    </package>
 
 </struts>

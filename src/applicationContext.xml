@@ -78,6 +78,9 @@
     <bean id="noticeAction" class="cn.hznu.islab.action.NoticeAction">
         <property name="noticeService" ref="noticeService"/>
     </bean>
+    <bean id="infoAction" class="cn.hznu.islab.action.LibInfoAction">
+        <property name="introductionService" ref="introductionService"/>
+    </bean>
     <!-- Service的配置 -->
     <bean id="userService" class="cn.hznu.islab.service.impl.UserServiceImpl">
         <property name="userDao" ref="userDao"/>

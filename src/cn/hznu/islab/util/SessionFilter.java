@@ -29,7 +29,7 @@ public class SessionFilter implements Filter {
 
         //获得根目录所对应的绝对路径
         String currentURL = request.getRequestURI();
-//        System.out.println(currentURL);
+//        System.out.println("用户的访问地址为：" + currentURL);
         //截取到当前文件名用于比较
         String targetURL = currentURL.substring(currentURL.indexOf("/",1),currentURL.length());
 //        System.out.println(targetURL);
