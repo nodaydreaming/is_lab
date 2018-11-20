@@ -16,7 +16,7 @@
     <schema id="4" parent="1" name="is_lab">
       <Current>1</Current>
       <Visible>1</Visible>
-      <Collation>utf8_general_ci</Collation>
+      <Collation>utf8mb4_general_ci</Collation>
     </schema>
     <schema id="5" parent="1" name="lib">
       <Collation>latin1_swedish_ci</Collation>
@@ -918,16 +918,36 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="231" parent="4" name="culture"/>
-    <table id="232" parent="4" name="introduction"/>
-    <table id="233" parent="4" name="link"/>
-    <table id="234" parent="4" name="news"/>
-    <table id="235" parent="4" name="notice"/>
-    <table id="236" parent="4" name="registration"/>
-    <table id="237" parent="4" name="research"/>
-    <table id="238" parent="4" name="student"/>
-    <table id="239" parent="4" name="teacher"/>
-    <table id="240" parent="4" name="user"/>
+    <table id="231" parent="4" name="culture">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="232" parent="4" name="introduction">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="233" parent="4" name="link">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="234" parent="4" name="news">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="235" parent="4" name="notice">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="236" parent="4" name="registration">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="237" parent="4" name="research">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="238" parent="4" name="student">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="239" parent="4" name="teacher">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="240" parent="4" name="user">
+      <Collation>utf8_general_ci</Collation>
+    </table>
     <column id="241" parent="231" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>

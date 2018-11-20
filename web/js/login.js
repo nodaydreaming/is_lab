@@ -48,11 +48,12 @@ function btn_login() {
             url : 'user_login.action',
             type : 'post',
             data : mydata,
+            scriptCharset : 'utf-8',
             success : function (result) {
-                console.log(result);
-                console.log(eval(result));
-                console.log(result.error);
-                console.log(result.newpage);
+                // console.log(result);
+                // console.log(eval(result));
+                // console.log(result.error);
+                // console.log(result.newpage);
                 //账号和密码正确，跳转页面
                 if(result.newpage != null){
                     window.location.href = result.newpage;

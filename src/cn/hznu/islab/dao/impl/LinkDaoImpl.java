@@ -7,6 +7,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * @Date 2018/11/6 18:25
  * @Version 1.0
  **/
+@Transactional
 public class LinkDaoImpl extends HibernateDaoSupport implements LinkDao {
 
     @Override

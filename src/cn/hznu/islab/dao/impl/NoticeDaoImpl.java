@@ -7,6 +7,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +21,7 @@ import java.util.List;
  * @Date 2018/10/16 18:13
  * @Version 1.0
  **/
+@Transactional
 public class NoticeDaoImpl extends HibernateDaoSupport implements NoticeDao {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     //添加通知

@@ -7,6 +7,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
  * @Date 2018/10/20 14:36
  * @Version 1.0
  **/
+@Transactional
 public class ResearchDaoImpl extends HibernateDaoSupport implements ResearchDao {
     //添加研究方向
     @Override

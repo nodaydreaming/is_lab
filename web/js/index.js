@@ -1,6 +1,6 @@
-$.ajax({
-    url: 'index.action',
-    type: 'post',
-    dataType: 'json',
-    
-});
+// $.ajax({
+//     url: 'index.action',
+//     type: 'post',
+//     dataType: 'json'
+//
+// });

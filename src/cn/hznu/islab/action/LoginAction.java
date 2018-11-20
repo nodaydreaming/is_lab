@@ -53,8 +53,8 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserEntity
 
         user.setTelephone(user.getUsername());
 
-        System.out.println("用户输入账号: " + user.getUsername());
-        System.out.println("用户输入密码: " + user.getPassword());
+//        System.out.println("用户输入账号: " + user.getUsername());
+//        System.out.println("用户输入密码: " + user.getPassword());
         //假设账号是用户名
         HashMap<String,String> queryMap = new HashMap<>();
         queryMap.put("username",user.getUsername());
@@ -82,8 +82,8 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserEntity
             }
             hashPwd = new PwdEnCoder().enCoder(user.getPassword(), salt);
 
-            System.out.println("用户输入密码的hash值：" + hashPwd);
-            System.out.println("账号对应密码的hash值：" + userEntity.getPassword());
+//            System.out.println("用户输入密码的hash值：" + hashPwd);
+//            System.out.println("账号对应密码的hash值：" + userEntity.getPassword());
 
             if(hashPwd.equals(userEntity.getPassword())){
                 //密码正确，将用户储存在session中
@@ -101,7 +101,7 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserEntity
                 return NONE;
             }else{
                 String error = "密码错误，请重新输入！";
-                System.out.println(error);
+//                System.out.println(error);
                 Gson gson = new Gson();
                 HashMap<String,String> map = new HashMap<>();
                 map.put("error",error);
@@ -117,7 +117,7 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserEntity
         //账号不存在
         else{
             String error = "账号不存在！";
-            System.out.println(error);
+//            System.out.println(error);
             Gson gson = new Gson();
             HashMap<String,String> map = new HashMap<>();
             map.put("error",error);

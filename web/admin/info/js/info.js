@@ -1,5 +1,49 @@
+var ueditor = UE.getEditor('ueditor');
+
+ueditor.ready(function () {
+    $.ajax({
+        url : 'getInfo.action',
+        type : 'post',
+        dataType : 'json',
+        data : {"name" : $("#btnUpdate").attr("name")},
+        success : function (result) {
+            if(result.content != "获得content失败！") {
+                ueditor.setContent(result.content);
+            }else{
+                layer.open({
+                    type: 1,
+                    offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                    id: 'layerDemo1', //防止重复弹出
+                    content: '<div style="padding: 20px 100px;">' + result.content + '</div>',
+                    btn: '关闭',
+                    btnAlign: 'c', //按钮居中
+                    shade: 0.5, //不显示遮罩
+                    title: "信息安全实验室",
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        },
+        error : function () {
+            layer.open({
+                type: 1,
+                offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                id: 'layerDemo1', //防止重复弹出
+                content: '<div style="padding: 20px 100px;">' + "请求Action失败！" + '</div>',
+                btn: '关闭',
+                btnAlign: 'c', //按钮居中
+                shade: 0.5, //不显示遮罩
+                title: "信息安全实验室",
+                yes: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+    });
+});
+
 function btn_update() {
-    var ueditor = UE.getEditor('ueditor');
     var introName = $("#btnUpdate").attr("name");
     var introContent = ueditor.getContent();
     console.log(introName);
@@ -13,11 +57,36 @@ function btn_update() {
         url : 'info_update.action',
         type : 'post',
         data : mydata,
-        success : function () {
-            console.log("修改成功");
+        scriptCharset : 'utf-8',
+        success : function (result) {
+            layer.open({
+                type: 1,
+                offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                id: 'layerDemo1', //防止重复弹出
+                content: '<div style="padding: 20px 100px;">' + result.updateResult + '</div>',
+                btn: '关闭',
+                btnAlign: 'c', //按钮居中
+                shade: 0.5, //不显示遮罩
+                title: "信息安全实验室",
+                yes: function () {
+                    layer.closeAll();
+                }
+            });
         },
         error : function () {
-            console.log("请求action失败！");
+            layer.open({
+                type: 1,
+                offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                id: 'layerDemo1', //防止重复弹出
+                content: '<div style="padding: 20px 100px;">' + "请求Action失败！" + '</div>',
+                btn: '关闭',
+                btnAlign: 'c', //按钮居中
+                shade: 0.5, //不显示遮罩
+                title: "信息安全实验室",
+                yes: function () {
+                    layer.closeAll();
+                }
+            });
         }
     });
 }

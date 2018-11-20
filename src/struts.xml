@@ -32,6 +32,8 @@
     <package name="libInfo" extends="json-default">
         <action name="info_update" class="cn.hznu.islab.action.LibInfoAction" method="updateInfo">
         </action>
+        <action name="getInfo" class="cn.hznu.islab.action.LibInfoAction" method="getInfoContent">
+        </action>
     </package>
 
 </struts>
