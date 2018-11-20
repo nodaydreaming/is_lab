@@ -1,8 +1,9 @@
 function btn_update() {
     var ueditor = UE.getEditor('ueditor');
-    var introName = "libIntro";
+    var introName = $("#btnUpdate").attr("name");
     var introContent = ueditor.getContent();
-
+    console.log(introName);
+    console.log(introContent);
     var mydata = {
         name : introName,
         content : introContent

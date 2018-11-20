@@ -1,9 +1,5 @@
 function btn_login() {
 
-    // console.log("123456");
-    // console.log($("#username").val());
-    // console.log($("#password").val());
-
     var account = $("#username").val();
     var pwd = $("#password").val();
 

@@ -5,6 +5,9 @@ import cn.hznu.islab.service.IntroductionService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * @ClassName LibInfoAction
  * @Description
@@ -29,6 +32,25 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
     public String updateInfo(){
         System.out.println(introductionEntity.getName());
         System.out.println(introductionEntity.getContent());
+
+        IntroductionEntity introduction;
+        HashMap<String, String> queryMap = new HashMap<>();
+        queryMap.put("name",introductionEntity.getName());
+
+        List<IntroductionEntity> list = introductionService.findIntroductionsByProperties(queryMap);
+
+        if(list != null){
+            introduction = list.get(0);
+            introduction.setContent(introductionEntity.getContent());
+            introductionService.updateIntroduction(introduction);
+        }
+
+        list = introductionService.findIntroductionsByProperties(queryMap);
+
+        if(list.get(0).getContent().equals(introductionEntity.getContent())){
+            System.out.println("更新成功！");
+        }
+
         return NONE;
     }
 }

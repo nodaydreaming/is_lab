@@ -32,7 +32,7 @@ public class IndexAction extends ActionSupport {
         PrintWriter writer = response.getWriter();
 
         HashMap<String,List> map = new HashMap<>();
-        System.out.println("查询所有用户。。。");
+//        System.out.println("查询所有用户。。。");
         List<UserEntity> userEntityList = userService.findAllUsers();
         List<String> stringList = new ArrayList<>();
         stringList.add("aaa");
