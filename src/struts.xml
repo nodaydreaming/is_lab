@@ -4,31 +4,25 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <!-- 上传文件的最大值 -->
     <constant name="struts.action.excludePattern" value="/ueditor/.*" />
+    <!-- 上传文件的最大值 -->
     <constant name="struts.multipart.maxSize" value="209715200" />
 
     <package name="index" extends="json-default">
-        <action name="index" class="indexAction">
+        <action name="index" class="indexAction" method="execute">
         </action>
     </package>
-    <package name="user" extends="json-default">
-        <!-- 登陆Action -->
-        <action name="user_login" class="loginAction" method="login">
-            <result type="json"></result>
-        </action>
 
-        <action name="user_addUser" class="userAction" method="addUser">
-            <result name="success" type="redirect">jsp/addNotice.jsp</result>
-            <result name="input">jsp/error.jsp</result>
+    <package name="user" extends="json-default">
+        <action name="user_login" class="userAction" method="login">
         </action>
     </package>
-    <package name="notice" extends="struts-default" namespace="/">
+
+    <package name="notice" extends="json-default">
         <action name="notice_addNotice" class="noticeAction" method="addNotice">
-            <result name="success">jsp/success.jsp</result>
-            <result name="input">jsp/error.jsp</result>
         </action>
     </package>
+
     <package name="libInfo" extends="json-default">
         <action name="info_update" class="cn.hznu.islab.action.LibInfoAction" method="updateInfo">
         </action>

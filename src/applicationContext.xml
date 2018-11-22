@@ -63,9 +63,6 @@
         <!--<property name="linkService" ref="linkService"/>-->
         <property name="userService" ref="userService"/>
     </bean>
-    <bean id="loginAction" class="cn.hznu.islab.action.LoginAction">
-        <property name="userService" ref="userService"/>
-    </bean>
     <bean id="userAction" class="cn.hznu.islab.action.UserAction">
         <property name="userService" ref="userService"/>
     </bean>

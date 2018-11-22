@@ -2,6 +2,7 @@ package cn.hznu.islab.action;
 
 import cn.hznu.islab.entity.UserEntity;
 import cn.hznu.islab.service.UserService;
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
@@ -29,7 +30,12 @@ public class IndexAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Cache-Control", "no-cache"); //取消浏览器缓存
+        response.setContentType("application/json; charset=utf-8");
+        response.setCharacterEncoding("utf-8");
         PrintWriter writer = response.getWriter();
+        Gson gson = new Gson();
+        String result;
 
         HashMap<String,List> map = new HashMap<>();
 //        System.out.println("查询所有用户。。。");
@@ -41,11 +47,9 @@ public class IndexAction extends ActionSupport {
         map.put("user",userEntityList);
         map.put("abc",stringList);
 
-        JSONArray jsonArray = JSONArray.fromObject(map);
-        response.setContentType("application/json;charset=utf-8");
-        response.setHeader("Cache-Control", "no-cache"); //取消浏览器缓存
+        result = gson.toJson(map);
 
-        writer.print(jsonArray);
+        writer.print(result);
         writer.flush();
         writer.close();
 

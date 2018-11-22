@@ -90,9 +90,13 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
         HashMap<String, String> queryMap = new HashMap<>();
         queryMap.put("name",introductionEntity.getName());
         List<IntroductionEntity> list = introductionService.findIntroductionsByProperties(queryMap);
-
         if(list != null){
-            String content = list.get(0).getContent().toString();
+            String content;
+            if(list.get(0).getContent() == null){
+                content = "";
+            }else {
+                content = list.get(0).getContent();
+            }
 
             map.put("content", content);
 

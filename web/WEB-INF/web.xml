@@ -17,7 +17,7 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-
+    <!-- 字符编码 -->
     <filter>
         <filter-name>encoding</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -30,7 +30,7 @@
         <filter-name>encoding</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
-
+    <!-- 用户登陆状态检测 -->
     <filter>
         <filter-name>sessionFilter</filter-name>
         <filter-class>cn.hznu.islab.util.SessionFilter</filter-class>
@@ -43,7 +43,7 @@
     <!-- Structs2框架的核心过滤器 -->
     <filter>
         <filter-name>struts2</filter-name>
-        <filter-class>cn.hznu.islab.util.UeditorFilter</filter-class>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
         <init-param>
             <param-name>config</param-name>
             <param-value>struts-default.xml,struts-plugin.xml,struts.xml</param-value>
@@ -52,14 +52,11 @@
     <filter-mapping>
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-
 
 </web-app>
