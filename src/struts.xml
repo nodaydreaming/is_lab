@@ -14,8 +14,13 @@
     </package>
 
     <package name="user" extends="json-default">
-        <action name="user_login" class="userAction" method="login">
-        </action>
+        <action name="user_login" class="userAction" method="login"></action>
+        <action name="user_getLoginUser" class="userAction" method="getLoginUser"></action>
+        <action name="user_update" class="userAction" method="updateUser"></action>
+        <action name="user_updatePassword" class="userAction" method="updatePassword"></action>
+        <action name="user_getAll" class="userAction" method="getAllUsers"></action>
+        <action name="user_add" class="userAction" method="addUser"></action>
+        <action name="user_delete" class="userAction" method="deleteUser"></action>
     </package>
 
     <package name="notice" extends="json-default">

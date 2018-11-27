@@ -1,4 +1,4 @@
-
+//鼠标悬浮在左侧菜单某一项时，该项的所在的类别的名字旁边出现标注，鼠标移开，效果取消
 window.onload = function(){
 	var listAForHover = document.getElementsByClassName("aHover");
 	// console.log(listAForHover);
@@ -6,9 +6,23 @@ window.onload = function(){
 		listAForHover[i].onmouseover = aOnHover;
 		listAForHover[i].onmouseout = noAHover;
 	}
+	$.ajax({
+		url : 'user_getLoginUser.action',
+		type : 'post',
+		dataType : 'json',
+        scriptCharset : 'utf-8',
+		success : function (result) {
+			var loginUser = result.loginUser;
+			if(loginUser.nickname != null){
+				var li = document.getElementById('showDlLi');
+				var img = li.childNodes[1].childNodes[1];
+			}
+			if(loginUser.photo != null){
+
+			}
+        }
+	});
 }
-
-
 function aOnHover() {
 	var a = window.event.target;
 	var li = a.parentNode.parentNode.parentNode;
@@ -26,14 +40,13 @@ function aOnHover() {
 	bar.style.top = offtop + "px";
 	bar.style.opacity = 1;
 }
-
 function noAHover(){
 	var bar = document.getElementById("nav-bar");
 	bar.style.height = "0px";
 	bar.style.top = "0px";
 	bar.style.opacity = 0;
 }
-
+//左侧菜单栏的展开与折叠
 function aClick(){
 	var a = window.event.target;
 	var li = a.parentNode;
@@ -44,6 +57,7 @@ function aClick(){
 		li.className = "layui-nav-item layui-nav-itemed";
 	}
 }
+
 // 展示屏幕右上角“我”的下拉菜单
 function showDl(){
 	var obj= window.event.target;
@@ -98,6 +112,7 @@ function showDl(){
 	// }
 	
 }
+// 隐藏屏幕右上角“我”的下拉菜单
 function closeDl(){
 	var obj= window.event.target;
 	while(obj.id != "showDlLi"){
@@ -131,8 +146,6 @@ function closeDl(){
 		}
 	}
 }
-
-// 隐藏屏幕右上角“我”的下拉菜单
 function noShowDl(){
 
 	var obj= window.event.target;
@@ -148,6 +161,7 @@ function noShowDl(){
 
 	obj.className = "layui-nav-item";
 }
+
 function showBar(){
 	var obj= window.event.target;
 	while(obj.className != "layui-nav-item"){

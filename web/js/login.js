@@ -1,5 +1,4 @@
 function btn_login() {
-
     var account = $("#username").val();
     var pwd = $("#password").val();
 
@@ -33,8 +32,6 @@ function btn_login() {
             yes: function () {
                 layer.closeAll();
             }
-            // title: '在线调试'
-            // ,content: '可以填写任意的layer代码'
         });
     }
     else{
@@ -42,7 +39,7 @@ function btn_login() {
             username : $("#username").val(),
             password : $("#password").val()
         };
-        console.log(mydata);
+        // console.log(mydata);
         //验证账号和密码
         $.ajax({
             url : 'user_login.action',
@@ -50,24 +47,18 @@ function btn_login() {
             data : mydata,
             scriptCharset : 'utf-8',
             success : function (result) {
-                // console.log(result);
-                // console.log(eval(result));
-                // console.log(result.error);
-                // console.log(result.newpage);
                 //账号和密码正确，跳转页面
-                if(result.newpage != null){
-                    window.location.href = result.newpage;
+                if(result.nextPage != null){
+                    window.location.href = result.nextPage;
                 }
                 //账号或密码错误，提示错误信息
-                else if (result.error != null) {
-                    var textError = result.error.toString();
-                    console.log(textError);
-
+                else if (result.message != null) {
+                    var textMessage = result.message.toString();
                     layer.open({
                         type: 1,
                         offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                         id: 'layerDemo1', //防止重复弹出
-                        content: '<div style="padding: 20px 100px;">' + textError + '</div>',
+                        content: '<div style="padding: 20px 100px;">' + textMessage + '</div>',
                         btn: '关闭',
                         btnAlign: 'c', //按钮居中
                         shade: 0.5, //不显示遮罩
@@ -75,10 +66,23 @@ function btn_login() {
                         yes: function () {
                             layer.closeAll();
                         }
-                        // title: '在线调试'
-                        // ,content: '可以填写任意的layer代码'
                     });
                 }
+            },
+            error : function () {
+                layer.open({
+                    type: 1,
+                    offset: 'auto',
+                    id: 'layerDemo1',
+                    content: '<div style="padding: 20px 100px;">' + "请求失败，请重试！" + '</div>',
+                    btn: '关闭',
+                    btnAlign: 'c', //按钮居中
+                    shade: 0.5, //不显示遮罩
+                    title: "信息安全实验室",
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
             }
         });
     }
