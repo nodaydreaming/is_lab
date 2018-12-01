@@ -60,8 +60,7 @@
 
     <!-- Action的配置 -->
     <bean id="indexAction" class="cn.hznu.islab.action.IndexAction">
-        <!--<property name="linkService" ref="linkService"/>-->
-        <property name="userService" ref="userService"/>
+
     </bean>
     <bean id="userAction" class="cn.hznu.islab.action.UserAction">
         <property name="userService" ref="userService"/>

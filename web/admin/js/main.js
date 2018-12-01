@@ -6,22 +6,26 @@ window.onload = function(){
 		listAForHover[i].onmouseover = aOnHover;
 		listAForHover[i].onmouseout = noAHover;
 	}
+	//此ajax不适用于main.html页面获取管理员信息
 	$.ajax({
-		url : 'user_getLoginUser.action',
+		url : '../../user_getLoginUser.action',
 		type : 'post',
-		dataType : 'json',
         scriptCharset : 'utf-8',
 		success : function (result) {
+			console.log(result);
 			var loginUser = result.loginUser;
 			console.log(loginUser);
 			if(loginUser.nickname != null){
 				var li = document.getElementById('showDlLi');
 				console.log(li.childNodes[1].childNodes);
-				var img = li.childNodes[1].childNodes[1];
+				li.childNodes[1].childNodes[2].data = loginUser.nickname;
 			}
 			if(loginUser.photo != null){
 
 			}
+        },
+        error : function () {
+			console.log("请求失败！");
         }
 	});
 }

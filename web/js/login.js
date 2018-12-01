@@ -46,6 +46,7 @@ function btn_login() {
             data : mydata,
             scriptCharset : 'utf-8',
             success : function (result) {
+                console.log(result);
                 //账号或密码错误，提示错误信息
                 if (result.message != null) {
                     var textMessage = result.message.toString();
@@ -62,6 +63,12 @@ function btn_login() {
                             layer.closeAll();
                         }
                     });
+                }
+                else{
+                    if(result.newPage != null){
+                        console.log(result.newPage);
+                        window.location.href = result.newPage;
+                    }
                 }
             },
             error : function () {

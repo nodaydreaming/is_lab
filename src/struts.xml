@@ -7,6 +7,8 @@
     <!--<constant name="struts.action.excludePattern" value="/ueditor/.*" />-->
     <!-- 上传文件的最大值 -->
     <constant name="struts.multipart.maxSize" value="209715200" />
+    <!-- 使用struts的开发者模式 -->
+    <constant name="struts.devMode" value="true"/>
 
     <package name="index" extends="struts-default, json-default">
         <action name="index" class="indexAction" method="execute">
@@ -15,25 +17,18 @@
 
     <package name="user" extends="struts-default, json-default" namespace="/">
         <action name="user_login" class="userAction" method="login">
-           <result name="success" type="redirect">/admin/main.html</result>
         </action>
         <action name="user_getLoginUser" class="userAction" method="getLoginUser">
-            <result name="login" type="redirect">/login.html</result>
         </action>
         <action name="user_update" class="userAction" method="updateUser">
-            <result name="login" type="redirect">/login.html</result>
         </action>
         <action name="user_updatePassword" class="userAction" method="updatePassword">
-            <result name="login" type="redirect">/login.html</result>
         </action>
         <action name="user_getAll" class="userAction" method="getAllUsers">
-            <result name="login" type="redirect">/login.html</result>
         </action>
         <action name="user_add" class="userAction" method="addUser">
-            <result name="login" type="redirect">/login.html</result>
         </action>
         <action name="user_delete" class="userAction" method="deleteUser">
-            <result name="login" type="redirect">/login.html</result>
         </action>
     </package>
 

@@ -23,6 +23,7 @@ import java.util.List;
  * @Date 2018/11/8 15:34
  * @Version 1.0
  **/
+
 public class UserAction extends ActionSupport implements ModelDriven<UserEntity> {
     private UserService userService;
     private UserEntity user = new UserEntity();
@@ -45,12 +46,11 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
 
         if(ActionContext.getContext().getSession().get("loginUser") != null){
             UserEntity loginUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
+            System.out.println(loginUser);
             map.put("loginUser", loginUser);
         }
         else {
-            //重定向到登陆界面
-            //response.sendRedirect(ServletActionContext.getRequest().getContextPath() + "/login.html");
-            return "login";
+            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
         }
 
         MapToJSON.mapToJson(response, map);
@@ -93,9 +93,8 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
             if(hashPwd.equals(userEntity.getPassword())){
                 //密码正确，将用户储存在session中
                 ActionContext.getContext().getSession().put("loginUser",userEntity);
-                return SUCCESS;
                 //跳转到后台首页
-                //response.sendRedirect(ServletActionContext.getRequest().getContextPath() + "/admin/main.html");
+                map.put("newPage", ServletActionContext.getRequest().getContextPath() + "/admin/main.html");
             }
             else{
                 //密码错误
@@ -170,7 +169,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         }
         else{
             //跳转到登陆页面
-            //response.sendRedirect(ServletActionContext.getRequest().getContextPath() + "/login.html");
+            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;
@@ -182,8 +181,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
     public String updatePassword() throws IOException {
         HttpServletResponse response = ServletActionContext.getResponse();
         HttpServletRequest request = ServletActionContext.getRequest();
-        //查询时，用于存储“属性”和“属性值”的map
-        HashMap<String,String> queryMap = new HashMap<>();
+
         //存储返回前端的数据
         HashMap<String,Object> map = new HashMap<>();
 
@@ -208,7 +206,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
             }
         }
         else {
-            response.sendRedirect(request.getContextPath() + "/login.html");
+            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;
@@ -220,8 +218,6 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
      */
     public String getAllUsers() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
-        //查询时，用于存储“属性”和“属性值”的map
-        HashMap<String,String> queryMap = new HashMap<>();
         //存储返回前端的数据
         HashMap<String,Object> map = new HashMap<>();
 
@@ -239,7 +235,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
             }
         }
         else{
-            //response.sendRedirect(ServletActionContext.getRequest().getContextPath() + "/login.html");
+            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;
@@ -291,7 +287,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         }
         else{
             //登陆
-            response.sendRedirect(ServletActionContext.getRequest().getContextPath() + "/login.html");
+            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;
@@ -337,9 +333,10 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         }
         else{
             //跳转到登录页
-            response.sendRedirect(ServletActionContext.getRequest().getContextPath() + "/login.html");
+            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
         }
         MapToJSON.mapToJson(response, map);
+        System.out.println(map);
         return NONE;
     }
 
