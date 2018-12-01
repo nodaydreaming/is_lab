@@ -13,8 +13,10 @@ window.onload = function(){
         scriptCharset : 'utf-8',
 		success : function (result) {
 			var loginUser = result.loginUser;
+			console.log(loginUser);
 			if(loginUser.nickname != null){
 				var li = document.getElementById('showDlLi');
+				console.log(li.childNodes[1].childNodes);
 				var img = li.childNodes[1].childNodes[1];
 			}
 			if(loginUser.photo != null){

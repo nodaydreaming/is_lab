@@ -29,41 +29,36 @@
     </style>
 </head>
 <body>
-    <div class="layui-layout layui-layout-admin">
-  <div class="layui-header header header-demo" winter="">
-  <div class="layui-main">
-    <a class="" href="../main.html" style="font-size: 17px;color: white; line-height: 55px; font-weight: 500">
-      网络与信息安全实验室
-    </a>
-    <ul class="layui-nav">
+  <div class="layui-layout layui-layout-admin">
+    <div class="layui-header header header-demo" winter="">
+    <div class="layui-main">
+      <a class="" href="../main.html" style="font-size: 17px;color: white; line-height: 55px; font-weight: 500">
+        网络与信息安全实验室
+      </a>
+      <ul class="layui-nav">
 
-      <li class="layui-nav-item">
-        <a href="../../index.html">返回首页</a>
-      </li>
+        <li class="layui-nav-item">
+          <a href="../../index.html">返回首页</a>
+        </li>
 
-      <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="showDl()" onmouseout="closeDl()">
-        <a href="javascript:;">
-          <img src="../../images/user_default.jpg" class="layui-nav-img">
-          我
-          <span class="layui-nav-more"></span>
-        </a>
-        <dl class="layui-nav-child layui-anim layui-anim-upbit" >
-          <dd><a href="../user_info/updateUser.html" onmouseover="showDl()" onmouseout="noShowDl()">修改信息</a></dd>
-          <dd><a href="../../login.html" onmouseover="showDl()" onmouseout="noShowDl()">退出</a></dd>
-        </dl>
-      </li>
-      
-    <span class="layui-nav-bar" style="left: 6.01px; top: 55px; width: 0px; opacity: 0;"></span>
-  </ul>
+        <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="showDl()" onmouseout="closeDl()">
+          <a href="javascript:;">
+            <img src="../../images/user_default.jpg" class="layui-nav-img">
+            我
+            <span class="layui-nav-more"></span>
+          </a>
+          <dl class="layui-nav-child layui-anim layui-anim-upbit" >
+            <dd><a href="../user_info/updateUser.html" onmouseover="showDl()" onmouseout="noShowDl()">修改信息</a></dd>
+            <dd><a href="../../login.html" onmouseover="showDl()" onmouseout="noShowDl()">退出</a></dd>
+          </dl>
+        </li>
+
+      <span class="layui-nav-bar" style="left: 6.01px; top: 55px; width: 0px; opacity: 0;"></span>
+    </ul>
+    </div>
   </div>
-</div>
-  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-  <!--[if lt IE 9]>
-    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]--> 
-  <div class="layui-side layui-bg-black">
-    <div class="layui-side-scroll">
+    <div class="layui-side layui-bg-black">
+      <div class="layui-side-scroll">
         <ul class="layui-nav layui-nav-tree site-demo-nav">
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;" onclick="aClick()">基础信息修改<span class="layui-nav-more"></span></a>
@@ -169,36 +164,9 @@
           <span class="layui-nav-bar" id = "nav-bar" style="top: 232.5px; height: 0px; opacity: 0;"></span>
       </ul>
     </div>
+    </div>
   </div>
-</div>
-    <div class="layui-body layui-tab-content site-demo site-demo-body" style="margin-top: 70px; text-align: center">
-        <p style="width: 100%;font-size: 36px; font-family: STXingkai;">研究方向</p>
-        <form class="layui-form" action="" style="width: 100%; text-align: center;">
-            <div style="width: 100%; margin-top: 20px; text-align: center;">
-                <script id="ueditor" type="text/plain" style="width: 90%; height: 500px; margin-left: 10%;">
-                </script>
-            </div>
-            <div style="width: 100%; margin: 30px; text-align: center;">
-                <input type="button" value="确定" id="btnUpdate" name="researchDirection" onclick="btn_update()" class="layui-btn layui-btn-fluid" style="width: 236px;">
-            </div>
-        </form>
-    </div>a
 
-    <script type="text/javascript">
-        var ue = UE.getEditor("ueditor",{toolbars: [[
-                'source', '|', 'undo', 'redo', '|',
-                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-                'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-                'directionalityltr', 'directionalityrtl', 'indent', '|',
-                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-                'insertframe', 'insertcode', 'template', 'background', '|',
-                'horizontal', 'date', 'time', 'spechars', '|',
-                'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-                'print', 'preview', 'searchreplace', 'drafts', 'help'
-            ]]});
-    </script>
 </body>
     <script type="text/javascript" src="js/info.js"></script>
 </html>

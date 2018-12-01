@@ -39,7 +39,6 @@ function btn_login() {
             username : $("#username").val(),
             password : $("#password").val()
         };
-        // console.log(mydata);
         //验证账号和密码
         $.ajax({
             url : 'user_login.action',
@@ -47,12 +46,8 @@ function btn_login() {
             data : mydata,
             scriptCharset : 'utf-8',
             success : function (result) {
-                //账号和密码正确，跳转页面
-                if(result.nextPage != null){
-                    window.location.href = result.nextPage;
-                }
                 //账号或密码错误，提示错误信息
-                else if (result.message != null) {
+                if (result.message != null) {
                     var textMessage = result.message.toString();
                     layer.open({
                         type: 1,
