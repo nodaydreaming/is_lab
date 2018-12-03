@@ -1,31 +1,29 @@
 package cn.hznu.islab.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-/**
- * @ClassName LinkEntity
- * @Description
- * @Author GYJ
- * @Date 2018/11/6 18:22
- * @Version 1.0
- **/
+@Entity
+@Table(name = "link", schema = "is_lab")
 public class LinkEntity {
-    private int id;
+    private int linkId;
     private String name;
     private String url;
-    /**
-     * 排序依据
-     */
-    private Integer level;
+    //排序标志，值越小优先级越高，默认与 linkId 相等
+    private int priority;
 
-    public int getId() {
-        return id;
+    @Id
+    @Column(name = "linkId")
+    public int getLinkId() {
+        return linkId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLinkId(int linkId) {
+        this.linkId = linkId;
     }
 
+    @Basic
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -34,6 +32,8 @@ public class LinkEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "url")
     public String getUrl() {
         return url;
     }
@@ -42,12 +42,14 @@ public class LinkEntity {
         this.url = url;
     }
 
-    public Integer getLevel() {
-        return level;
+    @Basic
+    @Column(name = "priority")
+    public int getPriority() {
+        return priority;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     @Override
@@ -55,14 +57,14 @@ public class LinkEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LinkEntity that = (LinkEntity) o;
-        return id == that.id &&
+        return linkId == that.linkId &&
+                priority == that.priority &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(url, that.url) &&
-                Objects.equals(level, that.level);
+                Objects.equals(url, that.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, url, level);
+        return Objects.hash(linkId, name, url, priority);
     }
 }

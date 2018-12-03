@@ -39,7 +39,7 @@ public class LinkDaoImpl extends HibernateDaoSupport implements LinkDao {
     @Override
     public LinkEntity findLinkById(int id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(LinkEntity.class);
-        criteria.add(Restrictions.eq("id",id));
+        criteria.add(Restrictions.eq("linkId",id));
         List<LinkEntity> list = (List<LinkEntity>)this.getHibernateTemplate().findByCriteria(criteria);
         if(!list.isEmpty()){
             return list.get(0);

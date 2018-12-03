@@ -52,7 +52,7 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
 
         if(list != null){
             IntroductionEntity introduction = list.get(0);
-            introductionEntity.setId(introduction.getId());
+            introductionEntity.setIntroductionId(introduction.getIntroductionId());
             introductionService.updateIntroduction(introductionEntity);
         }
         list.clear();

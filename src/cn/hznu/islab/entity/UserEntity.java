@@ -1,16 +1,12 @@
 package cn.hznu.islab.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-/**
- * @ClassName UserEntity
- * @Description
- * @Author GYJ
- * @Date 2018/10/20 10:23
- * @Version 1.0
- **/
+@Entity
+@Table(name = "user", schema = "is_lab")
 public class UserEntity {
-    private int id;
+    private int userId;
     private String photo;
     private String username;
     private String password;
@@ -18,16 +14,25 @@ public class UserEntity {
     private String nickname;
     private String email;
     private String telephone;
-    private Integer status;
+    /**
+     * 管理员等级标志
+     * 2 代表超级管理员 ， 可以添加、删除、修改一般管理员的信息
+     * 1 代表一般管理员
+     */
+    private int status;
 
-    public int getId() {
-        return id;
+    @Id
+    @Column(name = "userId")
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
+    @Basic
+    @Column(name = "photo")
     public String getPhoto() {
         return photo;
     }
@@ -36,6 +41,8 @@ public class UserEntity {
         this.photo = photo;
     }
 
+    @Basic
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -44,6 +51,8 @@ public class UserEntity {
         this.username = username;
     }
 
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -52,6 +61,8 @@ public class UserEntity {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "gender")
     public String getGender() {
         return gender;
     }
@@ -60,6 +71,8 @@ public class UserEntity {
         this.gender = gender;
     }
 
+    @Basic
+    @Column(name = "nickname")
     public String getNickname() {
         return nickname;
     }
@@ -68,6 +81,8 @@ public class UserEntity {
         this.nickname = nickname;
     }
 
+    @Basic
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -76,6 +91,8 @@ public class UserEntity {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "telephone")
     public String getTelephone() {
         return telephone;
     }
@@ -84,11 +101,13 @@ public class UserEntity {
         this.telephone = telephone;
     }
 
-    public Integer getStatus() {
+    @Basic
+    @Column(name = "status")
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -97,34 +116,19 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
-        return id == that.id &&
+        return userId == that.userId &&
+                status == that.status &&
                 Objects.equals(photo, that.photo) &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(password, that.password) &&
                 Objects.equals(gender, that.gender) &&
                 Objects.equals(nickname, that.nickname) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(telephone, that.telephone) &&
-                Objects.equals(status, that.status);
-    }
-
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", photo='" + photo + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", gender='" + gender + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", email='" + email + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", status=" + status +
-                '}';
+                Objects.equals(telephone, that.telephone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, photo, username, password, gender, nickname, email, telephone, status);
+        return Objects.hash(userId, photo, username, password, gender, nickname, email, telephone, status);
     }
 }

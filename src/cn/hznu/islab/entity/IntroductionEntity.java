@@ -1,27 +1,27 @@
 package cn.hznu.islab.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-/**
- * @ClassName IntroductionEntity
- * @Description
- * @Author GYJ
- * @Date 2018/10/20 10:23
- * @Version 1.0
- **/
+@Entity
+@Table(name = "introduction", schema = "is_lab")
 public class IntroductionEntity {
-    private int id;
+    private int introductionId;
     private String name;
     private String content;
 
-    public int getId() {
-        return id;
+    @Id
+    @Column(name = "introductionId")
+    public int getIntroductionId() {
+        return introductionId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIntroductionId(int introductionId) {
+        this.introductionId = introductionId;
     }
 
+    @Basic
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -30,6 +30,8 @@ public class IntroductionEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -43,13 +45,13 @@ public class IntroductionEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IntroductionEntity that = (IntroductionEntity) o;
-        return id == that.id &&
+        return introductionId == that.introductionId &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(content, that.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, content);
+        return Objects.hash(introductionId, name, content);
     }
 }

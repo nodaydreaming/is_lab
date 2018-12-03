@@ -1,16 +1,12 @@
 package cn.hznu.islab.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-/**
- * @ClassName TeacherEntity
- * @Description
- * @Author GYJ
- * @Date 2018/10/20 10:23
- * @Version 1.0
- **/
+@Entity
+@Table(name = "teacher", schema = "is_lab")
 public class TeacherEntity {
-    private int id;
+    private int teacherId;
     private String name;
     private String photo;
     private String enName;
@@ -20,16 +16,21 @@ public class TeacherEntity {
     private String researchArea;
     private String degree;
     private String intro;
-    private int level;
+    //排序标志，值越小优先级越高，默认与 teacherId 相等
+    private int priority;
 
-    public int getId() {
-        return id;
+    @Id
+    @Column(name = "teacherId")
+    public int getTeacherId() {
+        return teacherId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 
+    @Basic
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -38,6 +39,8 @@ public class TeacherEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "photo")
     public String getPhoto() {
         return photo;
     }
@@ -46,6 +49,8 @@ public class TeacherEntity {
         this.photo = photo;
     }
 
+    @Basic
+    @Column(name = "en_name")
     public String getEnName() {
         return enName;
     }
@@ -54,6 +59,8 @@ public class TeacherEntity {
         this.enName = enName;
     }
 
+    @Basic
+    @Column(name = "gender")
     public String getGender() {
         return gender;
     }
@@ -62,6 +69,8 @@ public class TeacherEntity {
         this.gender = gender;
     }
 
+    @Basic
+    @Column(name = "telephone")
     public String getTelephone() {
         return telephone;
     }
@@ -70,6 +79,8 @@ public class TeacherEntity {
         this.telephone = telephone;
     }
 
+    @Basic
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -78,6 +89,8 @@ public class TeacherEntity {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "research_area")
     public String getResearchArea() {
         return researchArea;
     }
@@ -86,6 +99,8 @@ public class TeacherEntity {
         this.researchArea = researchArea;
     }
 
+    @Basic
+    @Column(name = "degree")
     public String getDegree() {
         return degree;
     }
@@ -94,6 +109,8 @@ public class TeacherEntity {
         this.degree = degree;
     }
 
+    @Basic
+    @Column(name = "intro")
     public String getIntro() {
         return intro;
     }
@@ -102,12 +119,14 @@ public class TeacherEntity {
         this.intro = intro;
     }
 
-    public int getLevel() {
-        return level;
+    @Basic
+    @Column(name = "priority")
+    public int getPriority() {
+        return priority;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     @Override
@@ -115,8 +134,8 @@ public class TeacherEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TeacherEntity that = (TeacherEntity) o;
-        return id == that.id &&
-                level == that.level &&
+        return teacherId == that.teacherId &&
+                priority == that.priority &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(photo, that.photo) &&
                 Objects.equals(enName, that.enName) &&
@@ -130,6 +149,6 @@ public class TeacherEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, photo, enName, gender, telephone, email, researchArea, degree, intro, level);
+        return Objects.hash(teacherId, name, photo, enName, gender, telephone, email, researchArea, degree, intro, priority);
     }
 }

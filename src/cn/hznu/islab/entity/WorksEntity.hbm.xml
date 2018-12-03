@@ -4,12 +4,12 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="cn.hznu.islab.entity.LinkEntity" table="link" schema="is_lab">
-        <id name="linkId" column="linkId">
+    <class name="cn.hznu.islab.entity.WorksEntity" table="works" schema="is_lab">
+        <id name="worksId" column="worksId">
             <generator class="native"/>
         </id>
         <property name="name" column="name" not-null="false"/>
-        <property name="url" column="url" not-null="false"/>
-        <property name="priority" column="priority" not-null="false"/>
+        <property name="intro" column="intro" not-null="false"/>
+        <property name="photo" column="photo" not-null="false"/>
     </class>
 </hibernate-mapping>

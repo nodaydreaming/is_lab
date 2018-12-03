@@ -5,33 +5,16 @@
 <hibernate-mapping>
 
     <class name="cn.hznu.islab.entity.UserEntity" table="user" schema="is_lab">
-        <id name="id">
-            <column name="id" sql-type="int(11)"/>
+        <id name="userId" column="userId">
             <generator class="native"/>
         </id>
-        <property name="photo">
-            <column name="photo" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="username">
-            <column name="username" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="password">
-            <column name="password" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="gender">
-            <column name="gender" sql-type="varchar(10)" length="10" not-null="false"/>
-        </property>
-        <property name="nickname">
-            <column name="nickname" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="email">
-            <column name="email" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="telephone">
-            <column name="telephone" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="status">
-            <column name="status" sql-type="int(11)" not-null="true"/>
-        </property>
+        <property name="photo" column="photo" not-null="false"/>
+        <property name="username" column="username" not-null="false"/>
+        <property name="password" column="password" not-null="false"/>
+        <property name="gender" column="gender" not-null="false"/>
+        <property name="nickname" column="nickname" not-null="false"/>
+        <property name="email" column="email"/>
+        <property name="telephone" column="telephone" not-null="false"/>
+        <property name="status" column="status" not-null="false"/>
     </class>
 </hibernate-mapping>

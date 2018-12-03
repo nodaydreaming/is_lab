@@ -40,11 +40,10 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
     @Override
     public TeacherEntity findTeacherById(int id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(TeacherEntity.class);
-        criteria.add(Restrictions.eq("id",id));
+        criteria.add(Restrictions.eq("teacherId",id));
         List<TeacherEntity> list = (List<TeacherEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         //判断返回结果
         if(!list.isEmpty()){
-            System.out.println(list.get(0));
             return list.get(0);
         }
         return null;

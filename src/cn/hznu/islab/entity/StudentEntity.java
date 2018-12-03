@@ -1,25 +1,15 @@
 package cn.hznu.islab.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-/**
- * @ClassName StudentEntity
- * @Description
- * @Author GYJ
- * @Date 2018/10/20 10:23
- * @Version 1.0
- **/
+@Entity
+@Table(name = "student", schema = "is_lab")
 public class StudentEntity {
-    private int id;
+    private int studentId;
     private String name;
     private String photo;
     private String gender;
-    /**
-     * 1 大一 2 大二 3 大三 4 大四
-     * 5 研一 6 研二 7 研三
-     * 8 博一 9 博二
-     */
-    private Integer grade;
     private String telephone;
     private String qq;
     private String email;
@@ -29,22 +19,26 @@ public class StudentEntity {
     private String salary;
     private String intro;
     /**
-     * 1 本科生
-     * 2 硕士生
-     * 3 博士生
-     * 0 已毕业
-     * -1 已退出
+     * 学生类型：
+     * 1   本科生
+     * 2   研究生
+     * 3   毕业生
+     * -1  中途退出实验室的学生
      */
-    private int status;
+    private int type;
 
-    public int getId() {
-        return id;
+    @Id
+    @Column(name = "studentId")
+    public int getStudentId() {
+        return studentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
+    @Basic
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -53,6 +47,8 @@ public class StudentEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "photo")
     public String getPhoto() {
         return photo;
     }
@@ -61,6 +57,8 @@ public class StudentEntity {
         this.photo = photo;
     }
 
+    @Basic
+    @Column(name = "gender")
     public String getGender() {
         return gender;
     }
@@ -69,14 +67,8 @@ public class StudentEntity {
         this.gender = gender;
     }
 
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
-    }
-
+    @Basic
+    @Column(name = "telephone")
     public String getTelephone() {
         return telephone;
     }
@@ -85,6 +77,8 @@ public class StudentEntity {
         this.telephone = telephone;
     }
 
+    @Basic
+    @Column(name = "qq")
     public String getQq() {
         return qq;
     }
@@ -93,6 +87,8 @@ public class StudentEntity {
         this.qq = qq;
     }
 
+    @Basic
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -101,6 +97,8 @@ public class StudentEntity {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "homepage")
     public String getHomepage() {
         return homepage;
     }
@@ -109,6 +107,8 @@ public class StudentEntity {
         this.homepage = homepage;
     }
 
+    @Basic
+    @Column(name = "company")
     public String getCompany() {
         return company;
     }
@@ -117,6 +117,8 @@ public class StudentEntity {
         this.company = company;
     }
 
+    @Basic
+    @Column(name = "post")
     public String getPost() {
         return post;
     }
@@ -125,6 +127,8 @@ public class StudentEntity {
         this.post = post;
     }
 
+    @Basic
+    @Column(name = "salary")
     public String getSalary() {
         return salary;
     }
@@ -133,6 +137,8 @@ public class StudentEntity {
         this.salary = salary;
     }
 
+    @Basic
+    @Column(name = "intro")
     public String getIntro() {
         return intro;
     }
@@ -141,12 +147,14 @@ public class StudentEntity {
         this.intro = intro;
     }
 
-    public int getStatus() {
-        return status;
+    @Basic
+    @Column(name = "type")
+    public int getType() {
+        return type;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setType(int type) {
+        this.type = type;
     }
 
     @Override
@@ -154,12 +162,11 @@ public class StudentEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StudentEntity that = (StudentEntity) o;
-        return id == that.id &&
-                status == that.status &&
+        return studentId == that.studentId &&
+                type == that.type &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(photo, that.photo) &&
                 Objects.equals(gender, that.gender) &&
-                Objects.equals(grade, that.grade) &&
                 Objects.equals(telephone, that.telephone) &&
                 Objects.equals(qq, that.qq) &&
                 Objects.equals(email, that.email) &&
@@ -172,6 +179,6 @@ public class StudentEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, photo, gender, grade, telephone, qq, email, homepage, company, post, salary, intro, status);
+        return Objects.hash(studentId, name, photo, gender, telephone, qq, email, homepage, company, post, salary, intro, type);
     }
 }

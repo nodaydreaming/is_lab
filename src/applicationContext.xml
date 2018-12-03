@@ -43,13 +43,30 @@
             <list>
                 <value>cn/hznu/islab/entity/UserEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/StudentEntity.hbm.xml</value>
-                <value>cn/hznu/islab/entity/NoticeEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/CultureEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/IntroductionEntity.hbm.xml</value>
-                <value>cn/hznu/islab/entity/NewsEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/ResearchEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/TeacherEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/LinkEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/CompetitionEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/PatentEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/ProjectEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/WorksEntity.hbm.xml</value>
+            </list>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>cn.hznu.islab.entity.CompetitionEntity</value>
+                <value>cn.hznu.islab.entity.CultureEntity</value>
+                <value>cn.hznu.islab.entity.IntroductionEntity</value>
+                <value>cn.hznu.islab.entity.LinkEntity</value>
+                <value>cn.hznu.islab.entity.PatentEntity</value>
+                <value>cn.hznu.islab.entity.ProjectEntity</value>
+                <value>cn.hznu.islab.entity.ResearchEntity</value>
+                <value>cn.hznu.islab.entity.StudentEntity</value>
+                <value>cn.hznu.islab.entity.TeacherEntity</value>
+                <value>cn.hznu.islab.entity.UserEntity</value>
+                <value>cn.hznu.islab.entity.WorksEntity</value>
             </list>
         </property>
     </bean>
@@ -60,7 +77,12 @@
 
     <!-- Action的配置 -->
     <bean id="indexAction" class="cn.hznu.islab.action.IndexAction">
-
+        <property name="competitionService" ref="competitionService"/>
+        <property name="cultureService" ref="cultureService"/>
+        <property name="linkService" ref="linkService"/>
+        <property name="patentService" ref="patentService"/>
+        <property name="researchService" ref="researchService"/>
+        <property name="worksService" ref="worksService"/>
     </bean>
     <bean id="userAction" class="cn.hznu.islab.action.UserAction">
         <property name="userService" ref="userService"/>
@@ -71,24 +93,12 @@
     <bean id="studentAction" class="cn.hznu.islab.action.StudentAction">
         <property name="studentService" ref="studentService"/>
     </bean>
-    <bean id="noticeAction" class="cn.hznu.islab.action.NoticeAction">
-        <property name="noticeService" ref="noticeService"/>
-    </bean>
     <bean id="infoAction" class="cn.hznu.islab.action.LibInfoAction">
         <property name="introductionService" ref="introductionService"/>
     </bean>
     <!-- Service的配置 -->
-    <bean id="userService" class="cn.hznu.islab.service.impl.UserServiceImpl">
-        <property name="userDao" ref="userDao"/>
-    </bean>
-    <bean id="teacherService" class="cn.hznu.islab.service.impl.TeacherServiceImpl">
-        <property name="teacherDao" ref="teacherDao"/>
-    </bean>
-    <bean id="studentService" class="cn.hznu.islab.service.impl.StudentServiceImpl">
-        <property name="studentDao" ref="studentDao"/>
-    </bean>
-    <bean id="noticeService" class="cn.hznu.islab.service.impl.NoticeServiceImpl">
-        <property name="noticeDao" ref="noticeDao"/>
+    <bean id="competitionService" class="cn.hznu.islab.service.impl.CompetitionServiceImpl">
+        <property name="competitionDao" ref="competitionDao"/>
     </bean>
     <bean id="cultureService" class="cn.hznu.islab.service.impl.CultureServiceImpl">
         <property name="cultureDao" ref="cultureDao"/>
@@ -96,27 +106,32 @@
     <bean id="introductionService" class="cn.hznu.islab.service.impl.IntroductionServiceImpl">
         <property name="introductionDao" ref="introductionDao"/>
     </bean>
-    <bean id="newsService" class="cn.hznu.islab.service.impl.NewsServiceImpl">
-        <property name="newsDao" ref="newsDao"/>
+    <bean id="linkService" class="cn.hznu.islab.service.impl.LinkServiceImpl">
+        <property name="linkDao" ref="linkDao"/>
+    </bean>
+    <bean id="patentService" class="cn.hznu.islab.service.impl.PatentServiceImpl">
+        <property name="patentDao" ref="patentDao"/>
+    </bean>
+    <bean id="projectService" class="cn.hznu.islab.service.impl.ProjectServiceImpl">
+        <property name="projectDao" ref="projectDao"/>
     </bean>
     <bean id="researchService" class="cn.hznu.islab.service.impl.ResearchServiceImpl">
         <property name="researchDao" ref="researchDao"/>
     </bean>
-    <bean id="linkService" class="cn.hznu.islab.service.impl.LinkServiceImpl">
-        <property name="linkDao" ref="linkDao"/>
+    <bean id="studentService" class="cn.hznu.islab.service.impl.StudentServiceImpl">
+        <property name="studentDao" ref="studentDao"/>
     </bean>
-
+    <bean id="teacherService" class="cn.hznu.islab.service.impl.TeacherServiceImpl">
+        <property name="teacherDao" ref="teacherDao"/>
+    </bean>
+    <bean id="userService" class="cn.hznu.islab.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="worksService" class="cn.hznu.islab.service.impl.WorksServiceImpl">
+        <property name="worksDao" ref="worksDao"/>
+    </bean>
     <!-- DAO的配置 -->
-    <bean id="userDao" class="cn.hznu.islab.dao.impl.UserDaoImpl" scope="prototype">
-        <property name="hibernateTemplate" ref="hibernateTemplate"/>
-    </bean>
-    <bean id="teacherDao" class="cn.hznu.islab.dao.impl.TeacherDaoImpl" scope="prototype">
-        <property name="hibernateTemplate" ref="hibernateTemplate"/>
-    </bean>
-    <bean id="studentDao" class="cn.hznu.islab.dao.impl.StudentDaoImpl" scope="prototype">
-        <property name="hibernateTemplate" ref="hibernateTemplate"/>
-    </bean>
-    <bean id="noticeDao" class="cn.hznu.islab.dao.impl.NoticeDaoImpl" scope="prototype">
+    <bean id="competitionDao" class="cn.hznu.islab.dao.impl.CompetitionDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
     <bean id="cultureDao" class="cn.hznu.islab.dao.impl.CultureDaoImpl">
@@ -125,13 +140,28 @@
     <bean id="introductionDao" class="cn.hznu.islab.dao.impl.IntroductionDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
-    <bean id="newsDao" class="cn.hznu.islab.dao.impl.NewsDaoImpl">
+    <bean id="linkDao" class="cn.hznu.islab.dao.impl.LinkDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="patentDao" class="cn.hznu.islab.dao.impl.PatentDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="projectDao" class="cn.hznu.islab.dao.impl.ProjectDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
     <bean id="researchDao" class="cn.hznu.islab.dao.impl.ResearchDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
-    <bean id="linkDao" class="cn.hznu.islab.dao.impl.LinkDaoImpl">
+    <bean id="studentDao" class="cn.hznu.islab.dao.impl.StudentDaoImpl" scope="prototype">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="teacherDao" class="cn.hznu.islab.dao.impl.TeacherDaoImpl" scope="prototype">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="userDao" class="cn.hznu.islab.dao.impl.UserDaoImpl" scope="prototype">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="worksDao" class="cn.hznu.islab.dao.impl.WorksDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 

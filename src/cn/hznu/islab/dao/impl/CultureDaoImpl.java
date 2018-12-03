@@ -43,12 +43,11 @@ public class CultureDaoImpl extends HibernateDaoSupport implements CultureDao {
     @Override
     public CultureEntity findCultureById(int id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(CultureEntity.class);
-        criteria.add(Restrictions.eq("id",id));
-        List<CultureEntity> list = (List<CultureEntity>)this.getHibernateTemplate().findByCriteria(criteria);
+        criteria.add(Restrictions.eq("cultureId",id));
+        List<CultureEntity> list = (List<CultureEntity>) this.getHibernateTemplate().findByCriteria(criteria);
 
         //判断返回结果
         if(!list.isEmpty()){
-            System.out.println(list.get(0));
             return list.get(0);
         }
         return null;

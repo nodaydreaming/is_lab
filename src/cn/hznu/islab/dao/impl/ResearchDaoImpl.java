@@ -40,11 +40,10 @@ public class ResearchDaoImpl extends HibernateDaoSupport implements ResearchDao 
     @Override
     public ResearchEntity findResearchById(int id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(ResearchEntity.class);
-        criteria.add(Restrictions.eq("id",id));
+        criteria.add(Restrictions.eq("researchId",id));
         List<ResearchEntity> list = (List<ResearchEntity>)this.getHibernateTemplate().findByCriteria(criteria);
         //判断返回结果
         if(!list.isEmpty()){
-            System.out.println(list.get(0));
             return list.get(0);
         }
         return null;

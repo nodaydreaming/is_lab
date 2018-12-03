@@ -5,39 +5,18 @@
 <hibernate-mapping>
 
     <class name="cn.hznu.islab.entity.TeacherEntity" table="teacher" schema="is_lab">
-        <id name="id">
-            <column name="id" sql-type="int(11)"/>
+        <id name="teacherId" column="teacherId">
             <generator class="native"/>
         </id>
-        <property name="name">
-            <column name="name" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="photo">
-            <column name="photo" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="enName">
-            <column name="en_name" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="gender">
-            <column name="gender" sql-type="varchar(10)" length="10" not-null="false"/>
-        </property>
-        <property name="telephone">
-            <column name="telephone" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="email">
-            <column name="email" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="researchArea">
-            <column name="research_area" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="degree">
-            <column name="degree" sql-type="varchar(255)" not-null="false"/>
-        </property>
-        <property name="intro">
-            <column name="intro" sql-type="text" not-null="false"/>
-        </property>
-        <property name="level">
-            <column name="level" sql-type="int(11)" not-null="true"/>
-        </property>
+        <property name="name" column="name" not-null="false"/>
+        <property name="photo" column="photo" not-null="false"/>
+        <property name="enName" column="en_name" not-null="false"/>
+        <property name="gender" column="gender" not-null="false"/>
+        <property name="telephone" column="telephone" not-null="false"/>
+        <property name="email" column="email" not-null="false"/>
+        <property name="researchArea" column="research_area" not-null="false"/>
+        <property name="degree" column="degree" not-null="false"/>
+        <property name="intro" column="intro" not-null="false"/>
+        <property name="priority" column="priority" not-null="false"/>
     </class>
 </hibernate-mapping>

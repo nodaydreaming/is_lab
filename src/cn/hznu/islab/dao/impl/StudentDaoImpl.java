@@ -40,7 +40,7 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
     @Override
     public StudentEntity findStudentById(int id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(StudentEntity.class);
-        criteria.add(Restrictions.eq("id",id));
+        criteria.add(Restrictions.eq("studentId",id));
         List<StudentEntity> list = (List<StudentEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         if(!list.isEmpty()){
             return list.get(0);
@@ -52,7 +52,7 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
     public List<StudentEntity> findAllStudents() {
 
         Session session = this.currentSession();
-        Query query = session.createQuery("from StudentEntity where status != -1");
+        Query query = session.createQuery("from StudentEntity where type != -1");
         List<StudentEntity> list = query.list();
         if(!list.isEmpty()){
             return list;
