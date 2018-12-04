@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.Map;
 
 public class MapToJSON {
     /**
@@ -13,7 +13,7 @@ public class MapToJSON {
      * @param response
      * @param map
      */
-    public static void mapToJson(HttpServletResponse response, HashMap map) throws IOException {
+    public static void mapToJson(HttpServletResponse response, Map map) throws IOException {
         response.setHeader("Cache-Control", "no-cache"); //取消浏览器缓存
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("utf-8");

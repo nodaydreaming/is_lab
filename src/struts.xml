@@ -5,6 +5,7 @@
 
 <struts>
     <!--<constant name="struts.action.excludePattern" value="/ueditor/.*" />-->
+    <constant name="struts.action.excludePattern" value="/ueditor/.*" />
     <!-- 上传文件的最大值 -->
     <constant name="struts.multipart.maxSize" value="209715200" />
     <!-- 使用struts的开发者模式 -->
@@ -29,11 +30,6 @@
         <action name="user_add" class="userAction" method="addUser">
         </action>
         <action name="user_delete" class="userAction" method="deleteUser">
-        </action>
-    </package>
-
-    <package name="notice" extends="struts-default, json-default">
-        <action name="notice_addNotice" class="noticeAction" method="addNotice">
         </action>
     </package>
 
