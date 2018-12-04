@@ -17,11 +17,9 @@ public class UEditorFilter extends StrutsPrepareAndExecuteFilter {
         String URL = request.getRequestURI();
 
         if(URL.endsWith("controller.jsp")){
-            System.out.println(URL);
             chain.doFilter(req, res);
         }
         else {
-            System.out.println(URL);
             super.doFilter(req, res, chain);
         }
     }
