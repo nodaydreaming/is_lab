@@ -60,6 +60,6 @@ public class PwdEnCoder {
 
     public static void main(String[] args){
         PwdEnCoder pwdEnCoder = new PwdEnCoder();
-        pwdEnCoder.enCoder("123456","13396567");
+        System.out.println(pwdEnCoder.enCoder("123456","12345678"));
     }
 }

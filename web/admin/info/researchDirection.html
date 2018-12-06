@@ -19,14 +19,43 @@
     <script type="text/javascript" src="../../layui/layui.all.js"></script>
     <script type="text/javascript" src="../../layui/lay/modules/jquery.js"></script>
     <script type="text/javascript" src="../../js/jquery-1.10.2.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.all.min.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/lang/zh-cn/zh-cn.js"></script>
 
-    <script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/general.js"></script>
     <style>
         .layui-nav-tree{vertical-align: top;}
     </style>
+    <script type="text/javascript">
+      window.onload = function () {
+          $.ajax({
+              url : 'getAllResearch.action',
+              type : 'post',
+              scriptCharset : 'utf-8',
+              success : function (result) {
+                  fill(result.researchs);
+              },
+              error : function () {
+                  layer.open({
+                      type: 1,
+                      offset: 'auto',
+                      id: 'layerDemo1', //防止重复弹出
+                      content: '<div style="padding: 20px 100px;">' + "请求Action失败！" + '</div>',
+                      btn: '关闭',
+                      btnAlign: 'c',
+                      shade: 0.5,
+                      title: "信息安全实验室",
+                      yes: function () {
+                          layer.closeAll();
+                      }
+                  });
+              }
+          });
+      };
+      
+      function fill() {
+          var list = arguments[0];
+          console.log(list);
+      }
+    </script>
 </head>
 <body>
   <div class="layui-layout layui-layout-admin">
@@ -170,6 +199,65 @@
     </div>
   </div>
 
+  <div class="layui-body layui-tab-content site-demo site-demo-body" style="margin-top: 50px;">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+      <legend>研究方向</legend>
+    </fieldset>
+    <div style="width: 100%; height: 38px;">
+      <button class="layui-btn layui-btn-normal" style="width: 100px; float: right; margin-right: 2%">添加</button>
+    </div>
+    <div style="margin-top: 20px">
+      <table class="layui-table">
+      <colgroup>
+        <col width="0.2">
+        <col width="2">
+        <col width="5.3">
+        <col width="2.5">
+      </colgroup>
+      <thead>
+      <tr>
+        <th style="text-align: center">序号</th>
+        <th style="text-align: center">研究方向</th>
+        <th style="text-align: center">简介</th>
+        <td style="text-align: center">操作</td>
+      </tr>
+      </thead>
+      <tbody class="layui-text">
+      <tr>
+        <td style="text-align: center">1</td>
+        <td style="text-align: center">车联网安全</td>
+        <td>（推荐）无需写过多的 HTML，在 JS 中指定原始元素，再设定各项参数即可。</td>
+        <td style="text-align: center; padding: 0px">
+          <a class="layui-btn layui-btn-xs">编辑</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center">2</td>
+        <td style="text-align: center">区块链应用</td>
+        <td>无需写过多 JS，可专注于 HTML 表头部分</td>
+        <td style="text-align: center; padding: 2px">
+            <a class="layui-btn layui-btn-xs">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center">3</td>
+        <td style="text-align: center">密码学</td>
+        <td>无需配置数据接口，在JS中指定表格元素，并简单地给表头加上自定义属性即可</td>
+        <td style="text-align: center; padding: 0px">
+          <a class="layui-btn layui-btn-xs">编辑</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+
+  </div>
+
+
+
 </body>
-    <script type="text/javascript" src="js/info.js"></script>
+
 </html>

@@ -87,13 +87,16 @@
     <bean id="userAction" class="cn.hznu.islab.action.UserAction">
         <property name="userService" ref="userService"/>
     </bean>
+    <bean id="researchAction" class="cn.hznu.islab.action.ResearchDirectionAction">
+        <property name="researchService" ref="researchService"/>
+    </bean>
     <bean id="teacherAction" class="cn.hznu.islab.action.TeacherAction">
         <property name="teacherService" ref="teacherService"/>
     </bean>
     <bean id="studentAction" class="cn.hznu.islab.action.StudentAction">
         <property name="studentService" ref="studentService"/>
     </bean>
-    <bean id="infoAction" class="cn.hznu.islab.action.LibInfoAction">
+    <bean id="libInfoAction" class="cn.hznu.islab.action.LibInfoAction">
         <property name="introductionService" ref="introductionService"/>
     </bean>
     <!-- Service的配置 -->

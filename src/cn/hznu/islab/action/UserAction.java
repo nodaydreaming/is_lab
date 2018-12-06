@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import static java.sql.Types.NULL;
+
 /**
  * @ClassName UserAction
  * @Description 普通管理员 ：登陆、修改个人信息、修改密码
@@ -45,8 +47,12 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         HashMap<String,Object> map = new HashMap<>();
 
         if(ActionContext.getContext().getSession().get("loginUser") != null){
-            UserEntity loginUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
-            System.out.println(loginUser);
+            UserEntity getLoginUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
+
+            UserEntity loginUser = new UserEntity();
+            loginUser.setPhoto(getLoginUser.getPhoto());
+            loginUser.setNickname(getLoginUser.getNickname());
+
             map.put("loginUser", loginUser);
         }
         else {

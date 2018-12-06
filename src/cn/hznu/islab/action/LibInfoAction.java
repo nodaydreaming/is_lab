@@ -2,6 +2,7 @@ package cn.hznu.islab.action;
 
 import cn.hznu.islab.entity.IntroductionEntity;
 import cn.hznu.islab.service.IntroductionService;
+import cn.hznu.islab.util.MapToJSON;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName LibInfoAction
@@ -24,8 +26,6 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
     private IntroductionService introductionService;
     private IntroductionEntity introductionEntity = new IntroductionEntity();
 
-    private HttpServletResponse response;
-
     public void setIntroductionService(IntroductionService introductionService) {
         this.introductionService = introductionService;
     }
@@ -36,14 +36,9 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
     }
 
     public String updateInfo() throws IOException {
-        response = ServletActionContext.getResponse();
-        response.setHeader("Cache-Control", "no-cache"); //取消浏览器缓存
-        response.setContentType("application/json; charset=utf-8");
-        response.setCharacterEncoding("utf-8");
-        PrintWriter writer = response.getWriter();
+        HttpServletResponse response = ServletActionContext.getResponse();
 
-        Gson gson = new Gson();
-        HashMap<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
         HashMap<String, String> queryMap = new HashMap<>();
         queryMap.put("name",introductionEntity.getName());
@@ -63,28 +58,18 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
         if(list.get(0).getContent().equals(introductionEntity.getContent())){
             map.put("updateResult", "success");
 
-            writer.print(gson.toJson(map));
-            writer.flush();
-            writer.close();
         }else{
             map.put("updateResult", "error");
-
-            writer.print(gson.toJson(map));
-            writer.flush();
-            writer.close();
         }
+
+        MapToJSON.mapToJson(response, map);
 
         return NONE;
     }
 
     public String getInfoContent() throws IOException {
-        response = ServletActionContext.getResponse();
-        response.setHeader("Cache-Control", "no-cache"); //取消浏览器缓存
-        response.setContentType("application/json; charset=utf-8");
-        response.setCharacterEncoding("utf-8");
-        PrintWriter writer = response.getWriter();
+        HttpServletResponse response = ServletActionContext.getResponse();
 
-        Gson gson = new Gson();
         HashMap<String, Object> map = new HashMap<>();
 
         HashMap<String, String> queryMap = new HashMap<>();
@@ -99,18 +84,10 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
             }
 
             map.put("content", content);
-
-            writer.print(gson.toJson(map));
-            writer.flush();
-            writer.close();
-
         }else{
             map.put("content", "获得content失败！");
-
-            writer.print(gson.toJson(map));
-            writer.flush();
-            writer.close();
         }
+        MapToJSON.mapToJson(response, map);
         return NONE;
     }
 }

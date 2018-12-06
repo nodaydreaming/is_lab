@@ -16,7 +16,7 @@
         </action>
     </package>
 
-    <package name="user" extends="struts-default, json-default" namespace="/">
+    <package name="user" extends="struts-default, json-default">
         <action name="user_login" class="userAction" method="login">
         </action>
         <action name="user_getLoginUser" class="userAction" method="getLoginUser">
@@ -33,10 +33,15 @@
         </action>
     </package>
 
-    <package name="libInfo" extends="struts-default, json-default">
-        <action name="info_update" class="cn.hznu.islab.action.LibInfoAction" method="updateInfo">
+    <package name="research" extends="struts-default, json-default">
+        <action name="getAllResearch" class="researchAction" method="getAllResearch">
         </action>
-        <action name="getInfo" class="cn.hznu.islab.action.LibInfoAction" method="getInfoContent">
+    </package>
+
+    <package name="libInfo" extends="struts-default, json-default">
+        <action name="info_update" class="libInfoAction" method="updateInfo">
+        </action>
+        <action name="getInfo" class="libInfoAction" method="getInfoContent">
         </action>
     </package>
 

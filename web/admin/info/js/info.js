@@ -1,7 +1,7 @@
 var ueditor = UE.getEditor('ueditor');
 
 ueditor.ready(function () {
-    console.log($("#btnUpdate").attr("name"));
+    // console.log($("#btnUpdate").attr("name"));
     $.ajax({
         url : 'getInfo.action',
         type : 'post',
