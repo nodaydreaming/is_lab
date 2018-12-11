@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,6 +37,18 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
         map.put("researchs", list);
 
         MapToJSON.mapToJson(response, map);
+        return NONE;
+    }
+
+    public String addResearch() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+
+        Map<String, Object> map = new HashMap<>();
+
+        Map<String, String> queryMap = new HashMap<>();
+
+
+
         return NONE;
     }
 }

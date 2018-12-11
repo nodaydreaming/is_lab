@@ -41,15 +41,16 @@
         <a href="../../index.html">返回首页</a>
       </li>
 
-      <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="showDl()" onmouseout="closeDl()">
+      <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="change('block')" onmouseout="change('none')">
         <a href="javascript:;">
           <img src="../../images/user_default.jpg" class="layui-nav-img">
           我
           <span class="layui-nav-more"></span>
         </a>
-        <dl class="layui-nav-child layui-anim layui-anim-upbit" >
-          <dd><a href="../user_info/updateUser.html" onmouseover="showDl()" onmouseout="noShowDl()">修改信息</a></dd>
-          <dd><a href="../../login.html" onmouseover="showDl()" onmouseout="noShowDl()">退出</a></dd>
+        <dl class="layui-nav-child layui-anim layui-anim-upbit" id="list_cur" style="top: 60px;">
+          <dd style="border: 0px; height: 5px;"></dd>
+          <dd><a href="../user_info/updateUser.html" >修改信息</a></dd>
+          <dd><a href="../../login.html" >退出</a></dd>
         </dl>
       </li>
       

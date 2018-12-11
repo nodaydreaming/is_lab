@@ -9,8 +9,7 @@ public class ResearchEntity {
     private int researchId;
     private String researchDirection;
     private String introduction;
-    //排序标志，值越小优先级越高，默认和 researchId相等
-    private int priority;
+    private Integer priority;
 
     @Id
     @Column(name = "researchId")
@@ -44,11 +43,11 @@ public class ResearchEntity {
 
     @Basic
     @Column(name = "priority")
-    public int getPriority() {
+    public Integer getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(Integer priority) {
         this.priority = priority;
     }
 
@@ -58,9 +57,9 @@ public class ResearchEntity {
         if (o == null || getClass() != o.getClass()) return false;
         ResearchEntity that = (ResearchEntity) o;
         return researchId == that.researchId &&
-                priority == that.priority &&
                 Objects.equals(researchDirection, that.researchDirection) &&
-                Objects.equals(introduction, that.introduction);
+                Objects.equals(introduction, that.introduction) &&
+                Objects.equals(priority, that.priority);
     }
 
     @Override

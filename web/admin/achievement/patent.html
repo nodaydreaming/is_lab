@@ -36,15 +36,16 @@
         <a href="../../index.html">返回首页</a>
       </li>
 
-      <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="showDl()" onmouseout="closeDl()">
+      <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="change('block')" onmouseout="change('none')">
         <a href="javascript:;">
           <img src="../../images/user_default.jpg" class="layui-nav-img">
           我
           <span class="layui-nav-more"></span>
         </a>
-        <dl class="layui-nav-child layui-anim layui-anim-upbit" >
-          <dd><a href="../user_info/updateUser.html" onmouseover="showDl()" onmouseout="noShowDl()">修改信息</a></dd>
-          <dd><a href="../../login.html" onmouseover="showDl()" onmouseout="noShowDl()">退出</a></dd>
+        <dl class="layui-nav-child layui-anim layui-anim-upbit" id="list_cur" style="top: 60px;">
+          <dd style="border: 0px; height: 5px;"></dd>
+          <dd><a href="../user_info/updateUser.html" >修改信息</a></dd>
+          <dd><a href="../../login.html" >退出</a></dd>
         </dl>
       </li>
       
@@ -61,8 +62,8 @@
     <div class="layui-side-scroll">
         <ul class="layui-nav layui-nav-tree site-demo-nav">
           <li class="layui-nav-item">
-            <a href="javascript:;" onclick="aClick()">基础信息修改<span class="layui-nav-more"></span></a>
-            <!-- <span class="layui-nav-more"></span> -->
+            <a href="javascript:;" onclick="aClick()">基础信息修改<span class="layui-nav-more" id="my_bar"></span></a>
+            <!-- <span class="layui-nav-more" id="my_bar"></span> -->
             <dl class="layui-nav-child">
               <dd class="">
                 <a class="aHover" href="../info/libIntro.html">实验室简介</a>
@@ -89,7 +90,7 @@
           </li>
           
           <li class="layui-nav-item">
-            <a href="javascript:;" onclick="aClick()">成员管理<span class="layui-nav-more"></span></a>
+            <a href="javascript:;" onclick="aClick()">成员管理<span class="layui-nav-more" id="my_bar"></span></a>
             <dl class="layui-nav-child">
               <dd class="">
                 <a class="aHover" href="../member/postgraduate.html">研究生</a>
@@ -104,7 +105,7 @@
           </li>
           
           <li class="layui-nav-item layui-nav-itemed">
-            <a href="javascript:;" onclick="aClick()">成果管理<span class="layui-nav-more"></span></a>
+            <a href="javascript:;" onclick="aClick()">成果管理<span class="layui-nav-more" id="my_bar"></span></a>
             <dl class="layui-nav-child">
               <dd class="">
                 <a class="aHover" href="project.html">项目</a>
@@ -124,7 +125,7 @@
             </dl>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:;" onclick="aClick()">公告通知<span class="layui-nav-more"></span></a>
+            <a href="javascript:;" onclick="aClick()">公告通知<span class="layui-nav-more" id="my_bar"></span></a>
             <dl class="layui-nav-child">
               <dd class="">
                 <a class="aHover" href="../notice/notice.html">公告</a>
@@ -135,7 +136,7 @@
             </dl>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:;" onclick="aClick()">实验室文化<span class="layui-nav-more"></span></a>
+            <a href="javascript:;" onclick="aClick()">实验室文化<span class="layui-nav-more" id="my_bar"></span></a>
             <dl class="layui-nav-child">
               <dd class="">
                 <a class="aHover" href="../culture/cucoloris.html">生活剪影</a>
@@ -152,7 +153,7 @@
             </dl>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:;" onclick="aClick()">管理员信息<span class="layui-nav-more"></span></a>
+            <a href="javascript:;" onclick="aClick()">管理员信息<span class="layui-nav-more" id="my_bar"></span></a>
             <dl class="layui-nav-child">
               <dd class="">
                 <a class="aHover" href="../user_info/addUser.html">添加管理员</a>

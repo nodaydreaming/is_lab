@@ -74,47 +74,48 @@ function showDl(){
 	span.className = "layui-nav-more layui-nav-mored";
 	//显示dl
 	dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
-	// var width1 = obj.offsetWidth;
-	// var height1 = obj.offsetHeight;
-	
-	// var width2 = dl.offsetWidth;
-	// var height2 = dl.offsetHeight;
+    {
+        // var width1 = obj.offsetWidth;
+        // var height1 = obj.offsetHeight;
 
-	// var offleft1 = obj.offsetLeft;
-	// var offleft2 = dl.offsetLeft;
-	// var i = obj;
-	// while(i = i.offsetParent){
-	// 	offleft1 += i.offsetLeft;
-	// }
-	// i = dl;
-	// while(i = i.offsetParent){
-	// 	offleft2 += i.offsetLeft;
-	// }
-	// var x1 = offleft1 + width1;
-	// var y1 = height1;
+        // var width2 = dl.offsetWidth;
+        // var height2 = dl.offsetHeight;
 
-	// var x2 = offleft2 + width2 + 10;
-	// var y2 = y1 + height2 + 10;
+        // var offleft1 = obj.offsetLeft;
+        // var offleft2 = dl.offsetLeft;
+        // var i = obj;
+        // while(i = i.offsetParent){
+        // 	offleft1 += i.offsetLeft;
+        // }
+        // i = dl;
+        // while(i = i.offsetParent){
+        // 	offleft2 += i.offsetLeft;
+        // }
+        // var x1 = offleft1 + width1;
+        // var y1 = height1;
 
-	// console.log(x1);
-	// console.log(y1);
-	// console.log(x2);
-	// console.log(y2);
+        // var x2 = offleft2 + width2 + 10;
+        // var y2 = y1 + height2 + 10;
 
-	// var e = event || window.event;
-	// var x = e.clientX
-	// var y = e.clientY;
+        // console.log(x1);
+        // console.log(y1);
+        // console.log(x2);
+        // console.log(y2);
 
-	// if((x > offleft1 && x < x1 && y > 0 && y < y1) || (x > offleft2 && x < x2 && y > y1 && y < y2)){
-	// 	span.className = "layui-nav-more layui-nav-mored";
-	// 	//显示dl
-	// 	dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
-	// }else {
-	// 	span.className = "layui-nav-more";
-	// 	//显示dl
-	// 	dl.className = "layui-nav-child layui-anim layui-anim-upbit";
-	// }
-	
+        // var e = event || window.event;
+        // var x = e.clientX
+        // var y = e.clientY;
+
+        // if((x > offleft1 && x < x1 && y > 0 && y < y1) || (x > offleft2 && x < x2 && y > y1 && y < y2)){
+        // 	span.className = "layui-nav-more layui-nav-mored";
+        // 	//显示dl
+        // 	dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
+        // }else {
+        // 	span.className = "layui-nav-more";
+        // 	//显示dl
+        // 	dl.className = "layui-nav-child layui-anim layui-anim-upbit";
+        // }
+    }
 }
 // 隐藏屏幕右上角“我”的下拉菜单
 function closeDl(){
@@ -127,18 +128,21 @@ function closeDl(){
 
 	if(dl.className === "layui-nav-child layui-anim layui-anim-upbit layui-show"){
 		var e = event || window.event;
-		var x = e.clientX
+		var x = e.clientX;
 		var y = e.clientY;
 		var width = dl.offsetWidth;
 		var height = dl.offsetHeight;
+		console.log(width);
+		console.log(height);
 
 		var offleft = dl.offsetLeft;
 		var i = dl;
 		while(i = i.offsetParent){
 			offleft += i.offsetLeft;
 		}
+		console.log(offleft);
 
-		if(x > offleft && x < (width+offleft+10) && y > 0 && y < (height+70)){
+		if( x > offleft && x < ( width + offleft + 10) && y > 0 && y < ( height + 70)){
 			span.className = "layui-nav-more layui-nav-mored";
 			//显示dl
 			dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
@@ -166,6 +170,21 @@ function noShowDl(){
 	obj.className = "layui-nav-item";
 }
 
+function change(mode) {
+    var dl = document.getElementById('list_cur');
+    var span = document.getElementById('showDlLi').childNodes[1].childNodes[3];
+
+    if(mode === 'block'){
+        span.className = "layui-nav-more layui-nav-mored";
+        //显示dl
+        dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
+    }
+    else{
+        span.className = "layui-nav-more";
+        //隐藏dl
+        dl.className = "layui-nav-child layui-anim layui-anim-upbit";
+    }
+}
 function showBar(){
 	var obj= window.event.target;
 	while(obj.className != "layui-nav-item"){

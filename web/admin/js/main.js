@@ -173,3 +173,18 @@ function showBar(){
     }
     obj.className += " layui-this";
 }
+
+function change(mode) {
+    var dl = document.getElementById('list_cur');
+    var span = document.getElementById('showDlLi').childNodes[1].childNodes[3];
+    if(mode === 'block'){
+        span.className = "layui-nav-more layui-nav-mored";
+        //显示dl
+        dl.className = "layui-nav-child layui-anim layui-anim-upbit layui-show";
+    }
+    else{
+        span.className = "layui-nav-more";
+        //隐藏dl
+        dl.className = "layui-nav-child layui-anim layui-anim-upbit";
+    }
+}
