@@ -173,10 +173,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
                 map.put("message", "您没有权限修改其他管理员的信息！");
             }
         }
-        else{
-            //跳转到登陆页面
-            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
-        }
+
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
@@ -211,9 +208,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
                 map.put("message", "原密码输入错误！");
             }
         }
-        else {
-            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
-        }
+
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
@@ -240,9 +235,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
                 map.put("message", "您没有权限查看所有管理员信息！");
             }
         }
-        else{
-            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
-        }
+
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
@@ -291,10 +284,6 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
                 map.put("message", "您没有权限添加管理员！");
             }
         }
-        else{
-            //登陆
-            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
-        }
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
@@ -336,10 +325,6 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
             else{
                 map.put("message", "您没有权限删除管理员！");
             }
-        }
-        else{
-            //跳转到登录页
-            map.put("login", ServletActionContext.getRequest().getContextPath() + "/login.html");
         }
         MapToJSON.mapToJson(response, map);
         System.out.println(map);

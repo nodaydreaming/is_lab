@@ -3,11 +3,11 @@ package cn.hznu.islab.action;
 import cn.hznu.islab.entity.ResearchEntity;
 import cn.hznu.islab.service.ResearchService;
 import cn.hznu.islab.util.MapToJSON;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,10 +45,28 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
 
         Map<String, Object> map = new HashMap<>();
 
-        Map<String, String> queryMap = new HashMap<>();
+        HashMap<String, String> queryMap = new HashMap<>();
 
+        if(ActionContext.getContext().getSession().get("loginUser") != null) {
+            queryMap.put("researchDirection", researchEntity.getResearchDirection());
+            List<ResearchEntity> list = researchService.findResearchsByProperties(queryMap);
+            if(list == null){
+                researchService.addResearch(researchEntity);
+                list = researchService.findResearchsByProperties(queryMap);
+                if(list == null){
+                    map.put("message", "添加研究方向失败");
+                }else{
+                    System.out.println(list.get(0).toString());
+                    list.get(0).setPriority(list.get(0).getResearchId());
+                    researchService.updateResearch(list.get(0));
+                }
+            }
+            else{
+                map.put("message", "该研究方向已存在！");
+            }
+        }
 
-
+        MapToJSON.mapToJson(response, map);
         return NONE;
     }
 }

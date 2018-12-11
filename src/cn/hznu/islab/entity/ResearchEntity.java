@@ -63,6 +63,16 @@ public class ResearchEntity {
     }
 
     @Override
+    public String toString() {
+        return "ResearchEntity{" +
+                "researchId=" + researchId +
+                ", researchDirection='" + researchDirection + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", priority=" + priority +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(researchId, researchDirection, introduction, priority);
     }

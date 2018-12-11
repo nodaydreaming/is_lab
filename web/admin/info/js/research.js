@@ -1,5 +1,20 @@
 var list;
 window.onload = function () {
+    getAllResearch();
+
+    var btn_list = document.getElementsByClassName("layui-btn-xs");
+    console.log(btn_list);
+    for(var i = 0; i < btn_list; ++i){
+        if(btn_list[i].innerText == "编辑"){
+            console.log("编辑" + btn_list[i]);
+        }
+        else
+        {
+            console.log("删除" + btn_list[i]);
+        }
+    }
+};
+function getAllResearch() {
     $.ajax({
         url : 'getAllResearch.action',
         type : 'post',
@@ -23,12 +38,13 @@ window.onload = function () {
             });
         }
     });
-};
+}
 
 function fill() {
     list = arguments[0];
     // console.log(list);
     var tbody = document.getElementsByTagName('tbody')[0];
+    $('tbody').html("");
     // console.log(tbody);
     for (var i = 0; i < list.length; ++i){
         var research1 = list[i];
@@ -68,32 +84,44 @@ function fill() {
 }
 
 function addResearch(){
-    var index = layer.open({
+    layer.open({
         type: 1,
         offset: 'auto',
         skin : 'layui-layer-lan',
-        // id: 'layerDemo1', //防止重复弹出
+        id: 'layerDemo1', //防止重复弹出
         area :  ['600px', '400px'],
-        content: '<form class="layui-form" action="">\n' +
+        content: '<form class="layui-form" action="" style="margin-top: 30px">\n' +
             '  <div class="layui-form-item">\n' +
             '    <label class="layui-form-label">研究方向</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '      <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入研究方向" class="layui-input" style="width: 100px">\n' +
+            '      <input type="text" id="research_title" lay-verify="title" autocomplete="off" placeholder="请输入研究方向" class="layui-input" style="width: 150px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +
-            '    <label class="layui-form-label">简介</label>\n' +
+            '    <label class="layui-form-label">简&nbsp;&nbsp;&nbsp;介</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '      <input type="text" name="intro" lay-verify="title" autocomplete="off" placeholder="请输入研究方向" class="layui-input" style="width: 100px">\n' +
+            '       <textarea class="tcp_content layui-textarea" placeholder="请输入简介" style="width: 80%; height: 50%; resize:none" maxlength="100" onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()"></textarea>' +
+            '       <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>' +
             '    </div>\n' +
             '  </div>\n' +
             '</form>',
         btn: ['确定','取消'],
         btnAlign: 'c',
         shade: 0.5,
-        title: "信息安全实验室—添加研究方向",
+        title: "添加研究方向",
         btn1 : function () {
-            layer.msg("不能为空！");
+            var intro = $(".tcp_content").val();
+            var title = $("#research_title").val();
+            if(title == null || title === ""){
+                layer.msg("研究方向不能为空！");
+            }
+            else if(intro == null || intro === ""){
+                layer.msg("简介不能为空！");
+            }
+            else {
+                addresearch(title, intro);
+                return false;
+            }
             return false;
         },
         btn2 : function () {
@@ -101,3 +129,56 @@ function addResearch(){
         }
     });
 }
+
+function textarea_fun(){
+    $(".tcp_content").val($(".tcp_content").val().substring(0,100));
+    $(".t_h i").html($(".tcp_content").val().length);
+    if(window.event.keyCode  == 13){
+        return false;
+    }
+}
+
+function addresearch(title, intro) {
+    $.ajax({
+       url : 'addResearch.action',
+       type : 'post',
+       data : {"researchDirection" : title, "introduction" : intro},
+       scriptCharset : 'utf-8',
+       success : function (result) {
+           if(result.message == null) {
+               layer.open({
+                   type: 1,
+                   offset: 'auto',
+                   id: 'layerDemo2', //防止重复弹出
+                   content: '<div style="padding: 20px 100px;">' + "添加成功！" + '</div>',
+                   btn: '关闭',
+                   btnAlign: 'c',
+                   shade: 0.5,
+                   title: "信息安全实验室",
+                   yes: function () {
+                       layer.closeAll();
+                   }
+               });
+               getAllResearch();
+           }else{
+               layer.msg(result.message);
+           }
+       } ,
+        error : function () {
+            layer.open({
+                type: 1,
+                offset: 'auto',
+                id: 'layerDemo2', //防止重复弹出
+                content: '<div style="padding: 20px 100px;">' + "请求Action失败！" + '</div>',
+                btn: '关闭',
+                btnAlign: 'c',
+                shade: 0.5,
+                title: "信息安全实验室",
+                yes: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+    });
+}
+

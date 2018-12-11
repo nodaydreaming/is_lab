@@ -127,7 +127,7 @@ function closeDl(){
 
     if(dl.className === "layui-nav-child layui-anim layui-anim-upbit layui-show"){
         var e = event || window.event;
-        var x = e.clientX
+        var x = e.clientX;
         var y = e.clientY;
         var width = dl.offsetWidth;
         var height = dl.offsetHeight;

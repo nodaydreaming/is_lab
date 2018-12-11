@@ -36,6 +36,8 @@
     <package name="research" extends="struts-default, json-default">
         <action name="getAllResearch" class="researchAction" method="getAllResearch">
         </action>
+        <action name="addResearch" class="researchAction" method="addResearch">
+        </action>
     </package>
 
     <package name="libInfo" extends="struts-default, json-default">
