@@ -69,4 +69,51 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
+
+    public String updateResearch() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+
+        HashMap<String, String> map = new HashMap<>();
+
+        HashMap<String, String> queryMap = new HashMap<>();
+
+        researchService.updateResearch(researchEntity);
+        queryMap.put("researchDirection", researchEntity.getResearchDirection());
+        List<ResearchEntity> list = researchService.findResearchsByProperties(queryMap);
+
+        if(list != null){
+            ResearchEntity researchEntity1 = list.get(0);
+            if(researchEntity1.getResearchDirection().equals(researchEntity.getResearchDirection()) &&
+                researchEntity1.getIntroduction().equals(researchEntity.getIntroduction())){
+
+            }
+            else
+            {
+                map.put("message", "更新失败！");
+            }
+        }
+        else
+        {
+            map.put("message", "更新失败！");
+        }
+
+        MapToJSON.mapToJson(response, map);
+        return NONE;
+    }
+
+    public String delResearch() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HashMap<String, String> map = new HashMap<>();
+        HashMap<String, String> queryMap = new HashMap<>();
+
+        researchService.deleteResearch(researchEntity);
+        queryMap.put("researchDirection", researchEntity.getResearchDirection());
+        List<ResearchEntity> list = researchService.findResearchsByProperties(queryMap);
+        if(list != null){
+            map.put("message", "删除失败！");
+        }
+
+        MapToJSON.mapToJson(response, map);
+        return NONE;
+    }
 }

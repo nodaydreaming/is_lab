@@ -38,6 +38,10 @@
         </action>
         <action name="addResearch" class="researchAction" method="addResearch">
         </action>
+        <action name="updateResearch" class="researchAction" method="updateResearch">
+        </action>
+        <action name="delResearch" class="researchAction" method="delResearch">
+        </action>
     </package>
 
     <package name="libInfo" extends="struts-default, json-default">
