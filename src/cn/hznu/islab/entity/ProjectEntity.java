@@ -1,6 +1,8 @@
 package cn.hznu.islab.entity;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,7 +12,8 @@ public class ProjectEntity {
     private int projectId;
     private String name;
     private String number;
-    private Date stratdate;
+
+    private Date startdate;
     private Date enddate;
     private String principal;
     private String type;
@@ -46,13 +49,21 @@ public class ProjectEntity {
     }
 
     @Basic
-    @Column(name = "stratdate")
-    public Date getStratdate() {
-        return stratdate;
+    @Column(name = "startdate")
+    public Date getStartdate() {
+        return startdate;
     }
 
-    public void setStratdate(Date stratdate) {
-        this.stratdate = stratdate;
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
+    }
+
+    public void setStartdate(String startdate){
+        try {
+            this.startdate=(new SimpleDateFormat("yyyy-MM-dd").parse(startdate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Basic
@@ -61,10 +72,17 @@ public class ProjectEntity {
         return enddate;
     }
 
-    public void setEnddate(Date endate) {
+    public void setEnddate(Date enddate) {
         this.enddate = enddate;
     }
 
+    public void setEnddate(String enddate){
+        try {
+            this.enddate=(new SimpleDateFormat("yyyy-MM-dd").parse(enddate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
     @Basic
     @Column(name = "principal")
     public String getPrincipal() {
@@ -93,7 +111,7 @@ public class ProjectEntity {
         return projectId == that.projectId &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(number, that.number) &&
-                Objects.equals(stratdate, that.stratdate) &&
+                Objects.equals(startdate, that.startdate) &&
                 Objects.equals(enddate, that.enddate) &&
                 Objects.equals(principal, that.principal) &&
                 Objects.equals(type, that.type);
@@ -101,6 +119,6 @@ public class ProjectEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectId, name, number, stratdate, enddate, principal, type);
+        return Objects.hash(projectId, name, number, startdate, enddate, principal, type);
     }
 }

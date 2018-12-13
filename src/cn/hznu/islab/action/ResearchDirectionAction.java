@@ -35,16 +35,13 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
 
         List<ResearchEntity> list = researchService.findAllResearchs();
         map.put("researchs", list);
-
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
 
     public String addResearch() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
-
         Map<String, Object> map = new HashMap<>();
-
         HashMap<String, String> queryMap = new HashMap<>();
 
         if(ActionContext.getContext().getSession().get("loginUser") != null) {
@@ -72,20 +69,16 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
 
     public String updateResearch() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
-
-        HashMap<String, String> map = new HashMap<>();
-
+        HashMap<String, Object> map = new HashMap<>();
         HashMap<String, String> queryMap = new HashMap<>();
 
         researchService.updateResearch(researchEntity);
-        queryMap.put("researchDirection", researchEntity.getResearchDirection());
+        queryMap.put("researchId", researchEntity.getResearchId() + "");
         List<ResearchEntity> list = researchService.findResearchsByProperties(queryMap);
-
         if(list != null){
             ResearchEntity researchEntity1 = list.get(0);
             if(researchEntity1.getResearchDirection().equals(researchEntity.getResearchDirection()) &&
                 researchEntity1.getIntroduction().equals(researchEntity.getIntroduction())){
-
             }
             else
             {
@@ -103,7 +96,7 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
 
     public String delResearch() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
-        HashMap<String, String> map = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
         HashMap<String, String> queryMap = new HashMap<>();
 
         researchService.deleteResearch(researchEntity);
@@ -112,7 +105,6 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
         if(list != null){
             map.put("message", "删除失败！");
         }
-
         MapToJSON.mapToJson(response, map);
         return NONE;
     }

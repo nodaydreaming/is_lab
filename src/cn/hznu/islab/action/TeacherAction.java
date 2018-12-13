@@ -4,6 +4,11 @@ import cn.hznu.islab.entity.TeacherEntity;
 import cn.hznu.islab.service.TeacherService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * @ClassName TeacherAction
@@ -25,5 +30,19 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
         return teacherEntity;
     }
 
+    /**
+     * 添加指导老师，不可
+     * @return
+     * @throws IOException
+     */
+    public String addTeacher() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HashMap<String, String> map = new HashMap<>();
+        HashMap<String, String> queryMap = new HashMap<>();
+
+        queryMap.put("name", teacherEntity.getName());
+
+        return NONE;
+    }
 
 }

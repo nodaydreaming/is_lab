@@ -34,7 +34,7 @@
     </package>
 
     <package name="research" extends="struts-default, json-default">
-        <action name="getAllResearch" class="researchAction" method="getAllResearch">
+        <action name="getAllResearchs" class="researchAction" method="getAllResearch">
         </action>
         <action name="addResearch" class="researchAction" method="addResearch">
         </action>
@@ -48,6 +48,17 @@
         <action name="info_update" class="libInfoAction" method="updateInfo">
         </action>
         <action name="getInfo" class="libInfoAction" method="getInfoContent">
+        </action>
+    </package>
+
+    <package name="project" extends="json-default, struts-default">
+        <action name="getAllProjects" class="projectAction" method="getAllProjects">
+        </action>
+        <action name="addProject" class="projectAction" method="addProject">
+        </action>
+        <action name="delProject" class="projectAction" method="delProject">
+        </action>
+        <action name="updateProject" class="projectAction" method="updateProject">
         </action>
     </package>
 

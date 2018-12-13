@@ -100,6 +100,9 @@
     <bean id="libInfoAction" class="cn.hznu.islab.action.LibInfoAction">
         <property name="introductionService" ref="introductionService"/>
     </bean>
+    <bean id="projectAction" class="cn.hznu.islab.action.ProjectAction">
+        <property name="projectService" ref="projectService"/>
+    </bean>
     <!-- Service的配置 -->
     <bean id="competitionService" class="cn.hznu.islab.service.impl.CompetitionServiceImpl">
         <property name="competitionDao" ref="competitionDao"/>

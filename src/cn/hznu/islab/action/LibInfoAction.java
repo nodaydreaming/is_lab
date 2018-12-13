@@ -37,14 +37,11 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
 
     public String updateInfo() throws IOException {
         HttpServletResponse response = ServletActionContext.getResponse();
-
         Map<String, Object> map = new HashMap<>();
-
         HashMap<String, String> queryMap = new HashMap<>();
+
         queryMap.put("name",introductionEntity.getName());
-
         List<IntroductionEntity> list = introductionService.findIntroductionsByProperties(queryMap);
-
         if(list != null){
             IntroductionEntity introduction = list.get(0);
             introductionEntity.setIntroductionId(introduction.getIntroductionId());
@@ -52,27 +49,22 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
         }
         list.clear();
         list = introductionService.findIntroductionsByProperties(queryMap);
-
 //        System.out.println(list.get(0).getContent());
 //        System.out.println(introductionEntity.getContent());
         if(list.get(0).getContent().equals(introductionEntity.getContent())){
             map.put("updateResult", "success");
-
         }else{
             map.put("updateResult", "error");
         }
-
         MapToJSON.mapToJson(response, map);
-
         return NONE;
     }
 
     public String getInfoContent() throws IOException {
         HttpServletResponse response = ServletActionContext.getResponse();
-
         HashMap<String, Object> map = new HashMap<>();
-
         HashMap<String, String> queryMap = new HashMap<>();
+
         queryMap.put("name",introductionEntity.getName());
         List<IntroductionEntity> list = introductionService.findIntroductionsByProperties(queryMap);
         if(list != null){

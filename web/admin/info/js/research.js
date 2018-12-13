@@ -1,6 +1,6 @@
 var list;
 window.onload = function () {
-    getAllResearch();
+    getAllResearchs();
     $.ajax({
         url : 'user_getLoginUser.action',
         type : 'post',
@@ -21,9 +21,9 @@ window.onload = function () {
         }
     });
 };
-function getAllResearch() {
+function getAllResearchs() {
     $.ajax({
-        url : 'getAllResearch.action',
+        url : 'getAllResearchs.action',
         type : 'post',
         scriptCharset : 'utf-8',
         success : function (result) {
@@ -173,7 +173,7 @@ function editresearch(research) {
                         layer.closeAll();
                     }
                 });
-                getAllResearch();
+                getAllResearchs();
             }
             else
             {
@@ -233,7 +233,7 @@ function delresearch(research) {
                         layer.closeAll();
                     }
                 });
-                getAllResearch();
+                getAllResearchs();
             }
             else
             {
@@ -302,14 +302,6 @@ function addResearch(){
     });
 }
 
-function textarea_fun(){
-    $(".tcp_content").val($(".tcp_content").val().substring(0,100));
-    $(".t_h i").html($(".tcp_content").val().length);
-    if(window.event.keyCode  == 13){
-        return false;
-    }
-}
-
 function addresearch(title, intro) {
     $.ajax({
        url : 'addResearch.action',
@@ -331,7 +323,7 @@ function addresearch(title, intro) {
                        layer.closeAll();
                    }
                });
-               getAllResearch();
+               getAllResearchs();
            }else{
                layer.msg(result.message);
            }
@@ -354,3 +346,10 @@ function addresearch(title, intro) {
     });
 }
 
+function textarea_fun(){
+    $(".tcp_content").val($(".tcp_content").val().substring(0,100));
+    $(".t_h i").html($(".tcp_content").val().length);
+    if(window.event.keyCode  == 13){
+        return false;
+    }
+}

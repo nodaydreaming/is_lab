@@ -10,7 +10,7 @@
         </id>
         <property name="name" column="name" not-null="false"/>
         <property name="number" column="number" not-null="false"/>
-        <property name="stratdate" column="stratdate" not-null="false"/>
+        <property name="startdate" column="startdate" not-null="false"/>
         <property name="enddate" column="enddate" not-null="false"/>
         <property name="principal" column="principal" not-null="false"/>
         <property name="type" column="type" not-null="false"/>
