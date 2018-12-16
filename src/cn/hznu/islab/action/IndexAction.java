@@ -1,7 +1,16 @@
 package cn.hznu.islab.action;
 
+import cn.hznu.islab.entity.ResearchEntity;
 import cn.hznu.islab.service.*;
+import cn.hznu.islab.util.MapToJSON;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @ClassName IndexAction
@@ -12,13 +21,10 @@ import com.opensymphony.xwork2.ActionSupport;
  **/
 public class IndexAction extends ActionSupport {
     private WorksService worksService;
-
     private PatentService patentService;
     private CompetitionService competitionService;
-
     private CultureService cultureService;
     private ResearchService researchService;
-    private LinkService linkService;
 
     public void setWorksService(WorksService worksService) {
         this.worksService = worksService;
@@ -40,12 +46,14 @@ public class IndexAction extends ActionSupport {
         this.researchService = researchService;
     }
 
-    public void setLinkService(LinkService linkService) {
-        this.linkService = linkService;
-    }
+    public String indexInfo() throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HashMap<String, Object> map = new HashMap<>();
 
-    public String indexInfo() {
+        List<ResearchEntity> researchs = researchService.findAllResearchs();
+        map.put("researchs", researchs);
 
+        MapToJSON.mapToJson(response, map);
         return NONE;
     }
 }

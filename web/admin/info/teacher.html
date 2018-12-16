@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
+    <script type="text/javascript" src="../../js/jquery-1.10.2.js"></script>
 
     <link rel="stylesheet" href="../../layui/css/layui.css"  media="all">
     <link rel="stylesheet" href="../../layui/css/global.css" media="all">
@@ -18,10 +19,9 @@
 
     <script type="text/javascript" src="../../layui/layui.all.js"></script>
     <script type="text/javascript" src="../../layui/lay/modules/jquery.js"></script>
-    <script type="text/javascript" src="../../js/jquery-1.10.2.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.all.min.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/lang/zh-cn/zh-cn.js"></script>
+    <!--<script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.config.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.all.min.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="../../ueditor/lang/zh-cn/zh-cn.js"></script>-->
     <script type="text/javascript" src="../js/general.js"></script>
 
   <style>
@@ -127,6 +127,9 @@
               <dd class="">
                 <a class="aHover" href="../achievement/softwareCopyright.html">软著</a>
               </dd>
+              <dd class="">
+                <a class="aHover" href="../achievement/competition.html">竞赛</a>
+              </dd>
             </dl>
           </li>
           <li class="layui-nav-item">
@@ -177,13 +180,80 @@
 </div>
 
     <div class="layui-body layui-tab-content site-demo site-demo-body" style="margin-top: 50px;">
-      <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend>指导老师</legend>
-      </fieldset>
-      <div style="width: 100%; height: 38px;">
-        <button class="layui-btn layui-btn-normal" style="width: 100px; float: right; margin-right: 2%" onclick="addTeacher()">添加</button>
-      </div>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>指导老师</legend>
+        </fieldset>
+        <div style="width: 100%; height: 38px;">
+            <button class="layui-btn layui-btn-normal" style="width: 100px; float: right; margin-right: 2%" onclick="addTeacher()">添加</button>
+        </div>
+        <form class="layui-form" action="" style="margin-top: 30px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-block">
+                    <input type="text" id="instructor" autocomplete="off" placeholder="请输入姓名" class="layui-input" style="width: 350px;">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="男" title="男" checked="">
+                    <input type="radio" name="sex" value="女" title="女">
+                </div>
+            </div>
+            <div class="layui-upload layui-form-item">
+                <div class="layui-upload-list" style="float: left">
+                    <img class="layui-upload-img" id="demo1">
+                    <p id="demoText"></p>
+                </div>
+                <button type="button" class="layui-btn" id="upload" style="float:left;margin-top: 35px">上传图片</button>
+            </div>
+        </form>
+
     </div>
 </body>
     <script type="text/javascript" src="js/info.js"></script>
+    <script type="text/javascript">
+        layui.use('upload', function() {
+            var $ = layui.jquery, upload = layui.upload;
+            //普通图片上传使用layui上传图片
+            var uploadInst = upload.render({
+                elem: '#upload'
+                , url: 'teacherPhotoUpload.action'
+                , accept : 'images'
+                , multiple : false
+                , auto : false
+                , field : 'upload'
+                , bindAction : '#startUpload'
+                , choose: function (obj) {
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function (index, file, result) {
+                        $('#demo1').attr('src', result); //图片链接（base64）
+                        $('#demo1').width(92);
+                        $('#demo1').height(92)
+                    });
+                }
+                , done: function (res) {
+                    console.log(res);
+                    //如果上传失败
+                    if (res.code > 0) {
+                        return layer.msg('上传失败');
+                    }
+                    //上传成功
+                    else
+                    {
+                        $('#demo1').attr('src', res.src);
+                    }
+
+                }
+                , error: function () {
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function () {
+                        uploadInst.upload();
+                    });
+                }
+            });
+        });
+    </script>
 </html>

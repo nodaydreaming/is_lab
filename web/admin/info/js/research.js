@@ -77,15 +77,22 @@ function fill() {
         td4.style.padding = "0px";
         var a1 = document.createElement('a');
         a1.id = "editResearch" + (i+1);
-        a1.className = "layui-btn layui-btn-xs";
-        a1.innerText = "编辑";
+        a1.className = "layui-btn layui-btn-normal layui-btn-xs";
+        var i1 = document.createElement('i');
+        i1.className = "layui-icon layui-icon-edit";
+        a1.appendChild(i1);
+        a1.innerHTML = a1.innerHTML + "编辑";
         a1.onclick = editResearch;
 
         var a2 = document.createElement('a');
         a2.id = "delResearch" + (i+1);
         a2.className = "layui-btn layui-btn-danger layui-btn-xs";
-        a2.innerText = "删除";
+        var i2 = document.createElement('i');
+        i2.className = "layui-icon layui-icon-delete";
+        a2.appendChild(i2);
+        a2.innerHTML = a2.innerHTML + "删除";
         a2.onclick = delResearch;
+
         td4.appendChild(a1);
         td4.appendChild(a2);
 

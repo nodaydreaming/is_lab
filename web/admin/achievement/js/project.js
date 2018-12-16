@@ -83,7 +83,7 @@ function fillProjects() {
 
         var td4 = document.createElement('td');
         td4.style.textAlign = "center";
-        td4.innerText = parseDateTime(project1.startdate) + "至" + parseDateTime(project1.enddate);
+        td4.innerText = new Date(project1.startdate).Format("yyyy-MM-dd") + " 至 " + new Date(project1.enddate).Format("yyyy-MM-dd");
         tr.appendChild(td4);
 
         var td5 = document.createElement('td');
@@ -101,14 +101,20 @@ function fillProjects() {
         td7.style.padding = "0px";
         var a1 = document.createElement('a');
         a1.id = "editResearch" + (i+1);
-        a1.className = "layui-btn layui-btn-xs";
-        a1.innerText = "编辑";
+        a1.className = "layui-btn layui-btn-normal layui-btn-xs";
+        var i1 = document.createElement('i');
+        i1.className = "layui-icon layui-icon-edit";
+        a1.appendChild(i1);
+        a1.innerHTML = a1.innerHTML + "编辑";
         a1.onclick = editProject;
 
         var a2 = document.createElement('a');
         a2.id = "delResearch" + (i+1);
         a2.className = "layui-btn layui-btn-danger layui-btn-xs";
-        a2.innerText = "删除";
+        var i2 = document.createElement('i');
+        i2.className = "layui-icon layui-icon-delete";
+        a2.appendChild(i2);
+        a2.innerHTML = a2.innerHTML + "删除";
         a2.onclick = delProject;
         td7.appendChild(a1);
         td7.appendChild(a2);
@@ -139,15 +145,15 @@ function addProject() {
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +
-            '    <label class="layui-form-label">开始时间</label>\n' +
+            '    <label class="layui-form-label">开始日期</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '      <input type="text" id="project_starttime" autocomplete="off" placeholder="yyyy-MM-dd"class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
+            '      <input type="text" id="project_startdate" autocomplete="off" placeholder="yyyy-MM-dd"class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +
-            '    <label class="layui-form-label">结束时间</label>\n' +
+            '    <label class="layui-form-label">结束日期</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '      <input type="text" id="project_endtime" autocomplete="off" placeholder="yyyy-MM-dd" class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
+            '      <input type="text" id="project_enddate" autocomplete="off" placeholder="yyyy-MM-dd" class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +
@@ -169,10 +175,10 @@ function addProject() {
             '\n' +
             '        //执行一个laydate实例\n' +
             '        laydate.render({\n' +
-            '            elem: \'#project_starttime\' \n' +
+            '            elem: \'#project_startdate\' \n' +
             '        });\n' +
             '        laydate.render({\n' +
-            '            elem: \'#project_endtime\' \n' +
+            '            elem: \'#project_enddate\' \n' +
             '        });\n' +
             '    });' +
             '</script>',
@@ -183,8 +189,8 @@ function addProject() {
         btn1 : function () {
             var name = $("#project_name").val();
             var number = $("#project_number").val();
-            var starttime = $("#project_starttime").val();
-            var endtime = $("#project_endtime").val();
+            var startdate = $("#project_startdate").val();
+            var enddate = $("#project_enddate").val();
             var principal = $("#project_principal").val();
             var type = $("#project_type").val();
 
@@ -194,11 +200,11 @@ function addProject() {
             else if(number == null || number === ""){
                 layer.msg("项目编号不能为空！");
             }
-            else if(starttime == null || starttime === ""){
-                layer.msg("开始时间不能为空！");
+            else if(startdate == null || startdate === ""){
+                layer.msg("开始日期不能为空！");
             }
-            else if(endtime == null || endtime === ""){
-                layer.msg("结束时间不能为空！");
+            else if(enddate == null || enddate === ""){
+                layer.msg("结束日期不能为空！");
             }
             else if(principal == null || principal === ""){
                 layer.msg("负责人不能为空！");
@@ -206,8 +212,11 @@ function addProject() {
             else if(type == null || type === ""){
                 layer.msg("项目类型不能为空！");
             }
+            else if(new Date(enddate).getTime() < new Date(startdate).getTime()){
+                layer.msg("结束日期应该晚于开始日期！")
+            }
             else {
-                addproject(name, number, starttime, endtime, principal, type);
+                addproject(name, number, startdate, enddate, principal, type);
                 return false;
             }
             return false;
@@ -218,12 +227,12 @@ function addProject() {
     });
 }
 
-function addproject(name, number, starttime, endtime, principal, type) {
+function addproject(name, number, startdate, enddate, principal, type) {
     var mydata = {
         "name" : name,
         "number" : number,
-        "startdate" : starttime,
-        "enddate" : endtime,
+        "startdate" : startdate,
+        "enddate" : enddate,
         "principal" : principal,
         "type" : type
     };
@@ -285,30 +294,277 @@ function addproject(name, number, starttime, endtime, principal, type) {
 }
 
 function editProject() {
-    
+    var tr = this.parentNode.parentNode;
+    var num = tr.childNodes[0].innerText;
+    var project1 = projectList[num-1];
+    layer.open({
+        type: 1,
+        offset: 'auto',
+        skin : 'layui-layer-lan',
+        id: 'layerDemo1', //防止重复弹出
+        area :  ['600px', '500px'],
+        content: '<form class="layui-form" action="" style="margin-top: 30px">\n' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">项目名称</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <input type="text" id="project_name" autocomplete="off" placeholder="请输入项目名称" class="layui-input" style="width: 350px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+project1.name+'>\n' +
+            '    </div>\n' +
+            '  </div>\n' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">项目编号</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <input type="text" id="project_number" autocomplete="off" placeholder="请输入项目编号" class="layui-input" style="width: 250px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+project1.number+'>\n' +
+            '    </div>\n' +
+            '  </div>\n' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">开始日期</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <input type="text" id="project_startdate" autocomplete="off" placeholder="yyyy-MM-dd"class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+new Date(project1.startdate).Format("yyyy-MM-dd")+'>\n' +
+            '    </div>\n' +
+            '  </div>\n' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">结束日期</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <input type="text" id="project_enddate" autocomplete="off" placeholder="yyyy-MM-dd" class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+new Date(project1.enddate).Format("yyyy-MM-dd")+'>\n' +
+            '    </div>\n' +
+            '  </div>\n' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">项目负责人</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <input type="text" id="project_principal" autocomplete="off" placeholder="请输入负责人" class="layui-input" style="width: 150px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+project1.principal+'>\n' +
+            '    </div>\n' +
+            '  </div>\n' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">项目类型</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <input type="text" id="project_type" autocomplete="off" placeholder="请输入项目类型" class="layui-input" style="width: 250px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+project1.type+'>\n' +
+            '    </div>\n' +
+            '  </div>\n' +
+            '</form>' +
+            '<script>' +
+            'layui.use(\'laydate\', function(){\n' +
+            '        var laydate = layui.laydate;\n' +
+            '\n' +
+            '        //执行一个laydate实例\n' +
+            '        laydate.render({\n' +
+            '            elem: \'#project_startdate\' \n' +
+            '        });\n' +
+            '        laydate.render({\n' +
+            '            elem: \'#project_enddate\' \n' +
+            '        });\n' +
+            '    });' +
+            '</script>',
+        btn: ['确定','取消'],
+        btnAlign: 'c',
+        shade: 0.5,
+        title: "更新项目信息",
+        btn1 : function () {
+            var name = $("#project_name").val();
+            var number = $("#project_number").val();
+            var startdate = $("#project_startdate").val();
+            var enddate = $("#project_enddate").val();
+            var principal = $("#project_principal").val();
+            var type = $("#project_type").val();
+
+            if(name == null || name === ""){
+                layer.msg("项目名称不能为空！");
+            }
+            else if(number == null || number === ""){
+                layer.msg("项目编号不能为空！");
+            }
+            else if(startdate == null || startdate === ""){
+                layer.msg("开始日期不能为空！");
+            }
+            else if(enddate == null || enddate === ""){
+                layer.msg("结束日期不能为空！");
+            }
+            else if(principal == null || principal === ""){
+                layer.msg("负责人不能为空！");
+            }
+            else if(new Date(enddate).getTime() < new Date(startdate).getTime()){
+                layer.msg("结束日期应该晚于开始日期！")
+            }
+            else if(type == null || type === ""){
+                layer.msg("项目类型不能为空！");
+            }
+            else {
+                project1.name = name;
+                project1.number = number;
+                project1.startdate = startdate;
+                project1.enddate  = enddate;
+                project1.principal = principal;
+                project1.type = type;
+                editproject(project1);
+                return false;
+            }
+            return false;
+        },
+        btn2 : function () {
+            layer.closeAll();
+        }
+    });
 }
 
 function editproject() {
-    
+    var pro = arguments[0];
+    $.ajax({
+        url : 'updateProject.action',
+        type : 'post',
+        data : {"projectId" : pro.projectId, "name" : pro.name, "number" : pro.number, "startdate" : pro.startdate,
+        "enddate" : pro.enddate, "principal" : pro.principal, "type" : pro.type},
+        scriptCharset : 'utf-8',
+        success : function (result) {
+            if(result.message == null){
+                layer.open({
+                    type: 1,
+                    offset: 'auto',
+                    id: 'layerDemo2', //防止重复弹出
+                    content: '<div style="padding: 20px 100px;">' + "更新成功！" + '</div>',
+                    btn: '关闭',
+                    btnAlign: 'c',
+                    shade: 0.5,
+                    title: "信息安全实验室",
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+                getAllProjects();
+            }
+            else
+            {
+                layer.open({
+                    type: 1,
+                    offset: 'auto',
+                    id: 'layerDemo2', //防止重复弹出
+                    content: '<div style="padding: 20px 100px;">' + result.message + '</div>',
+                    btn: '关闭',
+                    btnAlign: 'c',
+                    shade: 0.5,
+                    title: "信息安全实验室",
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        },
+        error : function () {
+            layer.open({
+                type: 1,
+                offset: 'auto',
+                id: 'layerDemo2', //防止重复弹出
+                content: '<div style="padding: 20px 100px;">' + "更新失败！" + '</div>',
+                btn: '关闭',
+                btnAlign: 'c',
+                shade: 0.5,
+                title: "信息安全实验室",
+                yes: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+    });
 }
 
 function delProject() {
-    
+    var tr = this.parentNode.parentNode;
+    var num = tr.childNodes[0].innerText;
+    var project1 = projectList[num-1];
+    layer.open({
+        type: 1,
+        offset: 'auto',
+        id: 'layerDemo1', //防止重复弹出
+        content: '<div style="padding: 20px 50px;">' + "确定删除项目 " +'<b>'+project1.name+'</b>'+ " 吗?" + '</div>',
+        btn: ['确定','取消'],
+        btnAlign: 'c',
+        shade: 0.5,
+        title: "信息安全实验室",
+        yes : function () {
+            delproject(project1);
+            return false;
+        },
+        btn2 : function () {
+            layer.closeAll();
+        }
+    });
 }
 
 function delproject() {
+    var pro = arguments[0];
+    $.ajax({
+        url: 'delProject.action',
+        type: 'post',
+        data: {
+            "projectId": pro.projectId,
+        },
+        scriptCharset: 'utf-8',
+        success: function (result) {
+            if(result.message == null){
+                layer.open({
+                    type: 1,
+                    offset: 'auto',
+                    id: 'layerDemo2', //防止重复弹出
+                    content: '<div style="padding: 20px 100px;">' + "删除成功！" + '</div>',
+                    btn: '关闭',
+                    btnAlign: 'c',
+                    shade: 0.5,
+                    title: "信息安全实验室",
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+                getAllProjects();
+            }
+            else
+            {
+                layer.open({
+                    type: 1,
+                    offset: 'auto',
+                    id: 'layerDemo2', //防止重复弹出
+                    content: '<div style="padding: 20px 100px;">' + result.message + '</div>',
+                    btn: '关闭',
+                    btnAlign: 'c',
+                    shade: 0.5,
+                    title: "信息安全实验室",
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        },
+        error : function () {
+            layer.open({
+                type: 1,
+                offset: 'auto',
+                id: 'layerDemo2', //防止重复弹出
+                content: '<div style="padding: 20px 100px;">' + "删除失败！" + '</div>',
+                btn: '关闭',
+                btnAlign: 'c',
+                shade: 0.5,
+                title: "信息安全实验室",
+                yes: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+    });
 }
 
 
-function parseDateTime(dat)
+Date.prototype.Format = function(fmt)
 {
-    var mapping = {
-        "Jan" : 1,"Feb" : 2,"Apr" : 3,"May" : 4,"June" : 5,"July" : 6,
-        "July" : 7,"Aug" : 8,"Sep" : 9,"Oct" : 10,"Nov" : 11,"Dec" : 12
+    var o = {
+        "M+" : this.getMonth()+1,                 //月份
+        "d+" : this.getDate(),                    //日
+        "h+" : this.getHours(),                   //小时
+        "m+" : this.getMinutes(),                 //分
+        "s+" : this.getSeconds(),                 //秒
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度
+        "S"  : this.getMilliseconds()             //毫秒
     };
-    var y = dat.substring(dat.indexOf(",")+1, dat.indexOf(",")+6);
-    var m = dat.substring(0,3);
-    var d = dat.substring(dat.indexOf(" ")+1, dat.indexOf(","));
-
-    return y + "-" + m + "-" + d;
+    if(/(y+)/.test(fmt))
+        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+    for(var k in o)
+        if(new RegExp("("+ k +")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+    return fmt;
 }

@@ -10,9 +10,11 @@
     <constant name="struts.multipart.maxSize" value="209715200" />
     <!-- 使用struts的开发者模式 -->
     <constant name="struts.devMode" value="true"/>
+    <!-- 存放临时文件的文件夹 -->
+    <constant name="struts.multipart.saveDir" value="/upload/tmp/"/>
 
-    <package name="index" extends="struts-default, json-default">
-        <action name="index" class="indexAction" method="execute">
+    <package name="indexInfo" extends="struts-default, json-default">
+        <action name="indexInfo" class="indexAction" method="indexInfo">
         </action>
     </package>
 
@@ -51,6 +53,11 @@
         </action>
     </package>
 
+    <package name="teacher" extends="struts-default, json-default">
+        <action name="getAllInstructors" class="teacherAction" method="getAllInstructors">
+        </action>
+    </package>
+
     <package name="project" extends="json-default, struts-default">
         <action name="getAllProjects" class="projectAction" method="getAllProjects">
         </action>
@@ -62,4 +69,8 @@
         </action>
     </package>
 
+
+    <package name="upload" extends="struts-default, json-default">
+        <action name="teacherPhotoUpload" class="uploadAction" method="uploadImg"></action>
+    </package>
 </struts>

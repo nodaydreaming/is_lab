@@ -8,14 +8,14 @@ ueditor.ready(function () {
         dataType : 'json',
         data : {"name" : $("#btnUpdate").attr("name")},
         success : function (result) {
-            if(result.content != "获得content失败！") {
+            if(result.message == null) {
                 ueditor.setContent(result.content);
             }else{
                 layer.open({
                     type: 1,
                     offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                     id: 'layerDemo1', //防止重复弹出
-                    content: '<div style="padding: 20px 100px;">' + result.content + '</div>',
+                    content: '<div style="padding: 20px 100px;">' + result.message + '</div>',
                     btn: '关闭',
                     btnAlign: 'c', //按钮居中
                     shade: 0.5, //不显示遮罩

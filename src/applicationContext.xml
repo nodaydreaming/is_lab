@@ -80,7 +80,6 @@
     <bean id="indexAction" class="cn.hznu.islab.action.IndexAction">
         <property name="competitionService" ref="competitionService"/>
         <property name="cultureService" ref="cultureService"/>
-        <property name="linkService" ref="linkService"/>
         <property name="patentService" ref="patentService"/>
         <property name="researchService" ref="researchService"/>
         <property name="worksService" ref="worksService"/>
@@ -103,6 +102,7 @@
     <bean id="projectAction" class="cn.hznu.islab.action.ProjectAction">
         <property name="projectService" ref="projectService"/>
     </bean>
+    <bean id="uploadAction" class="cn.hznu.islab.action.FileUploadAction"></bean>
     <!-- Service的配置 -->
     <bean id="competitionService" class="cn.hznu.islab.service.impl.CompetitionServiceImpl">
         <property name="competitionDao" ref="competitionDao"/>

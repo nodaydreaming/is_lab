@@ -45,4 +45,9 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
         return NONE;
     }
 
+    public String getAllInstructors() throws IOException{
+
+        return NONE;
+    }
+
 }

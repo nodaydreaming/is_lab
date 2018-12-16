@@ -77,7 +77,7 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
 
             map.put("content", content);
         }else{
-            map.put("content", "获得content失败！");
+            map.put("message", "获得content失败！");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;
