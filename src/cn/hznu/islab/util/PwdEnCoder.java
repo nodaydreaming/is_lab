@@ -18,7 +18,7 @@ public class PwdEnCoder {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 
-            String inputWithSalt = pwd +  telephone;
+            String inputWithSalt = pwd + telephone;
 
             messageDigest.update(inputWithSalt.getBytes());
             String hashResult = byteArrayToHex(messageDigest.digest());

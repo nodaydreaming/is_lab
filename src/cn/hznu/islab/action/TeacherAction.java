@@ -2,6 +2,7 @@ package cn.hznu.islab.action;
 
 import cn.hznu.islab.entity.TeacherEntity;
 import cn.hznu.islab.service.TeacherService;
+import cn.hznu.islab.util.MapToJSON;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
@@ -9,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @ClassName TeacherAction
@@ -39,15 +41,87 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, String> map = new HashMap<>();
         HashMap<String, String> queryMap = new HashMap<>();
+        queryMap.put("email", teacherEntity.getEmail());
+        List<TeacherEntity> list = teacherService.findTeachersByProperties(queryMap);
 
-        queryMap.put("name", teacherEntity.getName());
-
+        if(list == null){
+            teacherService.addTeacher(teacherEntity);
+            list = teacherService.findTeachersByProperties(queryMap);
+            if(list != null && list.get(0) != null){
+                TeacherEntity t = list.get(0);
+                t.setPriority(t.getTeacherId());
+                teacherService.updateTeacher(t);
+            }
+            else{
+                map.put("message", "添加失败！");
+            }
+        }
+        else{
+            map.put("message", "此邮箱已存在，请重新输入！");
+        }
+        MapToJSON.mapToJson(response, map);
         return NONE;
     }
 
     public String getAllInstructors() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HashMap<String, Object> map = new HashMap<>();
 
+        List<TeacherEntity> list = teacherService.findAllTeachers();
+        if(list == null){
+            map.put("message", "请求失败！");
+        }
+        else
+        {
+            map.put("instructors", list);
+        }
+
+        MapToJSON.mapToJson(response, map);
         return NONE;
     }
 
+    public String delTeacher() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HashMap<String, Object> map = new HashMap<>();
+        HashMap<String, String> queryMap = new HashMap<>();
+
+        teacherService.deleteTeacher(teacherEntity);
+        queryMap.put("email", teacherEntity.getEmail());
+        List<TeacherEntity> list = teacherService.findTeachersByProperties(queryMap);
+        if(list != null){
+            map.put("message", "删除指导老师失败！");
+        }
+        MapToJSON.mapToJson(response, map);
+        return NONE;
+    }
+
+    public String updateTeacher() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HashMap<String, Object> map = new HashMap<>();
+        HashMap<String, String> queryMap = new HashMap<>();
+
+        teacherService.updateTeacher(teacherEntity);
+        queryMap.put("teacherId", teacherEntity.getTeacherId() + "");
+        List<TeacherEntity> list = teacherService.findTeachersByProperties(queryMap);
+        if(list != null){
+            TeacherEntity teacherEntity1 = list.get(0);
+            if(teacherEntity1.getName().equals(teacherEntity.getName()) &&
+                teacherEntity1.getDegree().equals(teacherEntity.getDegree()) &&
+                teacherEntity1.getEmail().equals(teacherEntity.getEmail()) &&
+                teacherEntity1.getIntro().equals(teacherEntity.getIntro()) &&
+                teacherEntity1.getGender().equals(teacherEntity.getGender())) {
+            }
+
+            else
+            {
+                map.put("message", "更新失败！");
+            }
+        }
+        else
+        {
+            map.put("message", "更新失败！");
+        }
+        MapToJSON.mapToJson(response, map);
+        return NONE;
+    }
 }

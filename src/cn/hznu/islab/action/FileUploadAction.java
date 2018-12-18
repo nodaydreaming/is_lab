@@ -1,11 +1,11 @@
 package cn.hznu.islab.action;
 
 import cn.hznu.islab.util.MapToJSON;
+import cn.hznu.islab.util.RandomUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -40,10 +40,10 @@ public class FileUploadAction extends ActionSupport {
         this.uploadContentType = uploadContentType;
     }
 
-    public String uploadTeacherImg() throws IOException {
+    public String uploadTeacherImg() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
-        HttpServletRequest request = ServletActionContext.getRequest();
         HashMap<String, Object> map = new HashMap<>();
+        String filename = RandomUtil.getRandomFileName();
         //获得服务器文件存储的文件夹
         String filePath = ServletActionContext.getServletContext().getRealPath("/upload/teacher");
         File fileFolder = new File(filePath);
@@ -51,11 +51,15 @@ public class FileUploadAction extends ActionSupport {
         if(!fileFolder.exists()){
             fileFolder.mkdirs();
         }
-        //将临时文件移动的目的文件夹
-        FileUtils.moveFile(upload, new File(fileFolder, uploadFileName));
-
-        map.put("code", "0");
-        map.put("src", filePath + "/" + uploadFileName);
+        filename += uploadFileName.substring(uploadFileName.indexOf('.'));
+        try {
+            //将临时文件移动的目的文件夹
+            FileUtils.moveFile(upload, new File(fileFolder, filename));
+            map.put("code", 0);
+            map.put("src", "/is_lab/upload/teacher/" + filename);
+        }catch (IOException e){
+            map.put("message", "图片上传失败！");
+        }
 
         MapToJSON.mapToJson(response, map);
         return NONE;

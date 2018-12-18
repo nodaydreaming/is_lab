@@ -288,5 +288,6 @@ public class DateUtils {
         list.add(begincal.getTime());
         return list;
     }
-    
+
+
 }

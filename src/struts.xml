@@ -56,6 +56,12 @@
     <package name="teacher" extends="struts-default, json-default">
         <action name="getAllInstructors" class="teacherAction" method="getAllInstructors">
         </action>
+        <action name="addInstructor" class="teacherAction" method="addTeacher">
+        </action>
+        <action name="updateInstructor" class="teacherAction" method="updateTeacher">
+        </action>
+        <action name="delInstructor" class="teacherAction" method="delTeacher">
+        </action>
     </package>
 
     <package name="project" extends="json-default, struts-default">
@@ -71,6 +77,6 @@
 
 
     <package name="upload" extends="struts-default, json-default">
-        <action name="teacherPhotoUpload" class="uploadAction" method="uploadImg"></action>
+        <action name="uploadTeacherImg" class="uploadAction" method="uploadTeacherImg"></action>
     </package>
 </struts>

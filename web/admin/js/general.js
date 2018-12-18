@@ -26,13 +26,10 @@ window.onload = function(){
 			console.log("请求失败！");
         }
 	});
-
-	var inputs = document.getElementsByTagName('input');
-	for(var i=0; i<inputs.length;++i){
-		inputs[i].onchange = function () { this.val(this.val().substring(0,200)); if(window.event.keyCode ==13) return false; };
-		inputs[i].onkeydown = function () { this.val(this.val().substring(0,200)); if(window.event.keyCode ==13) return false; };
-		inputs[i].onkeyup = function () { this.val(this.val().substring(0,200)); if(window.event.keyCode ==13) return false; };
-	}
+}
+function inputLimit() {
+	var input = window.event.target;
+    input.value = input.value.substring(0,100); if(window.event.keyCode ==13) return false;
 }
 function aOnHover() {
 	var a = window.event.target;
@@ -199,3 +196,4 @@ function showBar(){
 	}
 	obj.className += " layui-this";
 }
+

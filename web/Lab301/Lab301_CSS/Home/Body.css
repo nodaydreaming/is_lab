@@ -114,6 +114,8 @@
 
 #div3 ul {
     margin: 10px 0 0 23px;
+    width: 40%;
+    float: left;
 }
 #div3 ul li {
     padding: 4px 0;

@@ -21,6 +21,7 @@ window.onload = function () {
         }
     });
 };
+
 function getAllResearchs() {
     $.ajax({
         url : 'getAllResearchs.action',
