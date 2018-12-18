@@ -151,4 +151,21 @@ public class TeacherEntity {
     public int hashCode() {
         return Objects.hash(teacherId, name, photo, enName, gender, telephone, email, researchArea, degree, intro, priority);
     }
+
+    @Override
+    public String toString() {
+        return "TeacherEntity{" +
+                "teacherId=" + teacherId +
+                ", name='" + name + '\'' +
+                ", photo='" + photo + '\'' +
+                ", enName='" + enName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
+                ", researchArea='" + researchArea + '\'' +
+                ", degree='" + degree + '\'' +
+                ", intro='" + intro + '\'' +
+                ", priority=" + priority +
+                '}';
+    }
 }

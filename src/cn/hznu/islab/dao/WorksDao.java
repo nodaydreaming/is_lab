@@ -17,5 +17,5 @@ public interface WorksDao {
     //返回所有作品
     List<WorksEntity> findAllWorks();
     //返回根据一个或多个字段查找的某些作品
-    List<WorksEntity> findWorksByProperties(HashMap<String ,String> queryMap);
+    List<WorksEntity> findWorksByProperties(HashMap<String ,Object> queryMap);
 }

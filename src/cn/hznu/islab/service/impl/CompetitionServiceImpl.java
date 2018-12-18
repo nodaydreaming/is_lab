@@ -30,7 +30,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public List<CompetitionEntity> findCompetitionsByProperties(HashMap<String, String> queryMap) {
+    public List<CompetitionEntity> findCompetitionsByProperties(HashMap<String, Object> queryMap) {
         return competitionDao.findCompetitionsByProperties(queryMap);
     }
 

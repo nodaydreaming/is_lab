@@ -17,5 +17,5 @@ public interface UserDao {
     //返回所有用户
     List<UserEntity> findAllUsers();
     //返回根据一个或多个字段查找的某些用户
-    List<UserEntity> findUsersByProperties(HashMap<String ,String> queryMap);
+    List<UserEntity> findUsersByProperties(HashMap<String ,Object> queryMap);
 }

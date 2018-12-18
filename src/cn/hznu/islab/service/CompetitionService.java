@@ -13,7 +13,7 @@ public interface CompetitionService {
     //删除竞赛情况
     void deleteCompetition(CompetitionEntity competitionEntity);
     //通过某些字段查找一个或多个竞赛情况
-    List<CompetitionEntity> findCompetitionsByProperties(HashMap<String ,String> queryMap);
+    List<CompetitionEntity> findCompetitionsByProperties(HashMap<String ,Object> queryMap);
     //所有竞赛情况
     List<CompetitionEntity> findAllCompetitions();
 }

@@ -17,5 +17,5 @@ public interface PatentDao {
     //返回所有专利
     List<PatentEntity> findAllPatents();
     //返回根据一个或多个字段查找的某些专利
-    List<PatentEntity> findPatentsByProperties(HashMap<String ,String> queryMap);
+    List<PatentEntity> findPatentsByProperties(HashMap<String ,Object> queryMap);
 }

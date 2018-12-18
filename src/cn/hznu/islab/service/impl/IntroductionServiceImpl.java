@@ -37,7 +37,7 @@ public class IntroductionServiceImpl implements IntroductionService {
     }
 
     @Override
-    public List<IntroductionEntity> findIntroductionsByProperties(HashMap<String, String> queryMap) {
+    public List<IntroductionEntity> findIntroductionsByProperties(HashMap<String, Object> queryMap) {
         return introductionDao.findIntroductionsByProperties(queryMap);
     }
 

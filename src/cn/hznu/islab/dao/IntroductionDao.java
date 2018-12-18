@@ -15,7 +15,7 @@ public interface IntroductionDao {
     //根据id查找介绍
     IntroductionEntity findIntroductionById(int id);
     //根据某些字段查找一个或多个介绍
-    List<IntroductionEntity> findIntroductionsByProperties(HashMap<String,String> queryMap);
+    List<IntroductionEntity> findIntroductionsByProperties(HashMap<String, Object> queryMap);
     //返回所有介绍
     List<IntroductionEntity> findAllIntroductions();
 

@@ -30,7 +30,7 @@ public class WorksServiceImpl implements WorksService {
     }
 
     @Override
-    public List<WorksEntity> findWorksByProperties(HashMap<String, String> queryMap) {
+    public List<WorksEntity> findWorksByProperties(HashMap<String, Object> queryMap) {
         return worksDao.findWorksByProperties(queryMap);
     }
 

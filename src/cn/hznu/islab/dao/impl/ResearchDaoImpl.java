@@ -50,11 +50,11 @@ public class ResearchDaoImpl extends HibernateDaoSupport implements ResearchDao 
     }
     //返回根据一个或多个字段查找一个或多个研究方向
     @Override
-    public List<ResearchEntity> findResearchsByProperties(HashMap<String, String> queryMap) {
+    public List<ResearchEntity> findResearchsByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(ResearchEntity.class);
         for(String key : queryMap.keySet()){
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property,value));
         }
         List<ResearchEntity> list = (List<ResearchEntity>) this.getHibernateTemplate().findByCriteria(criteria);

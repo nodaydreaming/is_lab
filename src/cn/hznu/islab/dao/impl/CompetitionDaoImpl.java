@@ -55,12 +55,12 @@ public class CompetitionDaoImpl extends HibernateDaoSupport implements Competiti
     }
 
     @Override
-    public List<CompetitionEntity> findCompetitionsByProperties(HashMap<String, String> queryMap) {
+    public List<CompetitionEntity> findCompetitionsByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(CompetitionEntity.class);
 
         for(String key : queryMap.keySet()){
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
         List<CompetitionEntity> list = (List<CompetitionEntity>) this.getHibernateTemplate().findByCriteria(criteria);

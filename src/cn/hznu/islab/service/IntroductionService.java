@@ -13,7 +13,7 @@ public interface IntroductionService {
     //删除介绍
     void deleteIntroduction(IntroductionEntity introductionEntity);
     //通过某些字段查找一个或多个介绍
-    List<IntroductionEntity> findIntroductionsByProperties(HashMap<String ,String> queryMap);
+    List<IntroductionEntity> findIntroductionsByProperties(HashMap<String ,Object> queryMap);
     //所有介绍
     List<IntroductionEntity> findAllIntroductions();
 }

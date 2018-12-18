@@ -17,5 +17,5 @@ public interface TeacherDao {
     //返回所有指导老师
     List<TeacherEntity> findAllTeachers();
     //返回根据一个或多个字段查找的一个或多个指导老师
-    List<TeacherEntity> findTeachersByProperties(HashMap<String ,String> queryMap);
+    List<TeacherEntity> findTeachersByProperties(HashMap<String ,Object> queryMap);
 }

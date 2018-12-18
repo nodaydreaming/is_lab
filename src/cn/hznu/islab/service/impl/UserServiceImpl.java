@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
     //根据某些字段查找特定用户
     @Override
-    public List<UserEntity> findUsersByProperties(HashMap<String ,String> queryMap) {
+    public List<UserEntity> findUsersByProperties(HashMap<String ,Object> queryMap) {
         return userDao.findUsersByProperties(queryMap);
     }
     //所有用户

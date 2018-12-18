@@ -55,11 +55,11 @@ public class ProjectDaoImpl extends HibernateDaoSupport implements ProjectDao {
     }
 
     @Override
-    public List<ProjectEntity> findProjectsByProperties(HashMap<String, String> queryMap) {
+    public List<ProjectEntity> findProjectsByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(ProjectEntity.class);
         for(String key : queryMap.keySet()){
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
 

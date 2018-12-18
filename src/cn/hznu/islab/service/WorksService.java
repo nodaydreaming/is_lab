@@ -13,7 +13,7 @@ public interface WorksService {
     //删除作品
     void deleteWorks(WorksEntity worksEntity);
     //通过某些字段查找一个或多个作品
-    List<WorksEntity> findWorksByProperties(HashMap<String ,String> queryMap);
+    List<WorksEntity> findWorksByProperties(HashMap<String ,Object> queryMap);
     //所有作品
     List<WorksEntity> findAllWorks();
 }

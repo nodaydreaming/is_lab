@@ -13,7 +13,7 @@ public interface StudentService {
     //删除学生
     void deleteStudent(StudentEntity studentEntity);
     //通过某些字段查找一个或多个学生
-    List<StudentEntity> findStudentsByProperties(HashMap<String ,String> queryMap);
+    List<StudentEntity> findStudentsByProperties(HashMap<String ,Object> queryMap);
     //所有学生
     List<StudentEntity> findAllStudents();
 }

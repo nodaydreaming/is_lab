@@ -13,7 +13,7 @@ public interface TeacherService {
     //删除指导老师
     void deleteTeacher(TeacherEntity teacherEntity);
     //通过某些字段查找特定一个或多个老师
-    List<TeacherEntity> findTeachersByProperties(HashMap<String ,String> queryMap);
+    List<TeacherEntity> findTeachersByProperties(HashMap<String ,Object> queryMap);
     //所有指导老师
     List<TeacherEntity> findAllTeachers();
 }

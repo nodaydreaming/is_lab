@@ -37,7 +37,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<TeacherEntity> findTeachersByProperties(HashMap<String, String> queryMap) {
+    public List<TeacherEntity> findTeachersByProperties(HashMap<String, Object> queryMap) {
         return teacherDao.findTeachersByProperties(queryMap);
     }
 

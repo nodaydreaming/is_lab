@@ -54,11 +54,11 @@ public class PatentDaoImpl extends HibernateDaoSupport implements PatentDao {
     }
 
     @Override
-    public List<PatentEntity> findPatentsByProperties(HashMap<String, String> queryMap) {
+    public List<PatentEntity> findPatentsByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(PatentEntity.class);
         for(String key : queryMap.keySet()){
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
         List<PatentEntity> list = (List<PatentEntity>) this.getHibernateTemplate().findByCriteria(criteria);

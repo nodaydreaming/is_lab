@@ -56,11 +56,11 @@ public class WorksDaoImpl extends HibernateDaoSupport implements WorksDao {
     }
 
     @Override
-    public List<WorksEntity> findWorksByProperties(HashMap<String, String> queryMap) {
+    public List<WorksEntity> findWorksByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(WorksEntity.class);
         for(String key : queryMap.keySet()){
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
         List<WorksEntity> list = (List<WorksEntity>) this.getHibernateTemplate().findByCriteria(criteria);

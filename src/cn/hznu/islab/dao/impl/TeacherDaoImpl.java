@@ -61,15 +61,15 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
     }
     //根据一个或多个字段查找某些指导老师
     @Override
-    public List<TeacherEntity> findTeachersByProperties(HashMap<String, String> queryMap) {
+    public List<TeacherEntity> findTeachersByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(TeacherEntity.class);
         //设置查找条件
         for(String key : queryMap.keySet()){
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property,value));
         }
-        List<TeacherEntity> list = (List<TeacherEntity>) this.getHibernateTemplate().findByCriteria(criteria);
+        List<TeacherEntity> list = (List<TeacherEntity>)this.getHibernateTemplate().findByCriteria(criteria);
         //查询结果判断
         if(!list.isEmpty()){
             return list;

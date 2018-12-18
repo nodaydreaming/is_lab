@@ -38,7 +38,7 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
     public String updateInfo() throws IOException {
         HttpServletResponse response = ServletActionContext.getResponse();
         Map<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         queryMap.put("name",introductionEntity.getName());
         List<IntroductionEntity> list = introductionService.findIntroductionsByProperties(queryMap);
@@ -63,7 +63,7 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
     public String getInfoContent() throws IOException {
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         queryMap.put("name",introductionEntity.getName());
         List<IntroductionEntity> list = introductionService.findIntroductionsByProperties(queryMap);

@@ -17,5 +17,5 @@ public interface ProjectDao {
     //返回所有项目
     List<ProjectEntity> findAllProjects();
     //返回根据一个或多个字段查找的某些项目
-    List<ProjectEntity> findProjectsByProperties(HashMap<String ,String> queryMap);
+    List<ProjectEntity> findProjectsByProperties(HashMap<String ,Object> queryMap);
 }

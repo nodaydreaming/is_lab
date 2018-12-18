@@ -42,7 +42,7 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
     public String addResearch() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         Map<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         if(ActionContext.getContext().getSession().get("loginUser") != null) {
             queryMap.put("researchDirection", researchEntity.getResearchDirection());
@@ -70,7 +70,7 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
     public String updateResearch() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         researchService.updateResearch(researchEntity);
         queryMap.put("researchId", researchEntity.getResearchId() + "");
@@ -97,7 +97,7 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
     public String delResearch() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         researchService.deleteResearch(researchEntity);
         queryMap.put("researchDirection", researchEntity.getResearchDirection());

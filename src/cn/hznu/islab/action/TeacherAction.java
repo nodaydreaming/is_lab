@@ -40,7 +40,7 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
     public String addTeacher() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, String> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
         queryMap.put("email", teacherEntity.getEmail());
         List<TeacherEntity> list = teacherService.findTeachersByProperties(queryMap);
 
@@ -83,10 +83,10 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
     public String delTeacher() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         teacherService.deleteTeacher(teacherEntity);
-        queryMap.put("email", teacherEntity.getEmail());
+        queryMap.put("teacherId", teacherEntity.getTeacherId());
         List<TeacherEntity> list = teacherService.findTeachersByProperties(queryMap);
         if(list != null){
             map.put("message", "删除指导老师失败！");
@@ -98,23 +98,31 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
     public String updateTeacher() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
-        teacherService.updateTeacher(teacherEntity);
-        queryMap.put("teacherId", teacherEntity.getTeacherId() + "");
+        queryMap.put("teacherId", teacherEntity.getTeacherId());
         List<TeacherEntity> list = teacherService.findTeachersByProperties(queryMap);
         if(list != null){
-            TeacherEntity teacherEntity1 = list.get(0);
-            if(teacherEntity1.getName().equals(teacherEntity.getName()) &&
-                teacherEntity1.getDegree().equals(teacherEntity.getDegree()) &&
-                teacherEntity1.getEmail().equals(teacherEntity.getEmail()) &&
-                teacherEntity1.getIntro().equals(teacherEntity.getIntro()) &&
-                teacherEntity1.getGender().equals(teacherEntity.getGender())) {
-            }
-
-            else
-            {
-                map.put("message", "更新失败！");
+            TeacherEntity entity = list.get(0);
+            entity.setPhoto(teacherEntity.getPhoto());
+            entity.setName(teacherEntity.getName());
+            entity.setGender(teacherEntity.getGender());
+            entity.setDegree(teacherEntity.getDegree());
+            entity.setEmail(teacherEntity.getEmail());
+            entity.setIntro(teacherEntity.getIntro());
+            teacherService.updateTeacher(entity);
+            list = teacherService.findTeachersByProperties(queryMap);
+            if(list != null) {
+                TeacherEntity teacherEntity1 = list.get(0);
+                if (teacherEntity1.getName().equals(entity.getName()) &&
+                        teacherEntity1.getDegree().equals(entity.getDegree()) &&
+                        teacherEntity1.getEmail().equals(entity.getEmail()) &&
+                        teacherEntity1.getIntro().equals(entity.getIntro()) &&
+                        teacherEntity1.getPhoto().equals(entity.getPhoto()) &&
+                        teacherEntity1.getGender().equals(entity.getGender())) {
+                } else {
+                    map.put("message", "更新失败！");
+                }
             }
         }
         else

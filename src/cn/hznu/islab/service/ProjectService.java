@@ -13,7 +13,7 @@ public interface ProjectService {
     //删除项目
     void deleteProject(ProjectEntity projectEntity);
     //通过某些字段查找一个或多个项目
-    List<ProjectEntity> findProjectsByProperties(HashMap<String ,String> queryMap);
+    List<ProjectEntity> findProjectsByProperties(HashMap<String ,Object> queryMap);
     //所有项目
     List<ProjectEntity> findAllProjects();
 }

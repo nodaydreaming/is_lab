@@ -62,7 +62,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
     public String login() throws IOException {
         HttpServletResponse response = ServletActionContext.getResponse();
         //查询时，用于存储“属性”和“属性值”的map
-        HashMap<String,String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
         //存储返回前端的数据
         HashMap<String,Object> map = new HashMap<>();
         //用户输入的密码所生产的密钥
@@ -121,13 +121,13 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
     public String updateUser() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         //查询时，用于存储“属性”和“属性值”的map
-        HashMap<String,String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
         //存储返回前端的数据
         HashMap<String,Object> map = new HashMap<>();
         UserEntity loginUser = null;
 
         UserEntity sessionUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
-        queryMap.put("userId", sessionUser.getUserId() + "");
+        queryMap.put("userId", sessionUser.getUserId());
         List<UserEntity> list = userService.findUsersByProperties(queryMap);
         if(list != null){
             loginUser = list.get(0);
@@ -201,14 +201,14 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
     public String updatePassword() throws IOException {
         HttpServletResponse response = ServletActionContext.getResponse();
         HttpServletRequest request = ServletActionContext.getRequest();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
         //存储返回前端的数据
         HashMap<String, Object> map = new HashMap<>();
         UserEntity loginUser = null;
 
         //从session中得到要修改密码的管理员对象
         UserEntity sessionUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
-        queryMap.put("userId", sessionUser.getUserId() + "");
+        queryMap.put("userId", sessionUser.getUserId());
         List<UserEntity> list = userService.findUsersByProperties(queryMap);
         if(list != null){
             loginUser = list.get(0);
@@ -245,11 +245,11 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         HttpServletResponse response = ServletActionContext.getResponse();
         //存储返回前端的数据
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
         UserEntity loginUser = new UserEntity();
 
         UserEntity sessionUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
-        queryMap.put("userId", sessionUser.getUserId() + "");
+        queryMap.put("userId", sessionUser.getUserId());
         List<UserEntity> list = userService.findUsersByProperties(queryMap);
         if(list != null){
             loginUser = list.get(0);
@@ -278,13 +278,13 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
     public String addUser() throws IOException {
         HttpServletResponse response = ServletActionContext.getResponse();
         //查询时，用于存储“属性”和“属性值”的map
-        HashMap<String,String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
         //存储返回前端的数据
         HashMap<String,Object> map = new HashMap<>();
         UserEntity loginUser = new UserEntity();
 
         UserEntity sessionUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
-        queryMap.put("userId", sessionUser.getUserId() + "");
+        queryMap.put("userId", sessionUser.getUserId());
         List<UserEntity> list = userService.findUsersByProperties(queryMap);
         if(list != null){
             loginUser = list.get(0);
@@ -329,13 +329,13 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
     public String deleteUser() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         //查询时，用于存储“属性”和“属性值”的map
-        HashMap<String,String> queryMap = new HashMap<>();
+        HashMap<String,Object> queryMap = new HashMap<>();
         //存储返回前端的数据
         HashMap<String,Object> map = new HashMap<>();
         UserEntity loginUser = new UserEntity();
 
         UserEntity sessionUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
-        queryMap.put("userId", sessionUser.getUserId() + "");
+        queryMap.put("userId", sessionUser.getUserId());
         List<UserEntity> list = userService.findUsersByProperties(queryMap);
         if(list != null){
             loginUser = list.get(0);

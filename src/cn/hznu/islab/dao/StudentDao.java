@@ -17,5 +17,5 @@ public interface StudentDao {
     //返回所有学生
     List<StudentEntity> findAllStudents();
     //返回根据一个或多个字段查找的一个或多个学生
-    List<StudentEntity> findStudentsByProperties(HashMap<String ,String> queryMap);
+    List<StudentEntity> findStudentsByProperties(HashMap<String ,Object> queryMap);
 }

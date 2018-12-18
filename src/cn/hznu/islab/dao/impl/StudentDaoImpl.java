@@ -61,12 +61,12 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
     }
     //根据一个或多个字段查找某些学生
     @Override
-    public List<StudentEntity> findStudentsByProperties(HashMap<String, String> queryMap) {
+    public List<StudentEntity> findStudentsByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(StudentEntity.class);
         //设置查找条件字段
         for (String key : queryMap.keySet()) {
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
         List<StudentEntity> list = (List<StudentEntity>) this.getHibernateTemplate().findByCriteria(criteria);

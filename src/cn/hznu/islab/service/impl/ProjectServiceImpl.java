@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectEntity> findProjectsByProperties(HashMap<String, String> queryMap) {
+    public List<ProjectEntity> findProjectsByProperties(HashMap<String, Object> queryMap) {
         return projectDao.findProjectsByProperties(queryMap);
     }
 

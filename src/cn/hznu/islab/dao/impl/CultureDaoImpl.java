@@ -66,12 +66,12 @@ public class CultureDaoImpl extends HibernateDaoSupport implements CultureDao {
     }
     //返回根据一个或多个字段查找一个或多个实验室文化
     @Override
-    public List<CultureEntity> findCulturesByProperties(HashMap<String, String> queryMap) {
+    public List<CultureEntity> findCulturesByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(CultureEntity.class);
         //设置查找条件字段
         for(String key : queryMap.keySet()){
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property,value));
         }
         List<CultureEntity> list = (List<CultureEntity>)this.getHibernateTemplate().findByCriteria(criteria);

@@ -37,7 +37,7 @@ public class CultureServiceImpl implements CultureService {
     }
 
     @Override
-    public List<CultureEntity> findCulturesByProperties(HashMap<String, String> queryMap) {
+    public List<CultureEntity> findCulturesByProperties(HashMap<String, Object> queryMap) {
         return cultureDao.findCulturesByProperties(queryMap);
     }
 

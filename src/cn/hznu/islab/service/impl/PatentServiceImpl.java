@@ -30,7 +30,7 @@ public class PatentServiceImpl implements PatentService {
     }
 
     @Override
-    public List<PatentEntity> findPatentsByProperties(HashMap<String, String> queryMap) {
+    public List<PatentEntity> findPatentsByProperties(HashMap<String, Object> queryMap) {
         return patentDao.findPatentsByProperties(queryMap);
     }
 

@@ -13,7 +13,7 @@ public interface PatentService {
     //删除专利
     void deletePatent(PatentEntity patentEntity);
     //通过某些字段查找一个或多个专利
-    List<PatentEntity> findPatentsByProperties(HashMap<String ,String> queryMap);
+    List<PatentEntity> findPatentsByProperties(HashMap<String ,Object> queryMap);
     //所有专利
     List<PatentEntity> findAllPatents();
 }

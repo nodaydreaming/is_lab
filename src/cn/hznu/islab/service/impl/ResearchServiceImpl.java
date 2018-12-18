@@ -37,7 +37,7 @@ public class ResearchServiceImpl implements ResearchService {
     }
 
     @Override
-    public List<ResearchEntity> findResearchsByProperties(HashMap<String, String> queryMap) {
+    public List<ResearchEntity> findResearchsByProperties(HashMap<String, Object> queryMap) {
         return researchDao.findResearchsByProperties(queryMap);
     }
 

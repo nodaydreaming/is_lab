@@ -63,12 +63,12 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
     }
     //根据一个或多个字段查找某些用户
     @Override
-    public List<UserEntity> findUsersByProperties(HashMap<String, String> queryMap) {
+    public List<UserEntity> findUsersByProperties(HashMap<String, Object> queryMap) {
         DetachedCriteria criteria = DetachedCriteria.forClass(UserEntity.class);
         //设置查找条件字段
         for(String key : queryMap.keySet()){
             String property = key;
-            String value = queryMap.get(key);
+            Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property,value));
         }
         List<UserEntity> list = (List<UserEntity>) this.getHibernateTemplate().findByCriteria(criteria);

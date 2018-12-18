@@ -17,5 +17,5 @@ public interface CompetitionDao {
     //返回所有竞赛获奖情况
     List<CompetitionEntity> findAllCompetitions();
     //返回根据一个或多个字段查找的某些竞赛获奖情况
-    List<CompetitionEntity> findCompetitionsByProperties(HashMap<String ,String> queryMap);
+    List<CompetitionEntity> findCompetitionsByProperties(HashMap<String ,Object> queryMap);
 }

@@ -33,7 +33,7 @@ public class ProjectAction extends ActionSupport implements ModelDriven<ProjectE
         HttpServletResponse response = ServletActionContext.getResponse();
         HttpServletRequest request = ServletActionContext.getRequest();
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         try {
             projectEntity.setStartdate(sdf.parse(request.getParameter("startdate")));
@@ -73,7 +73,7 @@ public class ProjectAction extends ActionSupport implements ModelDriven<ProjectE
     public String delProject() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         projectService.deleteProject(projectEntity);
 
@@ -94,7 +94,7 @@ public class ProjectAction extends ActionSupport implements ModelDriven<ProjectE
     public String updateProject() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
         projectService.updateProject(projectEntity);
         queryMap.put("projectId", projectEntity.getProjectId() + "");

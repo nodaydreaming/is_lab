@@ -473,7 +473,7 @@ function delProject() {
         type: 1,
         offset: 'auto',
         id: 'layerDemo1', //防止重复弹出
-        content: '<div style="padding: 20px 50px;">' + "确定删除项目 " +'<b>'+project1.name+'</b>'+ " 吗?" + '</div>',
+        content: '<div style="padding: 20px 50px;">' + "确定删除项目 <b>'"+project1.name+"'</b> 吗?" + '</div>',
         btn: ['确定','取消'],
         btnAlign: 'c',
         shade: 0.5,

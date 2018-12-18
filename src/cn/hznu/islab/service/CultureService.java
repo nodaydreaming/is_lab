@@ -13,7 +13,7 @@ public interface CultureService {
     //删除实验室文化
     void deleteCulture(CultureEntity cultureEntity);
     //通过某些字段查找一个或多个实验室文化
-    List<CultureEntity> findCulturesByProperties(HashMap<String ,String> queryMap);
+    List<CultureEntity> findCulturesByProperties(HashMap<String ,Object> queryMap);
     //所有实验室文化
     List<CultureEntity> findAllCultures();
 }

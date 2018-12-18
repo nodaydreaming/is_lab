@@ -18,7 +18,7 @@ public interface CultureDao {
     //返回所有实验室文化
     List<CultureEntity> findAllCultures();
     //返回根据一个或多个字段查找的一个或多个实验室文化
-    List<CultureEntity> findCulturesByProperties(HashMap<String ,String> queryMap);
+    List<CultureEntity> findCulturesByProperties(HashMap<String ,Object> queryMap);
     //返回某个时间段内的实验室文化
     List<CultureEntity> findCulturesByDate(Date starttime , Date endtime);
     //返回某个类型的实验室文化
