@@ -4,6 +4,7 @@ import cn.hznu.islab.dao.UserDao;
 import cn.hznu.islab.entity.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -53,7 +54,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
     @Override
     public  List<UserEntity> findAllUsers(){
         Session session = this.currentSession();
-        Query query = session.createQuery("from UserEntity");
+        Query query = session.createQuery("from UserEntity order by userId desc ");
 
         List<UserEntity> list = query.list();
         if(!list.isEmpty()){
@@ -71,6 +72,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
             Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property,value));
         }
+        criteria.addOrder(Order.asc("userId"));
         List<UserEntity> list = (List<UserEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         //查询结果判断
         if(!list.isEmpty()){

@@ -4,6 +4,7 @@ import cn.hznu.islab.dao.TeacherDao;
 import cn.hznu.islab.entity.TeacherEntity;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -52,7 +53,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
     @Override
     public List<TeacherEntity> findAllTeachers() {
         Session session = this.currentSession();
-        Query query = session.createQuery("from TeacherEntity");
+        Query query = session.createQuery("from TeacherEntity order by teacherId");
         List<TeacherEntity> list = query.list();
         if(!list.isEmpty()){
             return list;
@@ -69,6 +70,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
             Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property,value));
         }
+        criteria.addOrder(Order.asc("teacherId"));
         List<TeacherEntity> list = (List<TeacherEntity>)this.getHibernateTemplate().findByCriteria(criteria);
         //查询结果判断
         if(!list.isEmpty()){

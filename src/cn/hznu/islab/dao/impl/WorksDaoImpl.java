@@ -4,6 +4,7 @@ import cn.hznu.islab.dao.WorksDao;
 import cn.hznu.islab.entity.WorksEntity;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -45,7 +46,7 @@ public class WorksDaoImpl extends HibernateDaoSupport implements WorksDao {
     @Override
     public List<WorksEntity> findAllWorks() {
         Session session = this.currentSession();
-        Query query = session.createQuery("from WorksEntity");
+        Query query = session.createQuery("from WorksEntity order by worksId");
 
         List<WorksEntity> list = query.list();
 
@@ -63,6 +64,7 @@ public class WorksDaoImpl extends HibernateDaoSupport implements WorksDao {
             Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
+        criteria.addOrder(Order.asc("worksId"));
         List<WorksEntity> list = (List<WorksEntity>) this.getHibernateTemplate().findByCriteria(criteria);
 
         if(!list.isEmpty()){

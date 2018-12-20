@@ -52,9 +52,9 @@ public class LibInfoAction extends ActionSupport implements ModelDriven<Introduc
 //        System.out.println(list.get(0).getContent());
 //        System.out.println(introductionEntity.getContent());
         if(list.get(0).getContent().equals(introductionEntity.getContent())){
-            map.put("updateResult", "success");
+            map.put("updateResult", "更新成功！");
         }else{
-            map.put("updateResult", "error");
+            map.put("updateResult", "更新失败！");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;

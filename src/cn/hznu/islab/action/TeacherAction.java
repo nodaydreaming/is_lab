@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
@@ -97,10 +98,19 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
 
     public String updateTeacher() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
         HashMap<String, Object> map = new HashMap<>();
         HashMap<String, Object> queryMap = new HashMap<>();
 
-        queryMap.put("teacherId", teacherEntity.getTeacherId());
+        System.out.println(request.getParameter("name"));
+        System.out.println(request.getParameter("email"));
+        System.out.println(request.getParameter("intro"));
+        System.out.println(request.getParameter("gender"));
+        System.out.println(request.getParameter("photo"));
+        System.out.println(request.getParameter("degree"));
+
+        queryMap.put("email", teacherEntity.getEmail());
+        System.out.println(teacherEntity.toString());
         List<TeacherEntity> list = teacherService.findTeachersByProperties(queryMap);
         if(list != null){
             TeacherEntity entity = list.get(0);
@@ -108,7 +118,6 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
             entity.setName(teacherEntity.getName());
             entity.setGender(teacherEntity.getGender());
             entity.setDegree(teacherEntity.getDegree());
-            entity.setEmail(teacherEntity.getEmail());
             entity.setIntro(teacherEntity.getIntro());
             teacherService.updateTeacher(entity);
             list = teacherService.findTeachersByProperties(queryMap);
@@ -116,18 +125,17 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
                 TeacherEntity teacherEntity1 = list.get(0);
                 if (teacherEntity1.getName().equals(entity.getName()) &&
                         teacherEntity1.getDegree().equals(entity.getDegree()) &&
-                        teacherEntity1.getEmail().equals(entity.getEmail()) &&
                         teacherEntity1.getIntro().equals(entity.getIntro()) &&
                         teacherEntity1.getPhoto().equals(entity.getPhoto()) &&
                         teacherEntity1.getGender().equals(entity.getGender())) {
                 } else {
-                    map.put("message", "更新失败！");
+                    map.put("message", "更新失败1！");
                 }
             }
         }
         else
         {
-            map.put("message", "更新失败！");
+            map.put("message", "更新失败2！");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;

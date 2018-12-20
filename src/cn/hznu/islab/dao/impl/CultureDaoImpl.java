@@ -4,6 +4,7 @@ import cn.hznu.islab.dao.CultureDao;
 import cn.hznu.islab.entity.CultureEntity;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -74,6 +75,7 @@ public class CultureDaoImpl extends HibernateDaoSupport implements CultureDao {
             Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property,value));
         }
+        criteria.addOrder(Order.desc("date"));
         List<CultureEntity> list = (List<CultureEntity>)this.getHibernateTemplate().findByCriteria(criteria);
         //查找返回结果判断
         if(!list.isEmpty()){

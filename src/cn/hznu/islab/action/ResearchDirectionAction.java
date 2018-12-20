@@ -53,7 +53,6 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
                 if(list == null){
                     map.put("message", "添加研究方向失败");
                 }else{
-                    System.out.println(list.get(0).toString());
                     list.get(0).setPriority(list.get(0).getResearchId());
                     researchService.updateResearch(list.get(0));
                 }
@@ -73,7 +72,7 @@ public class ResearchDirectionAction extends ActionSupport implements ModelDrive
         HashMap<String, Object> queryMap = new HashMap<>();
 
         researchService.updateResearch(researchEntity);
-        queryMap.put("researchId", researchEntity.getResearchId() + "");
+        queryMap.put("researchId", researchEntity.getResearchId());
         List<ResearchEntity> list = researchService.findResearchsByProperties(queryMap);
         if(list != null){
             ResearchEntity researchEntity1 = list.get(0);

@@ -4,6 +4,7 @@ import cn.hznu.islab.dao.ProjectDao;
 import cn.hznu.islab.entity.ProjectEntity;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -45,7 +46,7 @@ public class ProjectDaoImpl extends HibernateDaoSupport implements ProjectDao {
     @Override
     public List<ProjectEntity> findAllProjects() {
         Session session = this.currentSession();
-        Query query = session.createQuery("from ProjectEntity ");
+        Query query = session.createQuery("from ProjectEntity order by projectId desc ");
 
         List<ProjectEntity> list = query.list();
         if(!list.isEmpty()){
@@ -62,7 +63,7 @@ public class ProjectDaoImpl extends HibernateDaoSupport implements ProjectDao {
             Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
-
+        criteria.addOrder(Order.asc("projectId"));
         List<ProjectEntity> list = (List<ProjectEntity>) this.getHibernateTemplate().findByCriteria(criteria);
 
         if(!list.isEmpty()){

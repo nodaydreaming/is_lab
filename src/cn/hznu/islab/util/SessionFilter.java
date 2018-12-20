@@ -32,7 +32,7 @@ public class SessionFilter implements Filter {
 //        System.out.println("拦截过滤");
 //        System.out.println("用户的访问地址为：" + currentURL);
         //截取到当前文件名用于比较
-        String targetURL = currentURL.substring(currentURL.indexOf("/",1),currentURL.length());
+        String targetURL = currentURL.substring(currentURL.indexOf("/",1));
 //        System.out.println(targetURL);
         if(targetURL.contains("admin")){
             if(session == null || session.getAttribute("loginUser") == null){

@@ -64,4 +64,29 @@ public class FileUploadAction extends ActionSupport {
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
+
+    public String uploadStudentImg() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HashMap<String, Object> map = new HashMap<>();
+        String filename = RandomUtil.getRandomFileName();
+        //获得服务器文件存储的文件夹
+        String filePath = ServletActionContext.getServletContext().getRealPath("/upload/student");
+        File fileFolder = new File(filePath);
+        //判断文件夹是否存在，若不存在则创建文件夹
+        if(!fileFolder.exists()){
+            fileFolder.mkdirs();
+        }
+        filename += uploadFileName.substring(uploadFileName.indexOf('.'));
+        try {
+            //将临时文件移动的目的文件夹
+            FileUtils.moveFile(upload, new File(fileFolder, filename));
+            map.put("code", 0);
+            map.put("src", "/is_lab/upload/student/" + filename);
+        }catch (IOException e){
+            map.put("message", "图片上传失败！");
+        }
+
+        MapToJSON.mapToJson(response, map);
+        return NONE;
+    }
 }

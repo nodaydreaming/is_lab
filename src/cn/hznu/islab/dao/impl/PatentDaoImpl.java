@@ -4,6 +4,7 @@ import cn.hznu.islab.dao.PatentDao;
 import cn.hznu.islab.entity.PatentEntity;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -44,7 +45,7 @@ public class PatentDaoImpl extends HibernateDaoSupport implements PatentDao {
     @Override
     public List<PatentEntity> findAllPatents() {
         Session session = this.currentSession();
-        Query query = session.createQuery("from PatentEntity");
+        Query query = session.createQuery("from PatentEntity order by patentId desc");
 
         List<PatentEntity> list = query.list();
         if(!list.isEmpty()){
@@ -61,6 +62,7 @@ public class PatentDaoImpl extends HibernateDaoSupport implements PatentDao {
             Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
+        criteria.addOrder(Order.asc("patentId"));
         List<PatentEntity> list = (List<PatentEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         if(!list.isEmpty()){
             return list;

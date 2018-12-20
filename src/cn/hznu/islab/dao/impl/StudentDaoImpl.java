@@ -4,6 +4,7 @@ import cn.hznu.islab.dao.StudentDao;
 import cn.hznu.islab.entity.StudentEntity;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -50,9 +51,8 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
     //返回所有学生
     @Override
     public List<StudentEntity> findAllStudents() {
-
         Session session = this.currentSession();
-        Query query = session.createQuery("from StudentEntity where type != -1");
+        Query query = session.createQuery("from StudentEntity where type != -1 order by studentId");
         List<StudentEntity> list = query.list();
         if(!list.isEmpty()){
             return list;
@@ -69,6 +69,7 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
             Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property, value));
         }
+        criteria.addOrder(Order.asc("studentId"));
         List<StudentEntity> list = (List<StudentEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         //查找结果判断
         if (!list.isEmpty()) {

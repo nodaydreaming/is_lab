@@ -4,6 +4,7 @@ import cn.hznu.islab.dao.ResearchDao;
 import cn.hznu.islab.entity.ResearchEntity;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -57,6 +58,7 @@ public class ResearchDaoImpl extends HibernateDaoSupport implements ResearchDao 
             Object value = queryMap.get(key);
             criteria.add(Restrictions.eq(property,value));
         }
+        criteria.addOrder(Order.asc("researchId"));
         List<ResearchEntity> list = (List<ResearchEntity>) this.getHibernateTemplate().findByCriteria(criteria);
         if(!list.isEmpty()){
             return list;
@@ -67,7 +69,7 @@ public class ResearchDaoImpl extends HibernateDaoSupport implements ResearchDao 
     @Override
     public  List<ResearchEntity> findAllResearchs(){
         Session session = this.currentSession();
-        Query query = session.createQuery("from ResearchEntity");
+        Query query = session.createQuery("from ResearchEntity order by researchId");
 
         List<ResearchEntity> list = query.list();
         if(!list.isEmpty()){

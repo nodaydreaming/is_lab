@@ -1,4 +1,3 @@
-
 var projectList;
 
 window.onload = function () {
@@ -74,26 +73,30 @@ function fillProjects() {
         var td2 = document.createElement('td');
         td2.style.textAlign = "center";
         td2.innerText = project1.name;
+        td2.style.wordWrap = "break-word";
         tr.appendChild(td2);
 
         var td3 = document.createElement('td');
         td3.style.textAlign = "center";
         td3.innerText = project1.number;
+        td3.style.wordWrap = "break-word";
         tr.appendChild(td3);
 
         var td4 = document.createElement('td');
         td4.style.textAlign = "center";
         td4.innerText = new Date(project1.startdate).Format("yyyy-MM-dd") + " 至 " + new Date(project1.enddate).Format("yyyy-MM-dd");
+        td4.style.wordWrap = "break-word";
         tr.appendChild(td4);
 
         var td5 = document.createElement('td');
         td5.style.textAlign = "center";
         td5.innerText = project1.principal;
+        td5.style.wordWrap = "break-word";
         tr.appendChild(td5);
 
         var td6 = document.createElement('td');
-        td6.style.textAlign = "center";
         td6.innerText = project1.type;
+        td6.style.wordWrap = "break-word";
         tr.appendChild(td6);
 
         var td7 = document.createElement('td');
@@ -168,8 +171,12 @@ function addProject() {
             '      <input type="text" id="project_type" autocomplete="off" placeholder="请输入项目类型" class="layui-input" style="width: 250px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
             '    </div>\n' +
             '  </div>\n' +
-            '</form>' +
-            '<script>' +
+            '</form>\n' +
+            '<script>\n' +
+            'layui.use(\'form\', function(){\n' +
+            '  var form = layui.form;\n' +
+            '  form.render();\n' +
+            '});' +
             'layui.use(\'laydate\', function(){\n' +
             '        var laydate = layui.laydate;\n' +
             '\n' +
@@ -307,7 +314,7 @@ function editProject() {
             '  <div class="layui-form-item">\n' +
             '    <label class="layui-form-label">项目名称</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '      <input type="text" id="project_name" autocomplete="off" placeholder="请输入项目名称" class="layui-input" style="width: 350px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+project1.name+'>\n' +
+            '      <input type="text" id="project_name" autocomplete="off" placeholder="请输入项目名称" disabled class="layui-input layui-disabled" style="width: 350px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+project1.name+'>\n' +
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +

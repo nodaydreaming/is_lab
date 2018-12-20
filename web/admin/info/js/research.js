@@ -66,11 +66,12 @@ function fill() {
         var td2 = document.createElement('td');
         td2.style.textAlign = "center";
         td2.innerText = research1.researchDirection;
+        td2.style.wordWrap = "break-word";
         tr.appendChild(td2);
 
         var td3 = document.createElement('td');
         td3.innerText = research1.introduction;
-        td3.style.maxWidth = '600px';
+        td3.style.wordWrap = "break-word";
         tr.appendChild(td3);
 
         var td4 = document.createElement('td');
@@ -116,17 +117,23 @@ function editResearch() {
             '  <div class="layui-form-item">\n' +
             '    <label class="layui-form-label">研究方向</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '      <input type="text" id="research_title" lay-verify="title" autocomplete="off" placeholder="请输入研究方向" class="layui-input" style="width: 150px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+research.researchDirection+'>\n' +
+            '      <input type="text" id="research_title" lay-verify="title" autocomplete="off" placeholder="请输入研究方向" disabled class="layui-input layui-disabled" style="width: 250px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value='+research.researchDirection+'>\n' +
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +
             '    <label class="layui-form-label">简&nbsp;&nbsp;&nbsp;介</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '       <textarea class="tcp_content layui-textarea" placeholder="请输入简介" style="width: 80%; height: 50%; resize:none" maxlength="100" onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+research.introduction+'</textarea>' +
-            '       <span class="t_h" style="float: right; margin-right: 20%"><i>'+research.introduction.length+'</i>/100</span>' +
+            '       <textarea class="tcp_content layui-textarea" placeholder="请输入简介" style="width: 80%; height: 50%; resize:none" maxlength="200" onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+research.introduction+'</textarea>' +
+            '       <span class="t_h" style="float: right; margin-right: 20%"><i>'+research.introduction.length+'</i>/200</span>' +
             '    </div>\n' +
             '  </div>\n' +
-            '</form>',
+            '</form>\n' +
+            '<script>\n' +
+            'layui.use(\'form\', function(){\n' +
+            '  var form = layui.form;\n' +
+            '  form.render();\n' +
+            '});' +
+            '</script>',
         btn: ['确定','取消'],
         btnAlign: 'c',
         shade: 0.5,
@@ -274,17 +281,23 @@ function addResearch(){
             '  <div class="layui-form-item">\n' +
             '    <label class="layui-form-label">研究方向</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '      <input type="text" id="research_title" lay-verify="title" autocomplete="off" placeholder="请输入研究方向" class="layui-input" style="width: 150px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
+            '      <input type="text" id="research_title" lay-verify="title" autocomplete="off" placeholder="请输入研究方向" class="layui-input" style="width: 250px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +
             '    <label class="layui-form-label">简&nbsp;&nbsp;&nbsp;介</label>\n' +
             '    <div class="layui-input-block">\n' +
-            '       <textarea class="tcp_content layui-textarea" placeholder="请输入简介" style="width: 80%; height: 50%; resize:none" maxlength="100" onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()"></textarea>' +
-            '       <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>' +
+            '       <textarea class="tcp_content layui-textarea" placeholder="请输入简介" style="width: 80%; height: 50%; resize:none" maxlength="200" onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()"></textarea>' +
+            '       <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/200</span>' +
             '    </div>\n' +
             '  </div>\n' +
-            '</form>',
+            '</form>\n' +
+            '<script>\n' +
+            'layui.use(\'form\', function(){\n' +
+            '  var form = layui.form;\n' +
+            '  form.render();\n' +
+            '});' +
+            '</script>',
         btn: ['确定','取消'],
         btnAlign: 'c',
         shade: 0.5,
@@ -355,7 +368,7 @@ function addresearch(title, intro) {
 }
 
 function textarea_fun(){
-    $(".tcp_content").val($(".tcp_content").val().substring(0,100));
+    $(".tcp_content").val($(".tcp_content").val().substring(0,200));
     $(".t_h i").html($(".tcp_content").val().length);
     if(window.event.keyCode  == 13){
         return false;

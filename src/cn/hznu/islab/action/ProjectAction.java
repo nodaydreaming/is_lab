@@ -41,18 +41,22 @@ public class ProjectAction extends ActionSupport implements ModelDriven<ProjectE
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        projectService.addProject(projectEntity);
         queryMap.put("name", projectEntity.getName());
-        queryMap.put("number", projectEntity.getNumber());
-        queryMap.put("startdate", sdf.format(projectEntity.getStartdate()));
-        queryMap.put("enddate", sdf.format(projectEntity.getEnddate()));
-        queryMap.put("principal", projectEntity.getPrincipal());
-        queryMap.put("type", projectEntity.getType());
-
         List<ProjectEntity> list = projectService.findProjectsByProperties(queryMap);
-        if(list == null){
-            map.put("message", "添加项目失败！");
+        if(list == null) {
+            projectService.addProject(projectEntity);
+            queryMap.put("number", projectEntity.getNumber());
+            queryMap.put("startdate", sdf.format(projectEntity.getStartdate()));
+            queryMap.put("enddate", sdf.format(projectEntity.getEnddate()));
+            queryMap.put("principal", projectEntity.getPrincipal());
+            queryMap.put("type", projectEntity.getType());
+            list = projectService.findProjectsByProperties(queryMap);
+            if (list == null) {
+                map.put("message", "添加项目失败！");
+            }
+        }
+        else{
+            map.put("message", "该项目已存在！");
         }
 
         MapToJSON.mapToJson(response, map);
@@ -97,7 +101,7 @@ public class ProjectAction extends ActionSupport implements ModelDriven<ProjectE
         HashMap<String, Object> queryMap = new HashMap<>();
 
         projectService.updateProject(projectEntity);
-        queryMap.put("projectId", projectEntity.getProjectId() + "");
+        queryMap.put("projectId", projectEntity.getProjectId());
         List<ProjectEntity> list = projectService.findProjectsByProperties(queryMap);
         if(list != null){
             ProjectEntity projectEntity1 = list.get(0);

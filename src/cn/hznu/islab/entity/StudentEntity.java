@@ -11,8 +11,8 @@ public class StudentEntity {
     private String photo;
     private String gender;
     private String telephone;
-    private String qq;
-    private String email;
+    private String research;
+    private String grade;
     private String homepage;
     private String company;
     private String post;
@@ -78,23 +78,23 @@ public class StudentEntity {
     }
 
     @Basic
-    @Column(name = "qq")
-    public String getQq() {
-        return qq;
+    @Column(name = "research")
+    public String getResearch() {
+        return research;
     }
 
-    public void setQq(String qq) {
-        this.qq = qq;
+    public void setResearch(String research) {
+        this.research = research;
     }
 
     @Basic
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
+    @Column(name = "grade")
+    public String getGrade() {
+        return grade;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     @Basic
@@ -168,8 +168,8 @@ public class StudentEntity {
                 Objects.equals(photo, that.photo) &&
                 Objects.equals(gender, that.gender) &&
                 Objects.equals(telephone, that.telephone) &&
-                Objects.equals(qq, that.qq) &&
-                Objects.equals(email, that.email) &&
+                Objects.equals(research, that.research) &&
+                Objects.equals(grade, that.grade) &&
                 Objects.equals(homepage, that.homepage) &&
                 Objects.equals(company, that.company) &&
                 Objects.equals(post, that.post) &&
@@ -179,6 +179,6 @@ public class StudentEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, name, photo, gender, telephone, qq, email, homepage, company, post, salary, intro, type);
+        return Objects.hash(studentId, name, photo, gender, telephone, research, grade, homepage, company, post, salary, intro, type);
     }
 }

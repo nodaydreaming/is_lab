@@ -1,5 +1,5 @@
-var instructorList;
-var name, intro, degree, gender, email, photo;
+var postList;
+var name, gender, grade, telephone, research, intro, photo;
 var uploadInst;
 
 window.onload = function () {
@@ -22,33 +22,33 @@ window.onload = function () {
             console.log("请求失败！");
         }
     });
-    getInstructors();
+    getStudents();
 };
 
-function getInstructors() {
+function getStudents() {
     $.ajax({
-        url : 'getAllInstructors.action',
+        url : 'getStudents.action',
         type : 'post',
+        data : {"type" : 1},
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null){
-                fillInstructors(result.instructors)
+                fillStudents(result.students)
             }
         },
         error : function () {
             layer.msg("请求失败！");
         }
-
     });
 }
 
-function fillInstructors() {
-    instructorList = arguments[0];
+function fillStudents() {
+    postList = arguments[0];
     var tbody = document.getElementsByTagName('tbody')[0];
     $('tbody').html("");
 
-    for (var i = 0; i < instructorList.length; ++i){
-        var instructor = instructorList[i];
+    for (var i = 0; i < postList.length; ++i){
+        var student = postList[i];
         var tr = document.createElement('tr');
 
         var td1 = document.createElement('td');
@@ -58,70 +58,75 @@ function fillInstructors() {
 
         var td2 = document.createElement('td');
         td2.style.textAlign = "center";
-        td2.innerText = instructor.name;
+        td2.innerText = student.name;
         td2.style.wordWrap = "break-word";
         tr.appendChild(td2);
 
         var td3 = document.createElement('td');
         td3.style.textAlign = "center";
-        td3.innerText = instructor.gender;
+        td3.innerText = student.gender;
         td3.style.wordWrap = "break-word";
-
         tr.appendChild(td3);
 
         var td4 = document.createElement('td');
         td4.style.textAlign = "center";
-        td4.innerText = instructor.email;
+        td4.innerText = student.grade;
         td4.style.wordWrap = "break-word";
         tr.appendChild(td4);
 
         var td5 = document.createElement('td');
         td5.style.textAlign = "center";
-        td5.innerText = instructor.degree;
+        td5.innerText = student.telephone;
         td5.style.wordWrap = "break-word";
         tr.appendChild(td5);
 
         var td6 = document.createElement('td');
-        td6.innerText = instructor.intro;
+        td6.style.textAlign = "center";
+        td6.innerText = student.research;
         td6.style.wordWrap = "break-word";
         tr.appendChild(td6);
 
         var td7 = document.createElement('td');
-        td7.style.textAlign = "center";
-        td7.style.padding = "0px";
+        td7.innerText = student.intro;
+        td7.style.wordWrap = "break-word";
+        tr.appendChild(td7);
+
+        var td8 = document.createElement('td');
+        td8.style.textAlign = "center";
+        td8.style.padding = "0px";
         var a1 = document.createElement('a');
-        a1.id = "editInstructor" + (i+1);
+        a1.id = "editStudent" + (i+1);
         a1.className = "layui-btn layui-btn-normal layui-btn-xs";
         var i1 = document.createElement('i');
         i1.className = "layui-icon layui-icon-edit";
         a1.appendChild(i1);
         a1.innerHTML = a1.innerHTML + "编辑";
-        a1.onclick = editInstructor;
+        a1.onclick = editStudent;
 
         var a2 = document.createElement('a');
-        a2.id = "delInstructor" + (i+1);
+        a2.id = "delStudent" + (i+1);
         a2.className = "layui-btn layui-btn-danger layui-btn-xs";
         var i2 = document.createElement('i');
         i2.className = "layui-icon layui-icon-delete";
         a2.appendChild(i2);
         a2.innerHTML = a2.innerHTML + "删除";
-        a2.onclick = delInstructor;
-        td7.appendChild(a1);
-        td7.appendChild(a2);
+        a2.onclick = delStudent;
+        td8.appendChild(a1);
+        td8.appendChild(a2);
+        tr.appendChild(td8);
 
-        tr.appendChild(td7);
         tbody.appendChild(tr);
     }
 }
 
-function openAdd() {
+function openAddStudent() {
     photo = null;
     layer.open({
         type: 1,
         offset: 'auto',
         skin: 'layui-layer-lan',
         id: 'layerDemo1', //防止重复弹出
-        area: ['500px', '600px'],
+        area: ['500px', '610px'],
         content:
             '<form class="layui-form" method="post" enctype="multipart/form-data" style="margin-top: 30px; height: ;">\n' +
             '    <div class="layui-form-item layui-upload">\n' +
@@ -137,7 +142,7 @@ function openAdd() {
             '    <div class="layui-form-item">\n' +
             '        <label class="layui-form-label">姓名</label>\n' +
             '        <div class="layui-input-block">\n' +
-            '            <input class="layui-input" required type="text" id="instructor_name" autocomplete="off" placeholder="请输入姓名" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
+            '            <input class="layui-input" required type="text" id="student_name" autocomplete="off" placeholder="请输入姓名" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
             '        </div>\n' +
             '    </div>\n' +
             '    <div class="layui-form-item">\n' +
@@ -156,24 +161,30 @@ function openAdd() {
             '        </div>' +
             '    </div>\n' +
             '    <div class="layui-form-item">\n' +
-            '        <label class="layui-form-label">职称</label>\n' +
+            '        <label class="layui-form-label">年级</label>\n' +
             '        <div class="layui-input-block">\n' +
-            '            <input type="text" id="instructor_degree"  autocomplete="off" placeholder="请输入职称" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
+            '            <input type="text" id="student_grade"  autocomplete="off" placeholder="请输入年级" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
             '        </div>\n' +
             '    </div>\n' +
             '    <div class="layui-form-item">\n' +
-            '        <label class="layui-form-label">邮箱</label>\n' +
+            '        <label class="layui-form-label">手机号</label>\n' +
             '        <div class="layui-input-block">\n' +
-            '            <input class="layui-input" id="instructor_email" type="text" name="email" placeholder="请输入邮箱" autocomplete="off" style="width: 250px;">\n' +
+            '            <input class="layui-input" id="student_telephone" lay-verify="required|phone" type="text" name="telephone" placeholder="请输入手机号" autocomplete="off" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <div class="layui-form-item">\n' +
+            '        <label class="layui-form-label">研究方向</label>\n' +
+            '        <div class="layui-input-block">\n' +
+            '            <input class="layui-input" id="student_research" lay-verify="required" type="text" name="research" placeholder="请输入研究方向" autocomplete="off" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
             '        </div>\n' +
             '    </div>\n' +
             '    <div class="layui-form-item">\n' +
             '        <label class="layui-form-label">简介</label>\n' +
             '        <div class="layui-input-block">\n' +
             '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
-            '                     style="width: 80%; height: 130px; resize:none" maxlength="300"\n' +
+            '                     style="width: 80%; height: 100px; resize:none" maxlength="100"\n' +
             '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()"></textarea>\n' +
-            '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/300</span>\n' +
+            '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>\n' +
             '       </div>\n' +
             '    </div>\n' +
             '</form>\n' +
@@ -187,7 +198,7 @@ function openAdd() {
             '    //普通图片上传使用layui上传图片\n' +
             '    uploadInst = upload.render({\n' +
             '        elem: \'#upload\'\n' +
-            '        , url: \'uploadTeacherImg.action\'\n' +
+            '        , url: \'uploadStudentImg.action\'\n' +
             '        , accept : \'images\'\n' +
             '        , multiple : false\n' +
             '        , auto : false\n' +
@@ -213,7 +224,7 @@ function openAdd() {
             '            {\n' +
             '                photo = res.src;\n' +
             '                $(\'#demo1\').attr(\'src\', photo);\n' +
-            '                addinstructor(name, gender, photo, email, degree, intro);\n' +
+            '                addstudent(name, gender, photo, grade, telephone, research, intro);\n' +
             '            }\n' +
             '\n' +
             '        }\n' +
@@ -231,25 +242,24 @@ function openAdd() {
         btn: ['确定', '取消'],
         btnAlign: 'c',
         shade: 0.5,
-        title: "添加指导老师",
+        title: "添加本科生",
         btn1 : function () {
-            addInstructor();
+            addStudent();
             return false;
         },
         btn2 : function () {
-            photo = null;
             layer.closeAll();
         }
     });
 }
 
-function addInstructor() {
-    name = $('#instructor_name').val();
+function addStudent() {
+    name = $('#student_name').val();
     intro = $('.tcp_content').val();
-    degree = $('#instructor_degree').val();
+    telephone = $('#student_telephone').val();
     gender = ((document.getElementsByClassName('layui-form-radioed'))[0]).childNodes[1].innerText;
-    email = $('#instructor_email').val();
-    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+    grade = $('#student_grade').val();
+    research = $('#student_research').val();
     if(photo == "" || photo == null){
         layer.msg("请上传照片！");
         return false;
@@ -258,30 +268,27 @@ function addInstructor() {
         layer.msg("姓名不能为空！");
     }
     else if(gender == "" || gender == null){
-        layer.msg("请输入性别！");
+        layer.msg("请选择性别！");
     }
-    else if(degree == "" || degree == null){
-        layer.msg("职称不能为空！");
+    else if(grade == "" || grade == null){
+        layer.msg("年级不能为空！");
     }
-    else if(email == "" || degree == null) {
-        layer.msg("邮箱不能为空！ ");
+    else if(telephone == "" || telephone == null) {
+        layer.msg("手机号不能为空！ ");
     }
-    else if(!reg.test(email)){
-        layer.msg("请注意邮箱格式！");
-    }
-    else if(intro === "" || intro == null){
-        layer.msg("简介不能为空！");
+    else if(research == "" || research == null) {
+        layer.msg("研究方向不能为空！ ");
     }
     else{
         uploadInst.upload();
     }
 }
 
-function addinstructor(name, gender, photo, email, degree, intro) {
+function addstudent(name, gender, photo, grade, telephone, research, intro) {
     $.ajax({
-        url : 'addInstructor.action',
-        type : 'post', 
-        data : {"name" : name, "photo" : photo, "gender" : gender, "email" : email, "degree" : degree, "intro" : intro},
+        url : 'addStudent.action',
+        type : 'post',
+        data : {"name" : name, "photo" : photo, "gender" : gender, "telephone" : telephone, "research" : research, "grade" : grade, "intro" : intro, "type" : 1},
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null) {
@@ -298,7 +305,7 @@ function addinstructor(name, gender, photo, email, degree, intro) {
                         layer.closeAll();
                     }
                 });
-                getInstructors();
+                getStudents();
             }
             else{
                 layer.msg(result.message);
@@ -310,24 +317,24 @@ function addinstructor(name, gender, photo, email, degree, intro) {
     });
 }
 
-function editInstructor() {
+function editStudent() {
     photo = null;
     var tr = this.parentNode.parentNode;
     var num = tr.childNodes[0].innerText;
-    var instructor = instructorList[num-1];
-    if(instructor.gender == "男"){
+    var student = postList[num-1];
+    if(student.gender == "男"){
         layer.open({
             type: 1,
             offset: 'auto',
             skin: 'layui-layer-lan',
             id: 'layerDemo1', //防止重复弹出
-            area: ['500px', '600px'],
+            area: ['500px', '640px'],
             content:
-                '<form class="layui-form" method="post" enctype="multipart/form-data" style="margin-top: 30px; height: ;">\n' +
+                '<form class="layui-form" method="post" enctype="multipart/form-data" style="margin-top: 30px;">\n' +
                 '    <div class="layui-form-item layui-upload">\n' +
                 '        <label class="layui-form-label">照片</label>\n' +
                 '        <div class="layui-upload-list">\n' +
-                '            <img class="layui-upload-img" id="demo1" style="float:left;max-width: 10%; margin-right: 10px" src="'+instructor.photo+'">\n' +
+                '            <img class="layui-upload-img" id="demo1" style="float:left;max-width: 10%; margin-right: 10px" src="'+student.photo+'">\n' +
                 '            <div style="float:left;">\n' +
                 '                <button type="button" class="layui-btn" id="upload">上传图片</button>\n' +
                 '                <p id="demoText" style="width: 100px; margin-top: 20px"></p>\n' +
@@ -337,7 +344,7 @@ function editInstructor() {
                 '    <div class="layui-form-item">\n' +
                 '        <label class="layui-form-label">姓名</label>\n' +
                 '        <div class="layui-input-block">\n' +
-                '            <input class="layui-input" required type="text" id="instructor_name" autocomplete="off" placeholder="请输入姓名" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+instructor.name+'">\n' +
+                '            <input class="layui-input" lay-verify="required" type="text" id="student_name" autocomplete="off" placeholder="请输入姓名" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+student.name+'">\n' +
                 '        </div>\n' +
                 '    </div>\n' +
                 '    <div class="layui-form-item">\n' +
@@ -356,24 +363,30 @@ function editInstructor() {
                 '        </div>' +
                 '    </div>\n' +
                 '    <div class="layui-form-item">\n' +
-                '        <label class="layui-form-label">职称</label>\n' +
+                '        <label class="layui-form-label">年级</label>\n' +
                 '        <div class="layui-input-block">\n' +
-                '            <input type="text" id="instructor_degree"  autocomplete="off" placeholder="请输入职称" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+instructor.degree+'">\n' +
+                '            <input type="text" id="student_grade"  autocomplete="off" placeholder="请输入年级" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+student.grade+'">\n' +
                 '        </div>\n' +
                 '    </div>\n' +
                 '    <div class="layui-form-item">\n' +
-                '        <label class="layui-form-label">邮箱</label>\n' +
+                '        <label class="layui-form-label">手机号</label>\n' +
                 '        <div class="layui-input-block">\n' +
-                '            <input class="layui-input layui-disabled" disabled id="instructor_email" type="text" name="email" placeholder="请输入邮箱" autocomplete="off" style="width: 250px;" value="'+instructor.email+'">\n' +
+                '            <input class="layui-input layui-disabled" disabled id="student_telephone" lay-verify="required|phone" type="text" name="telephone" placeholder="请输入手机号" autocomplete="off" style="width: 250px;" value="'+student.telephone+'" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
+                '        </div>\n' +
+                '    </div>\n' +
+                '    <div class="layui-form-item">\n' +
+                '        <label class="layui-form-label">研究方向</label>\n' +
+                '        <div class="layui-input-block">\n' +
+                '            <input type="text" id="student_research"  autocomplete="off" placeholder="请输入研究方向" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+student.research+'">\n' +
                 '        </div>\n' +
                 '    </div>\n' +
                 '    <div class="layui-form-item">\n' +
                 '        <label class="layui-form-label">简介</label>\n' +
                 '        <div class="layui-input-block">\n' +
                 '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
-                '                     style="width: 80%; height: 130px; resize:none" maxlength="300"\n' +
-                '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+instructor.intro+'</textarea>\n' +
-                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/300</span>\n' +
+                '                     style="width: 80%; height: 130px; resize:none" maxlength="100"\n' +
+                '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+student.intro+'</textarea>\n' +
+                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>\n' +
                 '       </div>\n' +
                 '    </div>\n' +
                 '</form>\n' +
@@ -387,7 +400,7 @@ function editInstructor() {
                 '    //普通图片上传使用layui上传图片\n' +
                 '    uploadInst = upload.render({\n' +
                 '        elem: \'#upload\'\n' +
-                '        , url: \'uploadTeacherImg.action\'\n' +
+                '        , url: \'uploadStudentImg.action\'\n' +
                 '        , accept : \'images\'\n' +
                 '        , multiple : false\n' +
                 '        , auto : false\n' +
@@ -413,8 +426,8 @@ function editInstructor() {
                 '            {\n' +
                 '                photo = res.src;\n' +
                 '                $(\'#demo1\').attr(\'src\', photo);\n' +
-                '                updateInstructor(name, gender, photo, email, degree, intro);\n' +
-                '            }\n' +
+                '                updateStudent(name, gender, photo, telephone, grade, research, intro);\n' +
+                '}\n' +
                 '\n' +
                 '        }\n' +
                 '        , error: function () {\n' +
@@ -431,13 +444,12 @@ function editInstructor() {
             btn: ['确定', '取消'],
             btnAlign: 'c',
             shade: 0.5,
-            title: "更新指导老师",
+            title: "更新本科生",
             btn1 : function () {
-                editinstructor(instructor);
+                editstudent(student);
                 return false;
             },
             btn2 : function () {
-                photo = null;
                 layer.closeAll();
             }
         });
@@ -448,13 +460,13 @@ function editInstructor() {
             offset: 'auto',
             skin: 'layui-layer-lan',
             id: 'layerDemo1', //防止重复弹出
-            area: ['500px', '600px'],
+            area: ['500px', '640px'],
             content:
-                '<form class="layui-form" method="post" enctype="multipart/form-data" style="margin-top: 30px; height: ;">\n' +
+                '<form class="layui-form" method="post" enctype="multipart/form-data" style="margin-top: 30px;">\n' +
                 '    <div class="layui-form-item layui-upload">\n' +
                 '        <label class="layui-form-label">照片</label>\n' +
                 '        <div class="layui-upload-list">\n' +
-                '            <img class="layui-upload-img" id="demo1" style="float:left;max-width: 10%; margin-right: 10px" src="'+instructor.photo+'">\n' +
+                '            <img class="layui-upload-img" id="demo1" style="float:left;max-width: 10%; margin-right: 10px" src="'+student.photo+'">\n' +
                 '            <div style="float:left;">\n' +
                 '                <button type="button" class="layui-btn" id="upload">上传图片</button>\n' +
                 '                <p id="demoText" style="width: 100px; margin-top: 20px"></p>\n' +
@@ -464,18 +476,18 @@ function editInstructor() {
                 '    <div class="layui-form-item">\n' +
                 '        <label class="layui-form-label">姓名</label>\n' +
                 '        <div class="layui-input-block">\n' +
-                '            <input class="layui-input" required type="text" id="instructor_name" autocomplete="off" placeholder="请输入姓名" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+instructor.name+'">\n' +
+                '            <input class="layui-input" lay-verify="required" type="text" id="student_name" autocomplete="off" placeholder="请输入姓名" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+student.name+'">\n' +
                 '        </div>\n' +
                 '    </div>\n' +
                 '    <div class="layui-form-item">\n' +
                 '        <label class="layui-form-label">性别</label>\n' +
                 '        <div class="layui-input-block">\n' +
-                '            <input type="radio" name="sex" value="男" title="男">' +
+                '            <input type="radio" name="sex" value="男" title="男" checked="">' +
                 '            <div class="layui-unselect layui-form-radio">' +
                 '                <i class="layui-anim layui-icon"></i>' +
                 '                <p>男</p>' +
                 '            </div>\n' +
-                '            <input type="radio" name="sex" value="女" title="女" checked="">' +
+                '            <input type="radio" name="sex" value="女" title="女">' +
                 '            <div class="layui-unselect layui-form-radio layui-form-radioed">' +
                 '                <i class="layui-anim layui-icon layui-anim-scaleSpring"></i>' +
                 '                <p>女</p>' +
@@ -483,24 +495,30 @@ function editInstructor() {
                 '        </div>' +
                 '    </div>\n' +
                 '    <div class="layui-form-item">\n' +
-                '        <label class="layui-form-label">职称</label>\n' +
+                '        <label class="layui-form-label">年级</label>\n' +
                 '        <div class="layui-input-block">\n' +
-                '            <input type="text" id="instructor_degree"  autocomplete="off" placeholder="请输入职称" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+instructor.degree+'">\n' +
+                '            <input type="text" id="student_grade"  autocomplete="off" placeholder="请输入年级" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+student.grade+'">\n' +
                 '        </div>\n' +
                 '    </div>\n' +
                 '    <div class="layui-form-item">\n' +
-                '        <label class="layui-form-label">邮箱</label>\n' +
+                '        <label class="layui-form-label">手机号</label>\n' +
                 '        <div class="layui-input-block">\n' +
-                '            <input class="layui-input layui-disabled" disabled id="instructor_email" type="text" name="email" placeholder="请输入邮箱" autocomplete="off" style="width: 250px;" value="'+instructor.email+'">\n' +
+                '            <input class="layui-input layui-disabled" disabled id="student_telephone" lay-verify="required|phone" type="text" name="telephone" placeholder="请输入手机号" autocomplete="off" style="width: 250px;" value="'+student.telephone+'" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
+                '        </div>\n' +
+                '    </div>\n' +
+                '    <div class="layui-form-item">\n' +
+                '        <label class="layui-form-label">研究方向</label>\n' +
+                '        <div class="layui-input-block">\n' +
+                '            <input type="text" id="student_research"  autocomplete="off" placeholder="请输入研究方向" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()" value="'+student.research+'">\n' +
                 '        </div>\n' +
                 '    </div>\n' +
                 '    <div class="layui-form-item">\n' +
                 '        <label class="layui-form-label">简介</label>\n' +
                 '        <div class="layui-input-block">\n' +
                 '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
-                '                     style="width: 80%; height: 130px; resize:none" maxlength="300"\n' +
-                '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+instructor.intro+'</textarea>\n' +
-                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/300</span>\n' +
+                '                     style="width: 80%; height: 130px; resize:none" maxlength="100"\n' +
+                '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+student.intro+'</textarea>\n' +
+                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>\n' +
                 '       </div>\n' +
                 '    </div>\n' +
                 '</form>\n' +
@@ -514,7 +532,7 @@ function editInstructor() {
                 '    //普通图片上传使用layui上传图片\n' +
                 '    uploadInst = upload.render({\n' +
                 '        elem: \'#upload\'\n' +
-                '        , url: \'uploadTeacherImg.action\'\n' +
+                '        , url: \'uploadStudentImg.action\'\n' +
                 '        , accept : \'images\'\n' +
                 '        , multiple : false\n' +
                 '        , auto : false\n' +
@@ -540,8 +558,8 @@ function editInstructor() {
                 '            {\n' +
                 '                photo = res.src;\n' +
                 '                $(\'#demo1\').attr(\'src\', photo);\n' +
-                '                updateInstructor(name, gender, photo, email, degree, intro);\n' +
-                '             }\n' +
+                '                updateStudent(name, gender, photo, telephone, grade, research, intro);\n' +
+                '}\n' +
                 '        }\n' +
                 '        , error: function () {\n' +
                 '            //演示失败状态，并实现重传\n' +
@@ -557,64 +575,58 @@ function editInstructor() {
             btn: ['确定', '取消'],
             btnAlign: 'c',
             shade: 0.5,
-            title: "更新指导老师",
+            title: "更新本科生",
             btn1 : function () {
-                editinstructor(instructor);
+                editstudent(student);
                 return false;
             },
             btn2 : function () {
-                photo = null;
                 layer.closeAll();
             }
         });
     }
 }
 
-function editinstructor() {
-    var instructor = arguments[0];
-    name = $('#instructor_name').val();
+function editstudent() {
+    var student = arguments[0];
+    name = $('#student_name').val();
     intro = $('.tcp_content').val();
-    degree = $('#instructor_degree').val();
+    telephone = $('#student_telephone').val();
     gender = ((document.getElementsByClassName('layui-form-radioed'))[0]).childNodes[1].innerText;
-    email = $('#instructor_email').val();
-    photo = $('#demo1').attr("src");
-    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+    grade = $('#student_grade').val();
+    research = $('#student_research').val();
     if(name == "" || name == null){
         layer.msg("姓名不能为空！");
     }
     else if(gender == "" || gender == null){
         layer.msg("请选择性别！");
     }
-    else if(degree == "" || degree == null){
-        layer.msg("职称不能为空！");
+    else if(grade == "" || grade == null){
+        layer.msg("年级不能为空！");
     }
-    else if(email == "" || degree == null) {
-        layer.msg("邮箱不能为空！ ");
+    else if(telephone == "" || telephone == null) {
+        layer.msg("手机号不能为空！ ");
     }
-    else if(!reg.test(email)){
-        layer.msg("请注意邮箱格式！");
-    }
-    else if(intro == "" || intro == null){
-        layer.msg("简介不能为空！");
+    else if(research == "" || research == null) {
+        layer.msg("研究方向不能为空！ ");
     }
     else if (photo == null) {
-        updateInstructor(name, gender, instructor.photo, email, degree, intro);
+        updateStudent(name, gender, student.photo, telephone, grade, research, intro);
     }
-    else if (photo != instructor.photo) {
-            uploadInst.upload();
+    else if (photo != student.photo) {
+        uploadInst.upload();
     }
-    else{
-        updateInstructor(name, gender, instructor.photo, email, degree, intro);
+    else {
+        updateStudent(name, gender, student.photo, telephone, grade, research, intro);
     }
 
 }
 
-function updateInstructor(name, gender, photo, email, degree, intro) {
-    console.log({"name" : name, "photo" : photo, "gender" : gender, "email" : email, "degree" : degree, "intro" : intro});
+function updateStudent(name, gender, photo, telephone, grade, research, intro) {
     $.ajax({
-        url : 'updateInstructor.action',
+        url : 'updateStudent.action',
         type : 'post',
-        data : {"name" : name, "photo" : photo, "gender" : gender, "email" : email, "degree" : degree, "intro" : intro},
+        data : {"name" : name, "photo" : photo, "gender" : gender, "telephone" : telephone, "research" : research, "grade" : grade, "intro" : intro, "type" : 1},
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null) {
@@ -631,7 +643,7 @@ function updateInstructor(name, gender, photo, email, degree, intro) {
                         layer.closeAll();
                     }
                 });
-                getInstructors();
+                getStudents();
             }
             else{
                 layer.msg(result.message);
@@ -643,21 +655,21 @@ function updateInstructor(name, gender, photo, email, degree, intro) {
     });
 }
 
-function delInstructor() {
+function delStudent() {
     var tr = this.parentNode.parentNode;
     var num = tr.childNodes[0].innerText;
-    var instructor = instructorList[num-1];
+    var student = postList[num-1];
     layer.open({
         type: 1,
         offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
         id: 'layerDemo1', //防止重复弹出
-        content: '<div style="padding: 20px 50px;">' + "确定删除指导老师 <b>'" + instructor.name + "'</b> 吗？" + '</div>',
+        content: '<div style="padding: 20px 50px;">' + "确定删除本科生 <b>'" + student.name + "'</b> 吗？" + '</div>',
         btn: ['确定', '取消'],
         btnAlign: 'c', //按钮居中
         shade: 0.5, //不显示遮罩
-        title: "删除指导老师",
+        title: "删除本科生",
         btn1 : function () {
-            delinstructor(instructor);
+            delstudent(student);
             return false;
         },
         btn2 : function () {
@@ -666,12 +678,12 @@ function delInstructor() {
     });
 }
 
-function delinstructor() {
-    var id = arguments[0].teacherId;
+function delstudent() {
+    var id = arguments[0].studentId;
     $.ajax({
-        url : 'delInstructor.action',
+        url : 'delStudent.action',
         type : 'post',
-        data : {"teacherId" : id},
+        data : {"studentId" : id},
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null){
@@ -688,7 +700,8 @@ function delinstructor() {
                         layer.closeAll();
                     }
                 });
-                getInstructors();
+                console.log(123);
+                getStudents();
             }
             else
             {
@@ -702,7 +715,7 @@ function delinstructor() {
 }
 
 function textarea_fun(){
-    $(".tcp_content").val($(".tcp_content").val().substring(0,300));
+    $(".tcp_content").val($(".tcp_content").val().substring(0,100));
     $(".t_h i").html($(".tcp_content").val().length);
     if(window.event.keyCode  == 13){
         return false;
