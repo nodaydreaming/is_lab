@@ -12,7 +12,6 @@ public class ProjectEntity {
     private int projectId;
     private String name;
     private String number;
-
     private Date startdate;
     private Date enddate;
     private String principal;

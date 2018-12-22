@@ -45,7 +45,7 @@ public class PatentDaoImpl extends HibernateDaoSupport implements PatentDao {
     @Override
     public List<PatentEntity> findAllPatents() {
         Session session = this.currentSession();
-        Query query = session.createQuery("from PatentEntity order by patentId desc");
+        Query query = session.createQuery("from PatentEntity order by date desc");
 
         List<PatentEntity> list = query.list();
         if(!list.isEmpty()){

@@ -86,10 +86,72 @@
         </action>
     </package>
 
+    <package name="works" extends="json-default, struts-default">
+        <action name="addWorks" class="worksAction" method="addWorks">
+        </action>
+        <action name="updateWorks" class="worksAction" method="updateWorks">
+        </action>
+        <action name="getWorks" class="worksAction" method="getAllWorks">
+        </action>
+        <action name="delWorks" class="worksAction" method="delWorks">
+        </action>
+    </package>
+
+    <package name="patent" extends="struts-default,json-default">
+        <action name="addPatent" class="patentAction" method="addPatent">
+        </action>
+        <action name="getPatents" class="patentAction" method="getPatents">
+        </action>
+        <action name="updatePatent" class="patentAction" method="updatePatent">
+        </action>
+        <action name="delPatent" class="patentAction" method="delPatent">
+        </action>
+    </package>
+    <package name="competition" extends="json-default,json-default">
+        <action name="addCompetition" class="competitionAction" method="addCompetition">
+        </action>
+        <action name="getCompetitions" class="competitionAction" method="getCompetitions">
+        </action>
+        <action name="updateCompetition" class="competitionAction" method="updateCompetition">
+        </action>
+        <action name="delCompetition" class="competitionAction" method="delCompetition">
+        </action>
+    </package>
+    
+    <package name="paper" extends="json-default, json-default">
+        <action name="addPaper" class="paperAction" method="addPaper">
+        </action>
+        <action name="updatePaper" class="paperAction" method="updatePaper">
+        </action>
+        <action name="delPaper" class="paperAction" method="deletePaper">
+        </action>
+        <action name="getPapers" class="paperAction" method="getAllPapers">
+        </action>
+    </package>
+    
+    <package name="software" extends="json-default, json-default">
+        <action name="addSoftware" class="softwareAction" method="addSoftware">
+        </action>
+        <action name="updateSoftware" class="softwareAction" method="updateSoftware">
+        </action>
+        <action name="delSoftware" class="softwareAction" method="deleteSoftware">
+        </action>
+        <action name="getSoftwares" class="softwareAction" method="getAllSoftwares">
+        </action>
+    </package>
+    
     <package name="upload" extends="struts-default, json-default">
         <action name="uploadTeacherImg" class="uploadAction" method="uploadTeacherImg">
         </action>
         <action name="uploadStudentImg" class="uploadAction" method="uploadStudentImg">
+        </action>
+        <action name="uploadWorksImg" class="uploadAction" method="uploadWorksImg">
+        </action>
+        <action name="uploadUserImg" class="uploadAction" method="uploadUserImg">
+        </action>
+        <action name="uploadPaper" class="uploadAction" method="uploadPaper">
+        </action>
+        <action name="uploadSoft" class="uploadAction" method="uploadSoft">
         </action>
     </package>
 </struts>

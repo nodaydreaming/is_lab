@@ -41,12 +41,9 @@ public class StudentAction extends ActionSupport implements ModelDriven<StudentE
 
         queryMap.put("type", type);
         List<StudentEntity> list = studentService.findStudentsByProperties(queryMap);
-        if(list != null){
-            map.put("students", list);
-        }
-        else{
-            map.put("message", "获得学生信息失败！");
-        }
+
+        map.put("students", list);
+
         MapToJSON.mapToJson(response, map);
         return NONE;
     }

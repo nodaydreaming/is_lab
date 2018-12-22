@@ -169,7 +169,7 @@ function openAddStudent() {
             '    <div class="layui-form-item">\n' +
             '        <label class="layui-form-label">公司/学校</label>\n' +
             '        <div class="layui-input-block">\n' +
-            '            <input type="text" id="student_company"  autocomplete="off" placeholder="请输入公司" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
+            '            <input type="text" id="student_company"  autocomplete="off" placeholder="请输入公司/学校" class="layui-input" style="width: 250px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
             '        </div>\n' +
             '    </div>\n' +
             '    <div class="layui-form-item">\n' +
@@ -273,8 +273,8 @@ function addStudent() {
     else if(telephone == "" || telephone == null) {
         layer.msg("手机号不能为空！ ");
     }
-    else if(company == "" || research == null) {
-        layer.msg("研究方向不能为空！ ");
+    else if(company == "" || company == null) {
+        layer.msg("公司不能为空！ ");
     }
     else if(intro == "" || intro == null){
         layer.msg("简介不能为空！");
@@ -386,7 +386,7 @@ function editStudent() {
                 '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
                 '                     style="width: 80%; height: 130px; resize:none" maxlength="100"\n' +
                 '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+student.intro+'</textarea>\n' +
-                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>\n' +
+                '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+student.intro.length+'</i>/100</span>\n' +
                 '       </div>\n' +
                 '    </div>\n' +
                 '</form>\n' +
@@ -518,7 +518,7 @@ function editStudent() {
                 '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
                 '                     style="width: 80%; height: 130px; resize:none" maxlength="100"\n' +
                 '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+student.intro+'</textarea>\n' +
-                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>\n' +
+                '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+student.intro.length+'</i>/100</span>\n' +
                 '       </div>\n' +
                 '    </div>\n' +
                 '</form>\n' +

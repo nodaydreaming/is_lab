@@ -386,7 +386,7 @@ function editStudent() {
                 '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
                 '                     style="width: 80%; height: 130px; resize:none" maxlength="100"\n' +
                 '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+student.intro+'</textarea>\n' +
-                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>\n' +
+                '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+student.intro.length+'</i>/100</span>\n' +
                 '       </div>\n' +
                 '    </div>\n' +
                 '</form>\n' +
@@ -518,7 +518,7 @@ function editStudent() {
                 '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
                 '                     style="width: 80%; height: 130px; resize:none" maxlength="100"\n' +
                 '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+student.intro+'</textarea>\n' +
-                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/100</span>\n' +
+                '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+student.intro.length+'</i>/100</span>\n' +
                 '       </div>\n' +
                 '    </div>\n' +
                 '</form>\n' +

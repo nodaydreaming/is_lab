@@ -69,14 +69,7 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
         HashMap<String, Object> map = new HashMap<>();
 
         List<TeacherEntity> list = teacherService.findAllTeachers();
-        if(list == null){
-            map.put("message", "请求失败！");
-        }
-        else
-        {
-            map.put("instructors", list);
-        }
-
+        map.put("instructors", list);
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
@@ -98,19 +91,10 @@ public class TeacherAction extends ActionSupport implements ModelDriven<TeacherE
 
     public String updateTeacher() throws IOException{
         HttpServletResponse response = ServletActionContext.getResponse();
-        HttpServletRequest request = ServletActionContext.getRequest();
         HashMap<String, Object> map = new HashMap<>();
         HashMap<String, Object> queryMap = new HashMap<>();
 
-        System.out.println(request.getParameter("name"));
-        System.out.println(request.getParameter("email"));
-        System.out.println(request.getParameter("intro"));
-        System.out.println(request.getParameter("gender"));
-        System.out.println(request.getParameter("photo"));
-        System.out.println(request.getParameter("degree"));
-
         queryMap.put("email", teacherEntity.getEmail());
-        System.out.println(teacherEntity.toString());
         List<TeacherEntity> list = teacherService.findTeachersByProperties(queryMap);
         if(list != null){
             TeacherEntity entity = list.get(0);

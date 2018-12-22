@@ -1,6 +1,8 @@
 package cn.hznu.islab.entity;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -63,6 +65,13 @@ public class PatentEntity {
         this.date = date;
     }
 
+    public void setDate(String date){
+        try {
+            this.date=(new SimpleDateFormat("yyyy-MM-dd").parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -53,6 +53,8 @@
                 <value>cn/hznu/islab/entity/ProjectEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/WorksEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/ResearchEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/PaperEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/SoftwareEntity.hbm.xml</value>
             </list>
         </property>
         <property name="annotatedClasses">
@@ -68,6 +70,8 @@
                 <value>cn.hznu.islab.entity.TeacherEntity</value>
                 <value>cn.hznu.islab.entity.UserEntity</value>
                 <value>cn.hznu.islab.entity.WorksEntity</value>
+                <value>cn.hznu.islab.entity.PaperEntity</value>
+                <value>cn.hznu.islab.entity.SoftwareEntity</value>
             </list>
         </property>
     </bean>
@@ -102,6 +106,21 @@
     <bean id="projectAction" class="cn.hznu.islab.action.ProjectAction">
         <property name="projectService" ref="projectService"/>
     </bean>
+    <bean id="worksAction" class="cn.hznu.islab.action.WorksAction">
+        <property name="worksService" ref="worksService"/>
+    </bean>
+    <bean id="patentAction" class="cn.hznu.islab.action.PatentAction">
+        <property name="patentService" ref="patentService"/>
+    </bean>
+    <bean id="competitionAction" class="cn.hznu.islab.action.CompetitionAction">
+        <property name="competitionService" ref="competitionService"/>
+    </bean>
+    <bean id="paperAction" class="cn.hznu.islab.action.PaperAction">
+        <property name="paperService" ref="paperService"/>
+    </bean>
+    <bean id="softwareAction" class="cn.hznu.islab.action.SoftwareAction">
+        <property name="softwareService" ref="softwareService"/>
+     </bean>
     <bean id="uploadAction" class="cn.hznu.islab.action.FileUploadAction"></bean>
     <!-- Service的配置 -->
     <bean id="competitionService" class="cn.hznu.islab.service.impl.CompetitionServiceImpl">
@@ -137,6 +156,12 @@
     <bean id="worksService" class="cn.hznu.islab.service.impl.WorksServiceImpl">
         <property name="worksDao" ref="worksDao"/>
     </bean>
+    <bean id="paperService" class="cn.hznu.islab.service.impl.PaperServiceImpl">
+        <property name="paperDao" ref="paperDao"/>
+    </bean>
+    <bean id="softwareService" class="cn.hznu.islab.service.impl.SoftwareServiceImpl">
+        <property name="softwareDao" ref="softwareDao"/>
+    </bean>
     <!-- DAO的配置 -->
     <bean id="competitionDao" class="cn.hznu.islab.dao.impl.CompetitionDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
@@ -169,6 +194,12 @@
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
     <bean id="worksDao" class="cn.hznu.islab.dao.impl.WorksDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="paperDao" class="cn.hznu.islab.dao.impl.PaperDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="softwareDao" class="cn.hznu.islab.dao.impl.SoftwareDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 

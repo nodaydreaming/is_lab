@@ -259,9 +259,9 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         //权限判断
         if(loginUser.getStatus() == 2) {
             list = userService.findAllUsers();
-            if (list != null) {
-                map.put("users", list);
-            }
+
+            map.put("users", list);
+
         }
         else{
             map.put("message", "您没有权限查看所有管理员信息！");

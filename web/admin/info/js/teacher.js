@@ -171,9 +171,9 @@ function openAdd() {
             '        <label class="layui-form-label">简介</label>\n' +
             '        <div class="layui-input-block">\n' +
             '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
-            '                     style="width: 80%; height: 130px; resize:none" maxlength="300"\n' +
+            '                     style="width: 80%; height: 130px; resize:none" maxlength="500"\n' +
             '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()"></textarea>\n' +
-            '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/300</span>\n' +
+            '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/500</span>\n' +
             '       </div>\n' +
             '    </div>\n' +
             '</form>\n' +
@@ -371,9 +371,9 @@ function editInstructor() {
                 '        <label class="layui-form-label">简介</label>\n' +
                 '        <div class="layui-input-block">\n' +
                 '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
-                '                     style="width: 80%; height: 130px; resize:none" maxlength="300"\n' +
+                '                     style="width: 80%; height: 130px; resize:none" maxlength="500"\n' +
                 '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+instructor.intro+'</textarea>\n' +
-                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/300</span>\n' +
+                '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+instructor.intro.length+'</i>/500</span>\n' +
                 '       </div>\n' +
                 '    </div>\n' +
                 '</form>\n' +
@@ -498,9 +498,9 @@ function editInstructor() {
                 '        <label class="layui-form-label">简介</label>\n' +
                 '        <div class="layui-input-block">\n' +
                 '           <textarea class="tcp_content layui-textarea" placeholder="请输入简介"\n' +
-                '                     style="width: 80%; height: 130px; resize:none" maxlength="300"\n' +
+                '                     style="width: 80%; height: 130px; resize:none" maxlength="500"\n' +
                 '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+instructor.intro+'</textarea>\n' +
-                '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/300</span>\n' +
+                '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+instructor.intro.length+'</i>/500</span>\n' +
                 '       </div>\n' +
                 '    </div>\n' +
                 '</form>\n' +
@@ -596,9 +596,6 @@ function editinstructor() {
     }
     else if(intro == "" || intro == null){
         layer.msg("简介不能为空！");
-    }
-    else if (photo == null) {
-        updateInstructor(name, gender, instructor.photo, email, degree, intro);
     }
     else if (photo != instructor.photo) {
             uploadInst.upload();
@@ -702,7 +699,7 @@ function delinstructor() {
 }
 
 function textarea_fun(){
-    $(".tcp_content").val($(".tcp_content").val().substring(0,300));
+    $(".tcp_content").val($(".tcp_content").val().substring(0,500));
     $(".t_h i").html($(".tcp_content").val().length);
     if(window.event.keyCode  == 13){
         return false;

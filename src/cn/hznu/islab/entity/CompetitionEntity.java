@@ -103,4 +103,17 @@ public class CompetitionEntity {
     public int hashCode() {
         return Objects.hash(competitionId, name, worksName, awardLevel, instructor, teamMember, date);
     }
+
+    @Override
+    public String toString() {
+        return "CompetitionEntity{" +
+                "competitionId=" + competitionId +
+                ", name='" + name + '\'' +
+                ", worksName='" + worksName + '\'' +
+                ", awardLevel='" + awardLevel + '\'' +
+                ", instructor='" + instructor + '\'' +
+                ", teamMember='" + teamMember + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
