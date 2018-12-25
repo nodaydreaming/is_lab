@@ -1,4 +1,4 @@
-var paperList;
+var softwareList;
 var name, address;
 var uploadInst;
 
@@ -22,17 +22,17 @@ window.onload = function () {
             console.log("请求失败！");
         }
     });
-    getPapers();
+    getSoftwares();
 };
 
-function getPapers() {
+function getSoftwares() {
     $.ajax({
-        url : 'getPapers.action',
+        url : 'getSoftwares.action',
         type : 'post',
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null){
-                fillPaper(result.papers)
+                fillSoftware(result.softwares)
             }
         },
         error : function () {
@@ -42,13 +42,13 @@ function getPapers() {
     });
 }
 
-function fillPaper() {
-    paperList = arguments[0];
+function fillSoftware() {
+    softwareList = arguments[0];
     var tbody = document.getElementsByTagName('tbody')[0];
     $('tbody').html("");
 
-    for (var i = 0; i < paperList.length; ++i){
-        var paper = paperList[i];
+    for (var i = 0; i < softwareList.length; ++i){
+        var software = softwareList[i];
         var tr = document.createElement('tr');
 
         var td1 = document.createElement('td');
@@ -57,7 +57,7 @@ function fillPaper() {
         tr.appendChild(td1);
 
         var td2 = document.createElement('td');
-        td2.innerText = paper.name;
+        td2.innerText = software.name;
         td2.style.wordWrap = "break-word";
         tr.appendChild(td2);
 
@@ -66,32 +66,32 @@ function fillPaper() {
         td3.style.padding = "0px";
 
         var a0 = document.createElement('a');
-        a0.id = "editPaper" + (i+1);
+        a0.id = "editSoftware" + (i+1);
         a0.className = "layui-btn layui-btn-normal layui-btn-xs";
-        var filename = paper.address.substring(paper.address.lastIndexOf('/') + 21);
-        a0.href = "downFile.action?filename=" + filename + "&address=" + paper.address.substring(7);
+        var filename = software.address.substring(software.address.lastIndexOf('/') + 21);
+        a0.href = "downFile.action?filename=" + filename + "&address=" + software.address.substring(7);
         var i0 = document.createElement('i');
         i0.className = "layui-icon layui-icon-download-circle";
         a0.appendChild(i0);
         a0.innerHTML = a0.innerHTML + "下载";
 
         var a1 = document.createElement('a');
-        a1.id = "editPaper" + (i+1);
+        a1.id = "editSoftware" + (i+1);
         a1.className = "layui-btn layui-btn-normal layui-btn-xs";
         var i1 = document.createElement('i');
         i1.className = "layui-icon layui-icon-edit";
         a1.appendChild(i1);
         a1.innerHTML = a1.innerHTML + "编辑";
-        a1.onclick = editPaper;
+        a1.onclick = editSoftware;
 
         var a2 = document.createElement('a');
-        a2.id = "delPaper" + (i+1);
+        a2.id = "delSoftware" + (i+1);
         a2.className = "layui-btn layui-btn-danger layui-btn-xs";
         var i2 = document.createElement('i');
         i2.className = "layui-icon layui-icon-delete";
         a2.appendChild(i2);
         a2.innerHTML = a2.innerHTML + "删除";
-        a2.onclick = delPaper;
+        a2.onclick = delSoftware;
 
         td3.appendChild(a0);
         td3.appendChild(a1);
@@ -102,7 +102,7 @@ function fillPaper() {
     }
 }
 
-function openAddPaper() {
+function openAddSoft() {
     address = null;
     layer.open({
         type: 1,
@@ -138,7 +138,7 @@ function openAddPaper() {
             '    //普通图片上传使用layui上传图片\n' +
             '    uploadInst = upload.render({\n' +
             '        elem: \'#upload\'\n' +
-            '        , url: \'uploadPaper.action\'\n' +
+            '        , url: \'uploadSoft.action\'\n' +
             '        , accept : \'file\'\n' +
             '        , multiple : false\n' +
             '        , auto : false\n' +
@@ -162,7 +162,7 @@ function openAddPaper() {
             '            else\n' +
             '            {\n' +
             '                address = res.src;\n' +
-            '                addpaper(name, address);\n' +
+            '                addsoftware(name, address);\n' +
             '            }\n' +
             '\n' +
             '        }\n' +
@@ -180,9 +180,9 @@ function openAddPaper() {
         btn: ['确定', '取消'],
         btnAlign: 'c',
         shade: 0.5,
-        title: "添加论文",
+        title: "添加软著",
         btn1 : function () {
-            addPaper();
+            addSoftware();
             return false;
         },
         btn2 : function () {
@@ -192,7 +192,7 @@ function openAddPaper() {
     });
 }
 
-function addPaper() {
+function addSoftware() {
     name = $('.tcp_content').val();
     if(name == "" || name == null){
         layer.msg("名称不能为空！");
@@ -206,9 +206,9 @@ function addPaper() {
     }
 }
 
-function addpaper(name, address) {
+function addsoftware(name, address) {
     $.ajax({
-        url : 'addPaper.action',
+        url : 'addSoftware.action',
         type : 'post',
         data : {"name" : name, "address" : address},
         scriptCharset : 'utf-8',
@@ -227,7 +227,7 @@ function addpaper(name, address) {
                         layer.closeAll();
                     }
                 });
-                getPapers();
+                getSoftwares();
             }
             else{
                 layer.msg(result.message);
@@ -239,12 +239,12 @@ function addpaper(name, address) {
     });
 }
 
-function editPaper() {
+function editSoftware() {
     address = null;
     var tr = this.parentNode.parentNode;
     var num = tr.childNodes[0].innerText;
-    var paper = paperList[num-1];
-    var filename = paper.address.substring(paper.address.lastIndexOf('/') + 21);
+    var software = softwareList[num-1];
+    var filename = software.address.substring(software.address.lastIndexOf('/') + 21);
     layer.open({
         type: 1,
         offset: 'auto',
@@ -258,8 +258,8 @@ function editPaper() {
             '        <div class="layui-input-block">\n' +
             '           <textarea class="tcp_content layui-textarea layui-disabled" placeholder="请输入名称"\n' +
             '                     disabled style="width: 80%; height: 130px; resize:none" maxlength="200"\n' +
-            '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+paper.name+'</textarea>\n' +
-            '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+paper.name.length+'</i>/200</span>\n' +
+            '                     onchange="textarea_fun()" onkeydown="textarea_fun()" onkeyup="textarea_fun()">'+software.name+'</textarea>\n' +
+            '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+software.name.length+'</i>/200</span>\n' +
             '        </div>\n' +
             '    </div>\n' +
             '    <div class="layui-form-item layui-upload">\n' +
@@ -280,7 +280,7 @@ function editPaper() {
             '    //普通图片上传使用layui上传图片\n' +
             '    uploadInst = upload.render({\n' +
             '        elem: \'#upload\'\n' +
-            '        , url: \'uploadPaper.action\'\n' +
+            '        , url: \'uploadSoft.action\'\n' +
             '        , accept : \'file\'\n' +
             '        , multiple : false\n' +
             '        , auto : false\n' +
@@ -304,7 +304,7 @@ function editPaper() {
             '            else\n' +
             '            {\n' +
             '                address = res.src;\n' +
-            '                updatePaper(name, address);\n' +
+            '                updateSoftware(name, address);\n' +
             '            }\n' +
             '\n' +
             '        }\n' +
@@ -322,9 +322,9 @@ function editPaper() {
         btn: ['确定', '取消'],
         btnAlign: 'c',
         shade: 0.5,
-        title: "更新论文信息",
+        title: "更新软著信息",
         btn1 : function () {
-            editpaper(paper);
+            editsoftware(software);
             return false;
         },
         btn2 : function () {
@@ -334,25 +334,25 @@ function editPaper() {
     });
 }
 
-function editpaper() {
-    var paper = arguments[0];
+function editsoftware() {
+    var software = arguments[0];
     name = $('.tcp_content').val();
 
     if(name == "" || name == null){
         layer.msg("名称不能为空！");
     }
-    else if (address != null && address != paper.address) {
+    else if (address != null && address != software.address) {
         uploadInst.upload();
     }
     else{
-        updatePaper(name, paper.address);
+        updateSoftware(name, software.address);
     }
 
 }
 
-function updatePaper(name, address) {
+function updateSoftware(name, address) {
     $.ajax({
-        url : 'updatePaper.action',
+        url : 'updateSoftware.action',
         type : 'post',
         data : {"name" : name, "address" : address},
         scriptCharset : 'utf-8',
@@ -371,7 +371,7 @@ function updatePaper(name, address) {
                         layer.closeAll();
                     }
                 });
-                getPapers();
+                getSoftwares();
             }
             else{
                 layer.msg(result.message);
@@ -383,21 +383,21 @@ function updatePaper(name, address) {
     });
 }
 
-function delPaper() {
+function delSoftware() {
     var tr = this.parentNode.parentNode;
     var num = tr.childNodes[0].innerText;
-    var paper = paperList[num-1];
+    var software = softwareList[num-1];
     layer.open({
         type: 1,
         offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
         id: 'layerDemo1', //防止重复弹出
-        content: '<div style="padding: 20px 50px;">' + "确定删除论文 <b>'" + paper.name + "'</b> 吗？" + '</div>',
+        content: '<div style="padding: 20px 50px;">' + "确定删除软著 <b>'" + software.name + "'</b> 吗？" + '</div>',
         btn: ['确定', '取消'],
         btnAlign: 'c', //按钮居中
         shade: 0.5, //不显示遮罩
-        title: "删除论文",
+        title: "删除软著",
         btn1 : function () {
-            delpaper(paper);
+            delsoftware(software);
             return false;
         },
         btn2 : function () {
@@ -406,12 +406,12 @@ function delPaper() {
     });
 }
 
-function delpaper() {
-    var id = arguments[0].paperId;
+function delsoftware() {
+    var id = arguments[0].softwareId;
     $.ajax({
-        url : 'delPaper.action',
+        url : 'delSoftware.action',
         type : 'post',
-        data : {"paperId" : id},
+        data : {"softwareId" : id},
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null){
@@ -428,7 +428,7 @@ function delpaper() {
                         layer.closeAll();
                     }
                 });
-                getPapers();
+                getSoftwares();
             }
             else
             {

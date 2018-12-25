@@ -89,7 +89,7 @@ public class SoftwareAction extends ActionSupport implements ModelDriven<Softwar
         HashMap<String, Object> queryMap = new HashMap<>();
         HashMap<String, Object> map = new HashMap<>();
 
-        queryMap.put("name", softwareEntity.getName());
+        queryMap.put("softId", softwareEntity.getSoftId());
         List<SoftwareEntity> list = softwareService.findSoftwaresByProperties(queryMap);
         if(list != null){
             softwareService.deleteSoftware(list.get(0));

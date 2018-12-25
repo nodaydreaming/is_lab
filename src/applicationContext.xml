@@ -121,6 +121,7 @@
     <bean id="softwareAction" class="cn.hznu.islab.action.SoftwareAction">
         <property name="softwareService" ref="softwareService"/>
      </bean>
+    <bean id="downloadFileAction" class="cn.hznu.islab.action.FileDownloadAction"></bean>
     <bean id="uploadAction" class="cn.hznu.islab.action.FileUploadAction"></bean>
     <!-- Service的配置 -->
     <bean id="competitionService" class="cn.hznu.islab.service.impl.CompetitionServiceImpl">

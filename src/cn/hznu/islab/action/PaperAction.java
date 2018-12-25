@@ -72,13 +72,13 @@ public class PaperAction extends ActionSupport implements ModelDriven<PaperEntit
                 PaperEntity p = list.get(0);
                 if(p.getAddress().equals(paper.getAddress())){}
                 else{
-                    map.put("message", "更新失败！");
+                    map.put("message", "更新失败1！");
                 }
             }else{
-                map.put("message", "更新失败！");
+                map.put("message", "更新失败2！");
             }
         }else{
-            map.put("message", "更新失败！");
+            map.put("message", "更新失败3！");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;
@@ -89,7 +89,7 @@ public class PaperAction extends ActionSupport implements ModelDriven<PaperEntit
         HashMap<String, Object> queryMap = new HashMap<>();
         HashMap<String, Object> map = new HashMap<>();
 
-        queryMap.put("name", paperEntity.getName());
+        queryMap.put("paperId", paperEntity.getPaperId());
         List<PaperEntity> list = paperService.findPapersByProperties(queryMap);
         if(list != null){
             paperService.deletePaper(list.get(0));
