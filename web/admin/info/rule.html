@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="../../ueditor/themes/default/css/ueditor.css" media="all">
     <link rel="stylesheet" href="../../layui/css/modules/layer/default/layer.css" media="all">
 
-    <script type="text/javascript" src="../../layui/layui.all.js"></script>
-    <script type="text/javascript" src="../../layui/lay/modules/jquery.js"></script>
     <script type="text/javascript" src="../../js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="../../layui/layui.all.js"></script>
+    <script type="text/javascript" src="../../layui/lay/modules/layer.js"></script>
+    <script type="text/javascript" src="../../layui/lay/modules/jquery.js"></script>
     <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.all.min.js"></script>
     <script type="text/javascript" charset="UTF-8" src="../../ueditor/lang/zh-cn/zh-cn.js"></script>
@@ -38,7 +39,7 @@
     <ul class="layui-nav">
 
       <li class="layui-nav-item">
-        <a href="../../index.html">返回首页</a>
+        <a href="../../Lab301Home.html">返回首页</a>
       </li>
 
       <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="change('block')" onmouseout="change('none')">
@@ -49,8 +50,9 @@
         </a>
         <dl class="layui-nav-child layui-anim layui-anim-upbit" id="list_cur" style="top: 60px;">
           <dd style="border: 0px; height: 5px;"></dd>
-          <dd><a href="../user_info/updateUser.html" >修改信息</a></dd>
-          <dd><a href="../../login.html" >退出</a></dd>
+          <dd><a onclick="updatePwd()" style="cursor:pointer;">修改密码</a></dd>
+          <dd><a onclick="updateAdminInfo()" style="cursor:pointer;">修改信息</a></dd>
+          <dd><a onclick="signOut()" style="cursor:pointer;">退出</a></dd>
         </dl>
       </li>
       
@@ -127,17 +129,17 @@
               </dd>
             </dl>
           </li>
-          <li class="layui-nav-item">
-            <a href="javascript:;" onclick="aClick()">公告通知<span class="layui-nav-more"></span></a>
-            <dl class="layui-nav-child">
-              <dd class="">
-                <a class="aHover" href="../notice/notice.html">公告</a>
-              </dd>
-              <dd class="">
-                <a class="aHover" href="../notice/inform.html">通知</a>
-              </dd>
-            </dl>
-          </li>
+          <!--<li class="layui-nav-item">-->
+            <!--<a href="javascript:;" onclick="aClick()">公告通知<span class="layui-nav-more"></span></a>-->
+            <!--<dl class="layui-nav-child">-->
+              <!--<dd class="">-->
+                <!--<a class="aHover" href="../notice/notice.html">公告</a>-->
+              <!--</dd>-->
+              <!--<dd class="">-->
+                <!--<a class="aHover" href="../notice/inform.html">通知</a>-->
+              <!--</dd>-->
+            <!--</dl>-->
+          <!--</li>-->
           <li class="layui-nav-item">
             <a href="javascript:;" onclick="aClick()">实验室文化<span class="layui-nav-more"></span></a>
             <dl class="layui-nav-child">
@@ -162,7 +164,7 @@
                 <a class="aHover" href="../user_info/addUser.html">添加管理员</a>
               </dd>
               <dd class="">
-                <a class="aHover" href="../user_info/updateUser.html">修改管理员信息</a>
+                <a class="aHover" href="../user_info/updateUser.html">管理员列表</a>
               </dd>
             </dl>
           </li>

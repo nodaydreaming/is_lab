@@ -21,6 +21,8 @@
     <package name="user" extends="struts-default, json-default">
         <action name="user_login" class="userAction" method="login">
         </action>
+        <action name="sign_out" class="userAction" method="signOut">
+        </action>
         <action name="user_getLoginUser" class="userAction" method="getLoginUser">
         </action>
         <action name="user_update" class="userAction" method="updateUser">
@@ -32,6 +34,8 @@
         <action name="user_add" class="userAction" method="addUser">
         </action>
         <action name="user_delete" class="userAction" method="deleteUser">
+        </action>
+        <action name="getAdminInfo" class="userAction" method="getAdminInfo">
         </action>
     </package>
 

@@ -94,20 +94,23 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
                 UserEntity loginUser = new UserEntity();
                 loginUser.setUserId(userEntity.getUserId());
                 loginUser.setPhoto(userEntity.getPhoto());
+                loginUser.setUsername(userEntity.getUsername());
+                loginUser.setGender(userEntity.getGender());
                 loginUser.setNickname(userEntity.getNickname());
+                loginUser.setStatus(userEntity.getStatus());
                 ActionContext.getContext().getSession().put("loginUser",loginUser);
                 //跳转到后台首页
                 map.put("newPage", ServletActionContext.getRequest().getContextPath() + "/admin/main.html");
             }
             else{
                 //密码错误
-                String error = "用户名或密码错误！";
+                String error = "账号或密码错误！";
                 map.put("message",error);
             }
         }
         //账号不存在
         else{
-            String error = "用户名或密码错误！";
+            String error = "账号或密码错误！";
             map.put("message",error);
         }
         MapToJSON.mapToJson(response, map);
@@ -119,6 +122,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
      * @throws IOException
      */
     public String updateUser() throws IOException{
+        System.out.println("updateUser............");
         HttpServletResponse response = ServletActionContext.getResponse();
         //查询时，用于存储“属性”和“属性值”的map
         HashMap<String, Object> queryMap = new HashMap<>();
@@ -132,16 +136,18 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         if(list != null){
             loginUser = list.get(0);
         }
+//        System.out.println(loginUser.toString());
+//        System.out.println(user.toString());
         queryMap.clear();
         list.clear();
         //权限判断,手机号相等时修改自己的信息
         if(loginUser != null && loginUser.getTelephone().equals(user.getTelephone())){
+            System.out.println(user.toString());
             loginUser.setPhoto(user.getPhoto());
             loginUser.setUsername(user.getUsername());
             loginUser.setGender(user.getGender());
             loginUser.setNickname(user.getNickname());
-            loginUser.setEmail(user.getEmail());
-
+            System.out.println(loginUser.toString());
             userService.updateUser(loginUser);
             //检查更新信息是否成功
             queryMap.put("telephone", user.getTelephone());
@@ -150,47 +156,55 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
                 UserEntity newUserEntity = list.get(0);
                 //判断可修改属性是否相等
                 if (user.getUsername().equals(newUserEntity.getUsername()) &&
-                        user.getEmail().equals(newUserEntity.getEmail()) &&
                         user.getGender().equals(newUserEntity.getGender()) &&
                         user.getNickname().equals(newUserEntity.getNickname()) &&
                         user.getPhoto().equals(newUserEntity.getPhoto())) {
-                    map.put("message", "更新管理员信息成功！");
+//                    map.put("message", "更新管理员信息成功！");
+                    if(ActionContext.getContext().getSession().containsKey("loginUser")) {
+                        UserEntity loginUser1 = new UserEntity();
+                        loginUser1.setUserId(newUserEntity.getUserId());
+                        loginUser1.setPhoto(newUserEntity.getPhoto());
+                        loginUser1.setUsername(newUserEntity.getUsername());
+                        loginUser1.setGender(newUserEntity.getGender());
+                        loginUser1.setNickname(newUserEntity.getNickname());
+                        loginUser1.setStatus(newUserEntity.getStatus());
+                        ActionContext.getContext().getSession().put("loginUser",loginUser1);
+                    }
                 }
                 else {
                     map.put("message", "更新管理员信息失败！");
                 }
             }
         }
-        else if(loginUser.getStatus() == 2) {
-            queryMap.put("telephone", user.getTelephone());
-            list = userService.findUsersByProperties(queryMap);
-            UserEntity oldUserEntity = list.get(0);
-            oldUserEntity.setPhoto(user.getPhoto());
-            oldUserEntity.setUsername(user.getUsername());
-            oldUserEntity.setGender(user.getGender());
-            oldUserEntity.setNickname(user.getNickname());
-            oldUserEntity.setEmail(user.getEmail());
-            oldUserEntity.setPassword(PwdEnCoder.enCoder(user.getPassword(), user.getTelephone().substring(0,8)));
-            userService.updateUser(oldUserEntity);
-            //更新检验
-            queryMap.clear();
-            list.clear();
-            queryMap.put("telephone", user.getTelephone());
-            list = userService.findUsersByProperties(queryMap);
-            if (list != null) {
-                UserEntity newUserEntity = list.get(0);
-                if(newUserEntity.equals(oldUserEntity)){
-                    map.put("message", "更新管理员信息成功！");
-                }
-                else {
-                    map.put("message", "更新管理员信息失败！");
-                }
-            }
-        }
-        else {
-            map.put("message", "更新管理员信息失败！");
-        }
-
+//        else if(loginUser.getStatus() == 2) {
+//            queryMap.put("telephone", user.getTelephone());
+//            list = userService.findUsersByProperties(queryMap);
+//            UserEntity oldUserEntity = list.get(0);
+//            oldUserEntity.setPhoto(user.getPhoto());
+//            oldUserEntity.setUsername(user.getUsername());
+//            oldUserEntity.setGender(user.getGender());
+//            oldUserEntity.setNickname(user.getNickname());
+//            oldUserEntity.setEmail(user.getEmail());
+//            oldUserEntity.setPassword(PwdEnCoder.enCoder(user.getPassword(), user.getTelephone().substring(0,8)));
+//            userService.updateUser(oldUserEntity);
+//            //更新检验
+//            queryMap.clear();
+//            list.clear();
+//            queryMap.put("telephone", user.getTelephone());
+//            list = userService.findUsersByProperties(queryMap);
+//            if (list != null) {
+//                UserEntity newUserEntity = list.get(0);
+//                if(newUserEntity.equals(oldUserEntity)){
+//                    map.put("message", "更新管理员信息成功！");
+//                }
+//                else {
+//                    map.put("message", "更新管理员信息失败！");
+//                }
+//            }
+//        }
+//        else {
+//            map.put("message", "更新管理员信息失败！");
+//        }
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
@@ -216,23 +230,24 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         queryMap.clear();
         list.clear();
 
-        String newPassword = request.getParameter("newPassword");
+        String newPassword = user.getTelephone();
         String telephone = loginUser.getTelephone();
 
         String oldHashPassword = PwdEnCoder.enCoder(user.getPassword(), telephone.substring(0, 8));
         //验证密码是否输入正确
         if (oldHashPassword.equals(loginUser.getPassword())) {
             String newHashPassword = PwdEnCoder.enCoder(newPassword, telephone.substring(0, 8));
+            System.out.println("新密码" + newPassword);
+            System.out.println("新密码的Hash值" + newHashPassword);
             loginUser.setPassword(newHashPassword);
             //更改密码
             userService.updateUser(loginUser);
-            map.put("message", "密码修改成功！");
+            ActionContext.getContext().getSession().remove("loginUser");
+//            map.put("message", "密码修改成功！");
         }
         else {
             map.put("message", "原密码输入错误！");
         }
-
-
         MapToJSON.mapToJson(response, map);
         return NONE;
     }
@@ -259,9 +274,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         //权限判断
         if(loginUser.getStatus() == 2) {
             list = userService.findAllUsers();
-
             map.put("users", list);
-
         }
         else{
             map.put("message", "您没有权限查看所有管理员信息！");
@@ -298,6 +311,8 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
             list = userService.findUsersByProperties(queryMap);
             //手机号不存在
             if(list == null) {
+                user.setStatus(1);
+                user.setPassword(PwdEnCoder.enCoder(user.getPassword(), user.getTelephone().substring(0, 8)));
                 userService.addUser(user);
                 //检验是否添加成功
                 queryMap.clear();
@@ -305,7 +320,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
                 queryMap.put("telephone", user.getTelephone());
                 list = userService.findUsersByProperties(queryMap);
                 if (list != null) {
-                    map.put("message", "添加管理员成功！");
+
                 }
                 else {
                     map.put("message", "添加管理员失败！");
@@ -365,6 +380,43 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
         }
         else{
             map.put("message", "您没有权限删除管理员！");
+        }
+
+        MapToJSON.mapToJson(response, map);
+        return NONE;
+    }
+
+    public String getAdminInfo() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        //存储返回前端的数据
+        HashMap<String, Object> map = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
+
+        if(ActionContext.getContext().getSession().get("loginUser") != null){
+            UserEntity loginUser = (UserEntity) ActionContext.getContext().getSession().get("loginUser");
+            queryMap.put("userId", loginUser.getUserId());
+            List<UserEntity> list = userService.findUsersByProperties(queryMap);
+            if(!list.isEmpty()){
+                System.out.println(list.get(0).toString());
+                map.put("admin", list.get(0));
+            }
+        }
+        else{
+            System.out.println("获得当前登陆管理员详细信息失败！");
+        }
+
+        MapToJSON.mapToJson(response, map);
+        return NONE;
+    }
+
+    public String signOut() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HashMap<String, Object> map = new HashMap<>();
+
+        ActionContext.getContext().getSession().remove("loginUser");
+
+        if(ActionContext.getContext().getSession().containsKey("loginUser")){
+            map.put("message", "登出失败！");
         }
 
         MapToJSON.mapToJson(response, map);

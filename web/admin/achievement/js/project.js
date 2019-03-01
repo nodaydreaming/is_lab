@@ -2,6 +2,13 @@ var projectList;
 
 window.onload = function () {
     getAllProjects();
+    var listAForHover = document.getElementsByClassName("aHover");
+    // console.log(listAForHover);
+    for (var i= 0; i<listAForHover.length; i++){
+        listAForHover[i].onmouseover = aOnHover;
+        listAForHover[i].onmouseout = noAHover;
+    }
+    //此ajax不适用于main.html页面获取管理员信息
     $.ajax({
         url : 'user_getLoginUser.action',
         type : 'post',
@@ -14,7 +21,10 @@ window.onload = function () {
                 li.childNodes[1].childNodes[2].data = loginUser.nickname;
             }
             if(loginUser.photo != null){
-
+                $('.layui-nav-img')[0].src = loginUser.photo;
+            }
+            if(loginUser.status != 2){
+                $('.layui-nav-item')[6].remove();
             }
         },
         error : function () {

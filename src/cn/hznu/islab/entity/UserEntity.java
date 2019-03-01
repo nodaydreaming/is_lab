@@ -128,6 +128,21 @@ public class UserEntity {
     }
 
     @Override
+    public String toString() {
+        return "UserEntity{" +
+                "userId=" + userId +
+                ", photo='" + photo + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", status=" + status +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(userId, photo, username, password, gender, nickname, email, telephone, status);
     }

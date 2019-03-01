@@ -2,6 +2,13 @@ var competitionList;
 
 window.onload = function () {
     getAllCompetitions();
+    var listAForHover = document.getElementsByClassName("aHover");
+    // console.log(listAForHover);
+    for (var i= 0; i<listAForHover.length; i++){
+        listAForHover[i].onmouseover = aOnHover;
+        listAForHover[i].onmouseout = noAHover;
+    }
+    //此ajax不适用于main.html页面获取管理员信息
     $.ajax({
         url : 'user_getLoginUser.action',
         type : 'post',
@@ -14,7 +21,10 @@ window.onload = function () {
                 li.childNodes[1].childNodes[2].data = loginUser.nickname;
             }
             if(loginUser.photo != null){
-
+                $('.layui-nav-img')[0].src = loginUser.photo;
+            }
+            if(loginUser.status != 2){
+                $('.layui-nav-item')[6].remove();
             }
         },
         error : function () {
@@ -160,7 +170,7 @@ function addCompetition() {
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +
-            '    <label class="layui-form-label">授权日期</label>\n' +
+            '    <label class="layui-form-label">获奖日期</label>\n' +
             '    <div class="layui-input-block">\n' +
             '      <input type="text" id="competition_date" autocomplete="off" placeholder="yyyy-MM-dd"class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
             '    </div>\n' +
@@ -306,7 +316,7 @@ function editCompetition() {
             '    </div>\n' +
             '  </div>\n' +
             '  <div class="layui-form-item">\n' +
-            '    <label class="layui-form-label">授权日期</label>\n' +
+            '    <label class="layui-form-label">获奖日期</label>\n' +
             '    <div class="layui-input-block">\n' +
             '      <input type="text" id="competition_date" autocomplete="off" placeholder="yyyy-MM-dd"class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value="'+(new Date(competition.date)).Format("yyyy-MM-dd")+'">\n' +
             '    </div>\n' +

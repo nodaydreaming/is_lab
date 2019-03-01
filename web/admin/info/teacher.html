@@ -30,13 +30,13 @@
     </style>
 </head>
 <body>
-    <div class="layui-layout layui-layout-admin">
-        <div class="layui-header header header-demo" winter="">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header header header-demo" winter="">
             <div class="layui-main">
                 <a class="" href="../main.html" style="font-size: 17px;color: white; line-height: 55px; font-weight: 500">网络与信息安全实验室</a>
                 <ul class="layui-nav">
                     <li class="layui-nav-item">
-                        <a href="../../index.html">返回首页</a>
+                        <a href="../../Lab301Home.html">返回首页</a>
                     </li>
                     <li class="layui-nav-item" lay-unselect="" id="showDlLi" onmouseover="change('block')" onmouseout="change('none')">
                         <a href="javascript:;">
@@ -44,10 +44,11 @@
                             <span class="layui-nav-more"></span>
                         </a>
                         <dl class="layui-nav-child layui-anim layui-anim-upbit" id="list_cur" style="top: 60px;">
-            <dd style="border: 0px; height: 5px;"></dd>
-            <dd><a href="../user_info/updateUser.html" >修改信息</a></dd>
-            <dd><a href="../../login.html" >退出</a></dd>
-        </dl>
+                            <dd style="border: 0px; height: 5px;"></dd>
+                            <dd><a onclick="updatePwd()" style="cursor:pointer;">修改密码</a></dd>
+                            <dd><a onclick="updateAdminInfo()" style="cursor:pointer;">修改信息</a></dd>
+                            <dd><a onclick="signOut()" style="cursor:pointer;">退出</a></dd>
+                        </dl>
                     </li>
                     <span class="layui-nav-bar" style="left: 6.01px; top: 55px; width: 0px; opacity: 0;"></span>
                 </ul>
@@ -58,119 +59,119 @@
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
-        <div class="layui-side layui-bg-black">
-            <div class="layui-side-scroll">
-                <ul class="layui-nav layui-nav-tree site-demo-nav">
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a href="javascript:;" onclick="aClick()">基础信息修改<span class="layui-nav-more"></span></a>
-                        <dl class="layui-nav-child">
-                            <dd class="">
-                                <a class="aHover" href="libIntro.html">实验室简介</a>
-                            </dd>
-                            <dd class="">
-                  <a class="aHover" href="achievementSummary.html">成果总览</a>
-              </dd>
-                            <dd class="">
-                                  <a class="aHover" href="awards.html">获奖情况</a>
-                              </dd>
-                            <dd class="">
-                                  <a class="aHover" href="researchDirection.html">研究方向</a>
-                              </dd>
-                            <dd class="layui-this">
-                                  <a class="aHover" href="#">指导老师</a>
-                              </dd>
-                            <dd class="">
-                                  <a class="aHover" href="rule.html">规章制度</a>
-                              </dd>
-                            <dd class="">
-                                  <a class="aHover" href="registration.html">报名情况</a>
-                              </dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-            <a href="javascript:;" onclick="aClick()">成员管理<span class="layui-nav-more"></span></a>
-            <dl class="layui-nav-child">
-              <dd class="">
-                <a class="aHover" href="../member/postgraduate.html">研究生</a>
-              </dd>
-              <dd class="">
-                <a class="aHover" href="../member/undergraduate.html">本科生</a>
-              </dd>
-              <dd class="">
-                <a class="aHover" href="../member/graduate.html">毕业生</a>
-              </dd>
-            </dl>
-          </li>
-          
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" onclick="aClick()">成果管理<span class="layui-nav-more"></span></a>
-                        <dl class="layui-nav-child">
-                          <dd class="">
-                            <a class="aHover" href="../achievement/project.html">项目</a>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree site-demo-nav">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;" onclick="aClick()">基础信息修改<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd class="">
+                            <a class="aHover" href="libIntro.html">实验室简介</a>
+                        </dd>
+                        <dd class="">
+              <a class="aHover" href="achievementSummary.html">成果总览</a>
+          </dd>
+                        <dd class="">
+                              <a class="aHover" href="awards.html">获奖情况</a>
                           </dd>
-                          <dd class="">
-                            <a class="aHover" href="../achievement/works.html">作品</a>
+                        <dd class="">
+                              <a class="aHover" href="researchDirection.html">研究方向</a>
                           </dd>
-                          <dd class="">
-                            <a class="aHover" href="../achievement/paper.html">论文</a>
+                        <dd class="layui-this">
+                              <a class="aHover" href="#">指导老师</a>
                           </dd>
-                          <dd class="">
-                            <a class="aHover" href="../achievement/patent.html">专利</a>
+                        <dd class="">
+                              <a class="aHover" href="rule.html">规章制度</a>
                           </dd>
-                          <dd class="">
-                            <a class="aHover" href="../achievement/softwareCopyright.html">软著</a>
+                        <dd class="">
+                              <a class="aHover" href="registration.html">报名情况</a>
                           </dd>
-                          <dd class="">
-                            <a class="aHover" href="../achievement/competition.html">竞赛</a>
-                          </dd>
-                        </dl>
-                      </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" onclick="aClick()">公告通知<span class="layui-nav-more"></span></a>
-                        <dl class="layui-nav-child">
-                          <dd class="">
-                            <a class="aHover" href="../notice/notice.html">公告</a>
-                          </dd>
-                          <dd class="">
-                            <a class="aHover" href="../notice/inform.html">通知</a>
-                          </dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" onclick="aClick()">实验室文化<span class="layui-nav-more"></span></a>
-                        <dl class="layui-nav-child">
-                          <dd class="">
-                            <a class="aHover" href="../culture/cucoloris.html">生活剪影</a>
-                          </dd>
-                          <dd class="">
-                            <a class="aHover" href="../culture/leagueBuilding.html">团建活动</a>
-                          </dd>
-                          <dd class="">
-                            <a class="aHover" href="../culture/graduationPhoto.html">毕业时分</a>
-                          </dd>
-                          <dd class="">
-                            <a class="aHover" href="../culture/addCulture.html">添加实验室文化</a>
-                          </dd>
-                        </dl>
-                      </li>
-                    <li class="layui-nav-item">
-            <a href="javascript:;" onclick="aClick()">管理员信息<span class="layui-nav-more"></span></a>
-            <dl class="layui-nav-child">
-              <dd class="">
-                <a class="aHover" href="../user_info/addUser.html">添加管理员</a>
-              </dd>
-              <dd class="">
-                <a class="aHover" href="../user_info/updateUser.html">修改管理员信息</a>
-              </dd>
-            </dl>
-          </li>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+        <a href="javascript:;" onclick="aClick()">成员管理<span class="layui-nav-more"></span></a>
+        <dl class="layui-nav-child">
+          <dd class="">
+            <a class="aHover" href="../member/postgraduate.html">研究生</a>
+          </dd>
+          <dd class="">
+            <a class="aHover" href="../member/undergraduate.html">本科生</a>
+          </dd>
+          <dd class="">
+            <a class="aHover" href="../member/graduate.html">毕业生</a>
+          </dd>
+        </dl>
+      </li>
 
-                    <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
-                    <span class="layui-nav-bar" id = "nav-bar" style="top: 232.5px; height: 0px; opacity: 0;"></span>
-                </ul>
-            </div>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" onclick="aClick()">成果管理<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                      <dd class="">
+                        <a class="aHover" href="../achievement/project.html">项目</a>
+                      </dd>
+                      <dd class="">
+                        <a class="aHover" href="../achievement/works.html">作品</a>
+                      </dd>
+                      <dd class="">
+                        <a class="aHover" href="../achievement/paper.html">论文</a>
+                      </dd>
+                      <dd class="">
+                        <a class="aHover" href="../achievement/patent.html">专利</a>
+                      </dd>
+                      <dd class="">
+                        <a class="aHover" href="../achievement/softwareCopyright.html">软著</a>
+                      </dd>
+                      <dd class="">
+                        <a class="aHover" href="../achievement/competition.html">竞赛</a>
+                      </dd>
+                    </dl>
+                  </li>
+                <!--<li class="layui-nav-item">-->
+                    <!--<a href="javascript:;" onclick="aClick()">公告通知<span class="layui-nav-more"></span></a>-->
+                    <!--<dl class="layui-nav-child">-->
+                      <!--<dd class="">-->
+                        <!--<a class="aHover" href="../notice/notice.html">公告</a>-->
+                      <!--</dd>-->
+                      <!--<dd class="">-->
+                        <!--<a class="aHover" href="../notice/inform.html">通知</a>-->
+                      <!--</dd>-->
+                    <!--</dl>-->
+                <!--</li>-->
+                <li class="layui-nav-item">
+                    <a href="javascript:;" onclick="aClick()">实验室文化<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                      <dd class="">
+                        <a class="aHover" href="../culture/cucoloris.html">生活剪影</a>
+                      </dd>
+                      <dd class="">
+                        <a class="aHover" href="../culture/leagueBuilding.html">团建活动</a>
+                      </dd>
+                      <dd class="">
+                        <a class="aHover" href="../culture/graduationPhoto.html">毕业时分</a>
+                      </dd>
+                      <dd class="">
+                        <a class="aHover" href="../culture/addCulture.html">添加实验室文化</a>
+                      </dd>
+                    </dl>
+                  </li>
+                <li class="layui-nav-item">
+        <a href="javascript:;" onclick="aClick()">管理员信息<span class="layui-nav-more"></span></a>
+        <dl class="layui-nav-child">
+          <dd class="">
+            <a class="aHover" href="../user_info/addUser.html">添加管理员</a>
+          </dd>
+          <dd class="">
+            <a class="aHover" href="../user_info/updateUser.html">管理员列表</a>
+          </dd>
+        </dl>
+      </li>
+
+                <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
+                <span class="layui-nav-bar" id = "nav-bar" style="top: 232.5px; height: 0px; opacity: 0;"></span>
+            </ul>
         </div>
     </div>
+</div>
 
     <div class="layui-body layui-tab-content site-demo site-demo-body" style="margin-top: 50px;">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
