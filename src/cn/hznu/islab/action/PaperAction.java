@@ -9,6 +9,7 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class PaperAction extends ActionSupport implements ModelDriven<PaperEntit
     }
 
     public String updatePaper() throws IOException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> queryMap = new HashMap<>();
         HashMap<String, Object> map = new HashMap<>();
@@ -65,20 +67,21 @@ public class PaperAction extends ActionSupport implements ModelDriven<PaperEntit
         if(list != null){
             PaperEntity paper = list.get(0);
             paper.setAddress(paperEntity.getAddress());
+            paper.setDate(paperEntity.getDate());
             paperService.updatePaper(paper);
 
             list = paperService.findPapersByProperties(queryMap);
             if(list != null){
                 PaperEntity p = list.get(0);
-                if(p.getAddress().equals(paper.getAddress())){}
+                if(p.getAddress().equals(paper.getAddress()) && sdf.format(p.getDate()).equals(sdf.format(paper.getDate()))){}
                 else{
-                    map.put("message", "更新失败1！");
+                    map.put("message", "更新失败！");
                 }
             }else{
-                map.put("message", "更新失败2！");
+                map.put("message", "更新失败！");
             }
         }else{
-            map.put("message", "更新失败3！");
+            map.put("message", "更新失败！");
         }
         MapToJSON.mapToJson(response, map);
         return NONE;

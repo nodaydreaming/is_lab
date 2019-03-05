@@ -44,7 +44,7 @@ public class SoftwareDaoImpl extends HibernateDaoSupport implements SoftwareDao 
     @Override
     public List<SoftwareEntity> findAllSoftwares() {
         Session session = this.currentSession();
-        Query query =session.createQuery("from SoftwareEntity order by softId");
+        Query query =session.createQuery("from SoftwareEntity order by date desc ");
         List<SoftwareEntity> list = query.list();
         if(!list.isEmpty()){
             return list;

@@ -14,15 +14,16 @@
     <link rel="stylesheet" href="../../layui/css/global.css" media="all">
     <link rel="stylesheet" href="../../layui/css/modules/code.css" media="all">
     <link rel="stylesheet" href="../../layui/css/modules/layer/default/layer.css" media="all">
-    <script type="text/javascript" src="../js/general.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.all.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="../../ueditor/lang/zh-cn/zh-cn.js"></script>
 
     <script type="text/javascript" src="../../js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="../../layui/layui.all.js"></script>
     <script type="text/javascript" src="../../layui/lay/modules/layer.js"></script>
     <script type="text/javascript" src="../../layui/lay/modules/jquery.js"></script>
+
+    <script type="text/javascript" src="../js/general.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../../ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../../ueditor/lang/zh-cn/zh-cn.js"></script>
     <style>
         .layui-nav-tree{vertical-align: top;}
     </style>
@@ -179,16 +180,34 @@
     <div class="layui-body layui-tab-content site-demo site-demo-body" style="margin-top: 70px; text-align: center">
         <p style="width: 100%;font-size: 36px; font-family: STXingkai;">添加实验室文化</p>
         <form class="layui-form" action="" style="width: 100%; text-align: center;">
-            <div style="width: 100%; margin-top: 20px; text-align: center;">
-                <script id="ueditor" type="text/plain" style="width: 90%; height: 500px; margin-left: 10%;">
-                </script>
+            <div class="layui-inline layui-form-item" style="float: left;margin: 15px 0 0 90px;">
+                    <label class="layui-form-label">文化类型</label>
+                    <div class="layui-input-inline">
+                        <select name="modules">
+                            <option value="">请选择</option>
+                            <option value="1">生活剪影</option>
+                            <option value="2">团建活动</option>
+                            <option value="3">毕业时分</option>
+                        </select>
+                    </div>
             </div>
-            <div style="width: 100%; margin: 30px; text-align: center;">
-                <input type="button" value="确定" id="btnUpdate" name="addCulture" onclick="" class="layui-btn layui-btn-fluid" style="width: 236px;">
+            <div class="layui-form-item" style="padding-top: 20px;">
+                <div style="width: 100%; text-align: center;">
+                    <script id="ueditor" type="text/plain" style="width: 90%; height: 500px; margin-left: 10%;">
+                    </script>
+                </div>
+            </div>
+            <div style="margin: 30px; text-align: center;">
+                <input type="button" value="确定" onclick="addCulture()" class="layui-btn layui-btn-fluid" style="width: 236px;">
             </div>
         </form>
     </div>
-    <script type="text/javascript">
+    <script>
+        layui.use('form', function(){
+            var form = layui.form;
+            form.render();
+            form.verify();
+        });
         var ue = UE.getEditor("ueditor",{toolbars: [[
                 'undo', 'redo', '|',
                 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
@@ -202,6 +221,26 @@
                 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
                 'searchreplace'
             ]]});
+
+            function addCulture() {
+                var select = document.getElementsByClassName('layui-form-select')[0];
+                var selected = select.getElementsByClassName('layui-this')[0];
+                var culture_context = ue.getContent();
+                var type;
+                if(selected == null){
+                    layer.msg('请选择文化类型');
+                }
+                else{
+                    type = selected.innerText;
+                }
+                if(type == "请选择"){
+                    layer.msg('请选择文化类型');
+                }
+            
+            }
+            function addculture() {
+                
+            }
     </script>
 </body>
 

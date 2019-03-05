@@ -56,11 +56,22 @@
 #div1 ul {
     margin: 2% 0 0 5%;
 }
-#div1 ul span{
-    margin-left: 15%;
+#div1 ul time {
+    margin-left: 70%;
 }
 #div1 ul li {
     padding: 1% 0;
+/*    display:flex;*/
+}
+#div1 ul li span {
+/*    display: inline-block;*/
+    margin-left: -95.5%;
+/*    max-width: 200px;*/
+/*    overflow: hidden;*/
+/*    文字移除显示省略号*/
+/*    text-overflow: ellipsis;*/
+/*    文字不换行*/
+/*    white-space: nowrap;*/
 }
 
 /*实验室文化*/
@@ -81,7 +92,7 @@
     margin-left: 70%;
 }
 
-#div2 ul {
+#div2 #cultureFoot {
     margin: 10px 0 0 23px;
 }
 #div2 ul time{

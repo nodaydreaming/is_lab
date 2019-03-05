@@ -78,7 +78,7 @@ ul {
     float: left;
     width: 155px;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 11px;
 }
 #l1 {
     margin-left: 74px;
@@ -88,14 +88,14 @@ ul {
     color: white;
 }
 #nav .menu li a {
-    padding: 8px;
+    padding: 7px;
 }
 #nav .menu li a {
     color: #D0D0D0;
 }
 #nav .menu li a:hover {
     color: white;
-    border-bottom: 3px solid #46A3FF;
+    border-bottom: 4px solid #46A3FF;
 }
 
 /*底部模块*/

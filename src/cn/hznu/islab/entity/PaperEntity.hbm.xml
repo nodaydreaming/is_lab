@@ -10,5 +10,6 @@
         </id>
         <property name="name" column="name"/>
         <property name="address" column="address"/>
+        <property name="date" column="date"/>
     </class>
 </hibernate-mapping>

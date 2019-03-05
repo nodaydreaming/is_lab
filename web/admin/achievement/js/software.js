@@ -1,5 +1,5 @@
 var softwareList;
-var name, address;
+var name, date, address;
 var uploadInst;
 
 window.onload = function () {
@@ -71,6 +71,12 @@ function fillSoftware() {
         td2.style.wordWrap = "break-word";
         tr.appendChild(td2);
 
+        var td4 = document.createElement('td');
+        td4.style.textAlign = "center";
+        td4.style.wordWrap = "break-word";
+        td4.innerText = new Date(software.date).Format("yyyy-MM-dd");
+        tr.appendChild(td4);
+
         var td3 = document.createElement('td');
         td3.style.textAlign = "center";
         td3.style.padding = "0px";
@@ -78,7 +84,7 @@ function fillSoftware() {
         var a0 = document.createElement('a');
         a0.id = "editSoftware" + (i+1);
         a0.className = "layui-btn layui-btn-normal layui-btn-xs";
-        var filename = software.address.substring(software.address.lastIndexOf('/') + 21);
+        var filename = software.address.toString().substring(software.address.lastIndexOf('/') + 21);
         a0.href = "downFile.action?filename=" + filename + "&address=" + software.address.substring(7);
         var i0 = document.createElement('i');
         i0.className = "layui-icon layui-icon-download-circle";
@@ -131,6 +137,12 @@ function openAddSoft() {
             '           <span class="t_h" style="float: right; margin-right: 20%"><i>0</i>/200</span>\n' +
             '        </div>\n' +
             '    </div>\n' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">发表日期</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <input type="text" id="software_date" autocomplete="off" placeholder="yyyy-MM-dd"class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">\n' +
+            '    </div>\n' +
+            '  </div>\n' +
             '    <div class="layui-form-item layui-upload">\n' +
             '        <label class="layui-form-label">文件</label>\n' +
             '        <button type="button" class="layui-btn layui-btn-normal" id="upload">\n' +
@@ -143,6 +155,14 @@ function openAddSoft() {
             '  var form = layui.form;\n' +
             '  form.render();\n' +
             '});' +
+            'layui.use(\'laydate\', function(){\n' +
+            '        var laydate = layui.laydate;\n' +
+            '\n' +
+            '        //执行一个laydate实例\n' +
+            '        laydate.render({\n' +
+            '            elem: \'#software_date\' \n' +
+            '        });\n' +
+            '    });' +
             'layui.use(\'upload\', function() {\n' +
             '    var $ = layui.jquery, upload = layui.upload;\n' +
             '    //普通图片上传使用layui上传图片\n' +
@@ -172,7 +192,7 @@ function openAddSoft() {
             '            else\n' +
             '            {\n' +
             '                address = res.src;\n' +
-            '                addsoftware(name, address);\n' +
+            '                addsoftware(name, date, address);\n' +
             '            }\n' +
             '\n' +
             '        }\n' +
@@ -204,8 +224,12 @@ function openAddSoft() {
 
 function addSoftware() {
     name = $('.tcp_content').val();
+    date = $("#software_date").val();
     if(name == "" || name == null){
         layer.msg("名称不能为空！");
+    }
+    else if(date == null || date == ""){
+        layer.msg("发表日期不能为空！");
     }
     else if(address == "" || address == null){
         layer.msg("请上传文件！");
@@ -216,11 +240,11 @@ function addSoftware() {
     }
 }
 
-function addsoftware(name, address) {
+function addsoftware(name, date, address) {
     $.ajax({
         url : 'addSoftware.action',
         type : 'post',
-        data : {"name" : name, "address" : address},
+        data : {"name" : name, "date" : date,"address" : address},
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null) {
@@ -272,6 +296,12 @@ function editSoftware() {
             '           <span class="t_h" style="float: right; margin-right: 20%"><i>'+software.name.length+'</i>/200</span>\n' +
             '        </div>\n' +
             '    </div>\n' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">发表日期</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <input type="text" id="software_date" autocomplete="off" placeholder="yyyy-MM-dd"class="layui-input" style="width: 200px" onkeypress="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" value="'+(new Date(software.date)).Format("yyyy-MM-dd")+'">\n' +
+            '    </div>\n' +
+            '  </div>\n' +
             '    <div class="layui-form-item layui-upload">\n' +
             '        <label class="layui-form-label">文件</label>\n' +
             '        <button type="button" class="layui-btn layui-btn-normal" id="upload">\n' +
@@ -285,6 +315,14 @@ function editSoftware() {
             '  var form = layui.form;\n' +
             '  form.render();\n' +
             '});' +
+            'layui.use(\'laydate\', function(){\n' +
+            '        var laydate = layui.laydate;\n' +
+            '\n' +
+            '        //执行一个laydate实例\n' +
+            '        laydate.render({\n' +
+            '            elem: \'#software_date\' \n' +
+            '        });\n' +
+            '    });' +
             'layui.use(\'upload\', function() {\n' +
             '    var $ = layui.jquery, upload = layui.upload;\n' +
             '    //普通图片上传使用layui上传图片\n' +
@@ -314,7 +352,7 @@ function editSoftware() {
             '            else\n' +
             '            {\n' +
             '                address = res.src;\n' +
-            '                updateSoftware(name, address);\n' +
+            '                updateSoftware(name, date, address);\n' +
             '            }\n' +
             '\n' +
             '        }\n' +
@@ -347,24 +385,27 @@ function editSoftware() {
 function editsoftware() {
     var software = arguments[0];
     name = $('.tcp_content').val();
-
+    date = $('#software_date').val();
     if(name == "" || name == null){
         layer.msg("名称不能为空！");
+    }
+    else if(date == null || date == ""){
+        layer.msg("发表日期不能为空！");
     }
     else if (address != null && address != software.address) {
         uploadInst.upload();
     }
     else{
-        updateSoftware(name, software.address);
+        updateSoftware(name, date, software.address);
     }
 
 }
 
-function updateSoftware(name, address) {
+function updateSoftware(name, date, address) {
     $.ajax({
         url : 'updateSoftware.action',
         type : 'post',
-        data : {"name" : name, "address" : address},
+        data : {"name" : name, "date" : date, "address" : address},
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null) {
@@ -457,4 +498,23 @@ function textarea_fun(){
     if(window.event.keyCode  == 13){
         return false;
     }
+}
+
+Date.prototype.Format = function(fmt)
+{
+    var o = {
+        "M+" : this.getMonth()+1,                 //月份
+        "d+" : this.getDate(),                    //日
+        "h+" : this.getHours(),                   //小时
+        "m+" : this.getMinutes(),                 //分
+        "s+" : this.getSeconds(),                 //秒
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度
+        "S"  : this.getMilliseconds()             //毫秒
+    };
+    if(/(y+)/.test(fmt))
+        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+    for(var k in o)
+        if(new RegExp("("+ k +")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+    return fmt;
 }

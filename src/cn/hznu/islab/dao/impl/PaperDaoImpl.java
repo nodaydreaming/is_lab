@@ -43,7 +43,7 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
     @Override
     public List<PaperEntity> findAllPapers() {
         Session session = this.currentSession();
-        Query query = session.createQuery("from PaperEntity order by paperId desc ");
+        Query query = session.createQuery("from PaperEntity order by date desc ");
 
         List<PaperEntity> list = query.list();
         if(!list.isEmpty()){

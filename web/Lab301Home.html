@@ -1,54 +1,305 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <title>杭州师范大学网络与信息安全实验室</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/index.js"></script>
+    <link rel="stylesheet" href='Lab301/Lab301_CSS/Home/Home.css' />
+    <link rel="stylesheet" href="Lab301/Lab301_CSS/Home/Body.css" />
+    <link rel="stylesheet" href="Lab301/Lab301_CSS/Home/slideshow_1.css" />
+    <link rel="stylesheet" href="Lab301/Lab301_CSS/Home/slideshow_2.css" />
+    
+    <title>Lab301网络与信息安全实验室</title>
 </head>
+
 <body>
+
 <!-- 头部模块 -->
-<div class="top">
-
-    <div class="header">
-        <a href="#"><img class="logo" src="images/hznuLogo.png" /></a>
-        <a href="#"><div class="left hznu">杭州师范大学</div></a>
-        <a href="#"><div class="left lab">网络与信息安全实验室</div></a>
-        <a href="#"><div class="left ename">Network and Information security laboratory@hznu university</div></a>
-        <a href="login.html" class="login">登陆</a>
+<div id="top">
+    
+    <div class="header" >
+        <a href="#"><img src="Lab301/Lab301_Image/Home/HZNU_Logo.jpg" alt="HZNU_Logo"
+                         title="HZNU_Logo" /></a>
+        <a href="#"><p class="chinese"
+        title="HZNU"><span>杭州师范大学</span>网络与信息安全实验室</p>
+        </a>
+        <a href="#"><p class="english"
+        title="HZNU">Information And Network Security Laboratory@HZNU University</p>
+        </a>
     </div>
-
+    <!--<a href="login.html">登陆</a>-->
 </div>
+
 <!-- 导航模块 -->
 <div id="nav">
-    <ul class="nav">
-        <li><a href="#" class="color_in">首页</a></li>
-        <li><a href="#">实验室简介</a></li>
-        <li><a href="#">实验室成员</a></li>
-        <li><a href="#">成果导览</a></li>
-        <li><a href="#">公告通知</a></li>
-        <li><a href="#">专业资讯</a></li>
-        <li><a href="#">实验室文化</a></li>
-        <li><a href="#">关于我们</a></li>
+   
+    <ul class="menu">
+        <li id="l1"
+        title="Home">
+        <a href="#">首页</a>
+        </li>
+        <li id="l2" title="Introduce">
+        <a href="Lab301/Lab301_HTML/Introduce/LabIntroduce.html">
+        实验室概况</a>
+        </li>
+        <li id="l3"
+        title="Achievement">
+        <a href="Lab301/Lab301_HTML/Achievement/Overview.html">
+        成果导览</a>
+        </li>
+        <li id="l4"
+        title="Members">
+        <a href="Lab301/Lab301_HTML/Members/Postgraduate.html">
+        实验室成员</a>
+        </li>
+        <li id="l5"
+        title="Culture">
+        <a href="Lab301/Lab301_HTML/Culture/Lifesketch.html">
+        实验室文化</a>
+        </li>
+        <li id="l6"
+        title="Contact">
+        <a href="Lab301/Lab301_HTML/Contact/Contact.html">
+        联系我们</a>
+        </li>
+    </ul>
+    
+</div>
+    
+<!--轮播图1-->
+<!--
+<div id="firShow">
+    <div id="firInside">
+        <ul>
+            <li><a href="#"><img src="Lab301_Image/Home/lbt11.png" /></a></li>
+            <li><a href="#"><img src="Lab301_Image/Home/lbt12.jpg" /></a></li>
+            <li><a href="#"><img src="Lab301_Image/Home/lbt13.png" /></a></li>
+            <li><a href="#"><img src="Lab301_Image/Home/lbt14.jpg" /></a></li>
+        </ul>
+        
+        <ol id="firBar">
+            
+        </ol>
+        
+        <div id="firBt">
+            <span id="firLeft">&lt;</span>
+            <span id="firRight">&gt;</span>
+        </div>
+    </div>
+</div>
+-->
+<div class="box" id="box">
+    <div class="inner">
+        <!--轮播图-->
+        <ul>
+            <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt11.png" /></a></li>
+            <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt12.jpg" /></a></li>
+            <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt13.png" /></a></li>
+            <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt14.jpg" /></a></li>
+            
+        </ul>
+ 
+        <ol class="bar">
+        
+ 
+        </ol>
+        <!--左右焦点-->
+        <div id="arr">
+                    <span id="left">
+                        &lt;
+                    </span>
+            <span id="right">
+                        &gt;
+                    </span>
+        </div>
+ 
+    </div>
+</div>
+
+<!--最新动态板块-->
+<div class="divs" id="div1">
+    <div class="header">
+        <h2>最新动态
+        <span><a href="Lab301/Lab301_HTML/Achievement/Results.html" title="Results">More</a></span></h2>
+    </div>
+    
+    <ul>
+        <li>
+        <time>【2018-11-04】</time><a href="Lab301/Lab301_HTML/Achievement/Results.html#comp4" title="获得浙江省首届大学生网络与信息安全竞赛二等奖"><span>获得浙江省首届大学生网络与信息...</span></a>
+        </li>
+        <li>
+        <time>【2018-11-04】</time><a href="Lab301/Lab301_HTML/Achievement/Results.html#comp5" title="获得浙江省首届大学生网络与信息安全竞赛三等奖"><span>获得浙江省首届大学生网络与信息...</span></a>
+        </li>
+        <li>
+        <time>【2018-07-00】</time><a href="Lab301/Lab301_HTML/Achievement/Results.html#comp1" title="获十一届全国大学生信息安全大赛"><span>获十一届全国大学生信息安全大赛</span></a>
+        </li>
+        <li>
+        <time>【2017-07-00】</time><a href="Lab301/Lab301_HTML/Achievement/Results.html#comp2" title="获得第十届全国大学生信息安全竞赛三等奖"><span>获得第十届全国大学生信息安全竞...</span></a>
+        </li>
+        <li>
+        <time>【2016-11-00】</time><a href="Lab301/Lab301_HTML/Achievement/Results.html#comp8" title="本创项目结题且获得优秀证明"><span>本创项目结题且获得优秀证明</span></a>
+        </li>
+        <li>
+        <time>【2016-08-00】</time><a href="Lab301/Lab301_HTML/Achievement/Results.html#comp7" title="获得第九届全国大学生信息安全竞赛三等奖"><span>获得第九届全国大学生信息安全竞...</span></a>
+        </li>
+        <li>
+        <time>【2016-06-00】</time><a href="Lab301/Lab301_HTML/Achievement/Results.html#comp6" title="星光计划结题且获得优秀证明"><span>星光计划结题且获得优秀证明</span></a>
+        </li>
+        <li>
+        <time>【2015-11-00】</time><a href="Lab301/Lab301_HTML/Achievement/Results.html#comp9" title="获得第二届全国密码技术竞赛决赛优胜奖"><span>获得第二届全国密码技术竞赛决赛...</span></a>
+        </li>
+    </ul>
+    <script>
+     function cutString(str, len) { 
+       if(str.length*2 <= len) { 
+         return str; 
+       } 
+       var strlen = 0; 
+       var s = ""; 
+       for(var i = 0;i < str.length; i++) { 
+         s = s + str.charAt(i); 
+         if (str.charCodeAt(i) > 128) { 
+           strlen = strlen + 2; 
+           if(strlen >= len){ 
+             return s.substring(0,s.length-1) + "..."; 
+           } 
+         } else { 
+           strlen = strlen + 1; 
+           if(strlen >= len){ 
+             return s.substring(0,s.length-2) + "..."; 
+           } 
+         } 
+       } 
+       return s; 
+     } 
+    var iu = cutString("sflasj", 5);
+//    alert(iu);
+    </script>
+</div>
+<br />
+<!--实验室文化-->
+<div id="div2" class="divs">
+    <div class="header">
+        <h2>实验室文化
+        <span><a href="Lab301/Lab301_HTML/Culture/Lifesketch.html" title="Lifesketch">More</a></span></h2>
+    </div>
+    <div id="secBox">
+    <span id="secLeft">&lang;</span>
+    <div id="secShow">
+        <div id="secInside">
+            <ul>
+                <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt11.png" /></a></li>
+                <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt12.jpg" /></a></li>
+                <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt11.png" /></a></li>
+                <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt12.jpg" /></a></li>
+                <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt12.jpg" /></a></li>
+                <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt12.jpg" /></a></li>
+                <li><a href="#"><img src="Lab301/Lab301_Image/Home/lbt12.jpg" /></a></li>
+            </ul>
+        </div>
+    </div>
+    <span id="secRight">&rang;</span>
+    </div>
+    
+    <ul id="cultureFoot">
+        <li>
+        <time>【2018-10-29】</time>
+        <a href="Lab301/Lab301_HTML/Culture/Thegraduation.html">
+        <span>我们毕业啦！</span>
+        </a></li>
+        <li>
+        <time>【2018-10-29】</time>
+        <a href="Lab301/Lab301_HTML/Culture/Lifesketch.html">
+        <span>我们的学术讨论</span>
+        </a></li>
+        <li>
+        <time>【2018-10-29】</time><a href="Lab301/Lab301_HTML/Culture/Teamactivity.html">
+        <span>团建时刻</span>
+        </a></li>
     </ul>
 </div>
 
-<div class="main" style="height: 100px;width: 100%">
-
+<!--研究方向-->
+<div class="divs" id="div3">
+    <div class="header">
+        <h2>研究方向
+        <span><a href="Lab301/Lab301_HTML/Introduce/ResearchDirection.html" title="LabIntroduce">More</a></span></h2>
+    </div>
+    
+    <ul class="reUl">
+        <li><a href="Lab301/Lab301_HTML/Introduce/ResearchDirection.html#block1">车联网安全</a></li>
+        <li><a href="Lab301/Lab301_HTML/Introduce/ResearchDirection.html#block2">密码学应用</a></li>
+        <li><a href="Lab301/Lab301_HTML/Introduce/ResearchDirection.html#block3">Web安全</a></li>
+    </ul>
+    <ul class="reUl">
+        <li><a href="Lab301/Lab301_HTML/Introduce/ResearchDirection.html#block4">区块链应用</a></li>
+        <li><a href="Lab301/Lab301_HTML/Introduce/ResearchDirection.html#block5">网络攻防实践</a></li>
+        <li><a href="Lab301/Lab301_HTML/Introduce/ResearchDirection.html#block6">网络安全</a></li>
+    </ul>
 </div>
 
-<!-- 底部模块 -->
+<!--友情链接-->
+<div class="divs" id="div4">
+    <div class="header">
+        <h2>友情链接</h2>
+    </div>
+    
+    <ul id="frUl">
+        <li>
+            <a target="_blank" href="http://blockchain.whu.edu.cn/" >
+            武汉大学密码学与区块链实验室</a>
+        </li>
+        <li>
+            <a target="_blank" href="https://icsr.zju.edu.cn/">
+            浙江大学网络空间安全研究中心</a>
+        </li>
+        <li>
+            <a target="_blank" href="http://www.sklois.cn/">
+            中科院信息安全国家重点实验室</a>
+        </li>
+    </ul>
+</div>
+
+<!--底部模块-->
 <div id="footer">
-    <div style="width: 1200px; text-align: center;">
-        <div style="width: 36%;float: left;">联系方式：15990019420&nbsp;&nbsp;&nbsp;邮箱：805297781@qq.com</div>
-
-        <div style="width: 34%;float: left;">Copyright©2017-2018&nbsp;杭州师范大学网络与信息安全实验室</div>
-
-        <div style="width: 30%;float: right;">地址：杭州师范大学仓前校区勤园13号楼301</div>
+    <div class="foot_1">
+        <h5>
+            <span>关于我们</span>
+            <span>联系我们</span>
+        </h5>
+    </div>
+    
+    <div class="foot_2">
+        <h5>
+            杭州师范大学仓前校区勤园13号楼301
+        </h5>
+        <h5>
+            联系方式：15990019420&nbsp;&nbsp;邮箱：805297781@qq.com
+        </h5>
+        <h5>
+            Copyright&copy;2017-2018 杭州师范大学 信息安全实验室 All Right Reserved
+        </h5>
     </div>
 </div>
-</body>
 
+<script src="Lab301/Lab301_JavaScript/Home/home.js"></script>
+<script src="Lab301/Lab301_JavaScript/Home/slideshow_1.js"></script>
+<script src="Lab301/Lab301_JavaScript/Home/slideshow_2.js"></script>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

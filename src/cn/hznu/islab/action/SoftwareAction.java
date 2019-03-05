@@ -9,6 +9,7 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class SoftwareAction extends ActionSupport implements ModelDriven<Softwar
     }
 
     public String updateSoftware() throws IOException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         HttpServletResponse response = ServletActionContext.getResponse();
         HashMap<String, Object> queryMap = new HashMap<>();
         HashMap<String, Object> map = new HashMap<>();
@@ -65,12 +67,13 @@ public class SoftwareAction extends ActionSupport implements ModelDriven<Softwar
         if(list != null){
             SoftwareEntity software = list.get(0);
             software.setAddress(softwareEntity.getAddress());
+            software.setDate(softwareEntity.getDate());
             softwareService.updateSoftware(software);
 
             list = softwareService.findSoftwaresByProperties(queryMap);
             if(list != null){
                 SoftwareEntity p = list.get(0);
-                if(p.getAddress().equals(software.getAddress())){}
+                if(p.getAddress().equals(software.getAddress()) && sdf.format(p.getDate()).equals(sdf.format(software.getDate()))){}
                 else{
                     map.put("message", "更新失败！");
                 }

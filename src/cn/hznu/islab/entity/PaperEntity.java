@@ -1,14 +1,16 @@
 package cn.hznu.islab.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "paper", schema = "is_lab")
+@Table(name = "paper", schema = "is_lab", catalog = "")
 public class PaperEntity {
     private int paperId;
     private String name;
     private String address;
+    private Date date;
 
     @Id
     @Column(name = "paperId")
@@ -40,6 +42,16 @@ public class PaperEntity {
         this.address = address;
     }
 
+    @Basic
+    @Column(name = "date")
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,11 +59,22 @@ public class PaperEntity {
         PaperEntity that = (PaperEntity) o;
         return paperId == that.paperId &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(address, that.address);
+                Objects.equals(address, that.address) &&
+                Objects.equals(date, that.date);
+    }
+
+    @Override
+    public String toString() {
+        return "PaperEntity{" +
+                "paperId=" + paperId +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", date=" + date +
+                '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(paperId, name, address);
+        return Objects.hash(paperId, name, address, date);
     }
 }
