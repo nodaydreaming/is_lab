@@ -12,6 +12,7 @@ public class CultureEntity {
     private Date date;
     private String author;
     private String content;
+    //实验室文化的类型，1 ：代表生活剪影，2 ：代表团建活动，3 ：代表毕业时分；
     private int type;
 
     @Id

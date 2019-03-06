@@ -180,17 +180,24 @@
     <div class="layui-body layui-tab-content site-demo site-demo-body" style="margin-top: 70px; text-align: center">
         <p style="width: 100%;font-size: 36px; font-family: STXingkai;">添加实验室文化</p>
         <form class="layui-form" action="" style="width: 100%; text-align: center;">
-            <div class="layui-inline layui-form-item" style="float: left;margin: 15px 0 0 90px;">
-                    <label class="layui-form-label">文化类型</label>
-                    <div class="layui-input-inline">
-                        <select name="modules">
-                            <option value="">请选择</option>
-                            <option value="1">生活剪影</option>
-                            <option value="2">团建活动</option>
-                            <option value="3">毕业时分</option>
-                        </select>
-                    </div>
+            <div class="layui-inline layui-form-item" style="float: left;margin: 15px 0 0 150px;">
+                <label class="layui-form-label">文化类型</label>
+                <div class="layui-input-inline">
+                    <select name="modules">
+                        <option value="">请选择</option>
+                        <option value="1">生活剪影</option>
+                        <option value="2">团建活动</option>
+                        <option value="3">毕业时分</option>
+                    </select>
+                </div>
+                <label class="layui-form-label" style="margin-left: 100px">题目</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="title" id="cultureTitle" autocomplete="off" placeholder="请输入题目" class="layui-input" style="width: 350px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">
+                </div>
             </div>
+            <!--<div class="layui-form-item layui-inline" style="float: left; margin: 15px 0 0 90px;">-->
+                <!---->
+            <!--</div>-->
             <div class="layui-form-item" style="padding-top: 20px;">
                 <div style="width: 100%; text-align: center;">
                     <script id="ueditor" type="text/plain" style="width: 90%; height: 500px; margin-left: 10%;">
@@ -222,24 +229,57 @@
                 'searchreplace'
             ]]});
 
+            var mdl = $('dl.layui-anim.layui-anim-upbit')[1];
+            $(mdl).css("z-index", 3000);
+
             function addCulture() {
                 var select = document.getElementsByClassName('layui-form-select')[0];
                 var selected = select.getElementsByClassName('layui-this')[0];
                 var culture_context = ue.getContent();
-                var type;
+                var culture_title = document.getElementById('cultureTitle').value;
+                var culture_type;
+                var type = 0;
                 if(selected == null){
                     layer.msg('请选择文化类型');
                 }
                 else{
-                    type = selected.innerText;
+                    culture_type = selected.innerText;
                 }
-                if(type == "请选择"){
+                if(culture_type == "请选择"){
                     layer.msg('请选择文化类型');
+                }
+                else{
+                    if(culture_type == "生活剪影"){
+                        type = 1;
+                    }
+                    else if(culture_type == "团建活动"){
+                        type = 2;
+                    }
+                    else if(culture_type == "毕业时分"){
+                        type = 3;
+                    }
+                }
+                if(culture_title == null || culture_title == ""){
+                    layer.msg('请输入题目');
+                }
+                if(culture_context == null){
+                    layer.msg('请输入内容');
+                }
+                else{
+                    addculture(culture_title, culture_context, type);
                 }
             
             }
-            function addculture() {
-                
+            function addculture(culture_title, culture_context, type) {
+                $.ajax({
+                    url : 'addCulture.action',
+                    type : 'post',
+                    scriptCharset : 'utf-8',
+                    data : {"title" : culture_title, "content" : culture_context, "type" : type},
+                    success : function (result) {
+                        
+                    }
+                });
             }
     </script>
 </body>
