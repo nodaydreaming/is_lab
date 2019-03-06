@@ -190,9 +190,9 @@
                         <option value="3">毕业时分</option>
                     </select>
                 </div>
-                <label class="layui-form-label" style="margin-left: 100px">题目</label>
+                <label class="layui-form-label" style="margin-left: 100px">标题</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="title" id="cultureTitle" autocomplete="off" placeholder="请输入题目" class="layui-input" style="width: 350px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">
+                    <input type="text" name="title" id="cultureTitle" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width: 350px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">
                 </div>
             </div>
             <!--<div class="layui-form-item layui-inline" style="float: left; margin: 15px 0 0 90px;">-->
@@ -200,7 +200,7 @@
             <!--</div>-->
             <div class="layui-form-item" style="padding-top: 20px;">
                 <div style="width: 100%; text-align: center;">
-                    <script id="ueditor" type="text/plain" style="width: 90%; height: 500px; margin-left: 10%;">
+                    <script id="ueditor" type="text/plain" style="width: 90%; height: 400px; margin-left: 10%;">
                     </script>
                 </div>
             </div>
@@ -235,20 +235,15 @@
             function addCulture() {
                 var select = document.getElementsByClassName('layui-form-select')[0];
                 var selected = select.getElementsByClassName('layui-this')[0];
-                var culture_context = ue.getContent();
+                var culture_content = ue.getContent();
                 var culture_title = document.getElementById('cultureTitle').value;
                 var culture_type;
                 var type = 0;
                 if(selected == null){
-                    layer.msg('请选择文化类型');
+                    type = 0;
                 }
                 else{
                     culture_type = selected.innerText;
-                }
-                if(culture_type == "请选择"){
-                    layer.msg('请选择文化类型');
-                }
-                else{
                     if(culture_type == "生活剪影"){
                         type = 1;
                     }
@@ -259,28 +254,52 @@
                         type = 3;
                     }
                 }
-                if(culture_title == null || culture_title == ""){
-                    layer.msg('请输入题目');
+
+                if(type == 0){
+                    layer.msg('请选择文化类型');
                 }
-                if(culture_context == null){
+                else if(culture_title == null || culture_title == ""){
+                    layer.msg('请输入标题');
+                }
+                else if(culture_content == null || culture_content == ""){
                     layer.msg('请输入内容');
                 }
                 else{
-                    addculture(culture_title, culture_context, type);
+                    addculture(culture_title, culture_content, type);
                 }
             
             }
-            function addculture(culture_title, culture_context, type) {
+            function addculture(culture_title, culture_content, type) {
                 $.ajax({
                     url : 'addCulture.action',
                     type : 'post',
                     scriptCharset : 'utf-8',
-                    data : {"title" : culture_title, "content" : culture_context, "type" : type},
+                    data : {"title" : culture_title, "content" : culture_content, "type" : type},
                     success : function (result) {
-                        
+                        if(result.message == null){
+                            layer.open({
+                                type: 1,
+                                offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                                id: 'layerDemo1', //防止重复弹出
+                                content: '<div style="padding: 20px 100px;">' + "添加成功！" + '</div>',
+                                btn: '关闭',
+                                btnAlign: 'c', //按钮居中
+                                shade: 0.5, //不显示遮罩
+                                title: "信息安全实验室",
+                                yes: function () {
+                                    layer.closeAll();
+                                    window.location.reload();
+                                }
+                            });
+                            ue.setContent('');
+                            $('#cultureTitle').val("");
+                        }
+                        else{
+                            layer.msg(result.message);
+                        }
                     },
                     error : function () {
-                        
+                        layer.msg('请求Action失败，添加失败！');
                     }
                 });
             }

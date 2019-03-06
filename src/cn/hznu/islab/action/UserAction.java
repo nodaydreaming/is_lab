@@ -368,7 +368,6 @@ public class UserAction extends ActionSupport implements ModelDriven<UserEntity>
                 list.clear();
                 list = userService.findUsersByProperties(queryMap);
                 if(list == null){
-                    map.put("message", "管理员删除成功！");
                 }
                 else{
                     map.put("message", "管理员删除失败！");

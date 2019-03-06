@@ -121,7 +121,10 @@
     </bean>
     <bean id="softwareAction" class="cn.hznu.islab.action.SoftwareAction">
         <property name="softwareService" ref="softwareService"/>
-     </bean>
+    </bean>
+    <bean id="cultureAction" class="cn.hznu.islab.action.CultureAction">
+        <property name="cultureService" ref="cultureService"/>
+    </bean>
     <bean id="downloadFileAction" class="cn.hznu.islab.action.FileDownloadAction"></bean>
     <bean id="uploadAction" class="cn.hznu.islab.action.FileUploadAction"></bean>
     <!-- Service的配置 -->

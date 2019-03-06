@@ -50,6 +50,17 @@
         </action>
     </package>
 
+    <package name="culture" extends="struts-default, json-default">
+        <action name="getCultureByType" class="cultureAction" method="getCultureByType">
+        </action>
+        <action name="addCulture" class="cultureAction" method="addCulture">
+        </action>
+        <action name="updateCulture" class="cultureAction" method="updateCulture">
+        </action>
+        <action name="delCulture" class="cultureAction" method="delCulture">
+        </action>
+    </package>
+
     <package name="libInfo" extends="struts-default, json-default">
         <action name="info_update" class="libInfoAction" method="updateInfo">
         </action>
