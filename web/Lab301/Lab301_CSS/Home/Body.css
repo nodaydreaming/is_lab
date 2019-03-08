@@ -43,7 +43,7 @@
     height: 300px;
 }
 #div1 .header {
-    height: 12%;
+    height: 36px;
 }
 #div1 .header h2 {
     margin: 3% 5% 0 3%;
@@ -78,7 +78,6 @@
 #div2 {
     float: left;
     width: 65%;
-    height: 292px;
     margin-top: 10px;
 }
 #div2 .header {
@@ -109,10 +108,10 @@
 #div3 {
     float: right;
     width: 33%;
-    height: 135px;
     margin-top: 10px;
 }
 #div3 .header {
+    margin-bottom: 5px;
     height: 35px;
 }
 #div3 .header h2 {
@@ -124,7 +123,7 @@
 }
 
 #div3 ul {
-    margin: 10px 0 0 23px;
+    margin-left: 23px;
     width: 40%;
     float: left;
 }
@@ -136,7 +135,6 @@
 #div4 {
     float: right;
     width: 33%;
-    height: 130px;
     margin-top: 10px;
 }
 #div4 .header {

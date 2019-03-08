@@ -14,6 +14,9 @@
     float: left;
     margin-bottom: 5px;
 }
+.body .v_table {
+    margin: 0;
+}
 .body .v_table td {
 /*    text-indent: 2em;*/
 }

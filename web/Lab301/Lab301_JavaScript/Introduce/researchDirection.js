@@ -20,23 +20,26 @@ function fillResearchs() {
     var researchs = arguments[0];
     
     var body = document.getElementsByClassName('body')[0];
+    // body.innerHTML = '';
     var table = document.createElement('table');
+    table.className = 'v_table';
     body.appendChild(table);
+    var tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+    console.log(1);
     for(var i=0; i<researchs.length; ++i) {
         var res = researchs[i];
-        
+console.log(2);
         var tr = document.createElement('tr');
-        table.appendChild(tr);
+        tbody.appendChild(tr);
         var th = document.createElement('th');
         tr.appendChild(th);
         var h2 = document.createElement('h2');
         h2.innerHTML = res.researchDirection;
         th.appendChild(h2);
         var td = document.createElement('td');
+        td.innerHTML = res.introduction;
         tr.appendChild(td);
-        var p = document.createElement('p');
-        p.innerHTML = res.introduction;
-        td.appendChild(p);
     }
 };
 
