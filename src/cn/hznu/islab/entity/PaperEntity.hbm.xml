@@ -8,8 +8,9 @@
         <id name="paperId" column="paperId">
             <generator class="native"/>
         </id>
-        <property name="name" column="name"/>
-        <property name="address" column="address"/>
-        <property name="date" column="date"/>
+        <property name="name" column="name" not-null="false"/>
+        <property name="address" column="address" not-null="false"/>
+        <property name="date" column="date" not-null="false"/>
+        <property name="type" column="type" not-null="false"/>
     </class>
 </hibernate-mapping>

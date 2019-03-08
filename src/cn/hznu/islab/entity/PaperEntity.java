@@ -5,12 +5,13 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "paper", schema = "is_lab", catalog = "")
+@Table(name = "paper", schema = "is_lab")
 public class PaperEntity {
     private int paperId;
     private String name;
     private String address;
     private Date date;
+    private Integer type;
 
     @Id
     @Column(name = "paperId")
@@ -52,6 +53,16 @@ public class PaperEntity {
         this.date = date;
     }
 
+    @Basic
+    @Column(name = "type")
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,21 +71,12 @@ public class PaperEntity {
         return paperId == that.paperId &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(address, that.address) &&
-                Objects.equals(date, that.date);
-    }
-
-    @Override
-    public String toString() {
-        return "PaperEntity{" +
-                "paperId=" + paperId +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", date=" + date +
-                '}';
+                Objects.equals(date, that.date) &&
+                Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(paperId, name, address, date);
+        return Objects.hash(paperId, name, address, date, type);
     }
 }

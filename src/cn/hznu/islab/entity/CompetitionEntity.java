@@ -14,6 +14,7 @@ public class CompetitionEntity {
     private String instructor;
     private String teamMember;
     private Date date;
+    private Integer type;
 
     @Id
     @Column(name = "competitionId")
@@ -85,6 +86,16 @@ public class CompetitionEntity {
         this.date = date;
     }
 
+    @Basic
+    @Column(name = "type")
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,24 +107,12 @@ public class CompetitionEntity {
                 Objects.equals(awardLevel, that.awardLevel) &&
                 Objects.equals(instructor, that.instructor) &&
                 Objects.equals(teamMember, that.teamMember) &&
-                Objects.equals(date, that.date);
+                Objects.equals(date, that.date) &&
+                Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(competitionId, name, worksName, awardLevel, instructor, teamMember, date);
-    }
-
-    @Override
-    public String toString() {
-        return "CompetitionEntity{" +
-                "competitionId=" + competitionId +
-                ", name='" + name + '\'' +
-                ", worksName='" + worksName + '\'' +
-                ", awardLevel='" + awardLevel + '\'' +
-                ", instructor='" + instructor + '\'' +
-                ", teamMember='" + teamMember + '\'' +
-                ", date=" + date +
-                '}';
+        return Objects.hash(competitionId, name, worksName, awardLevel, instructor, teamMember, date, type);
     }
 }

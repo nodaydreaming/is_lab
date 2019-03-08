@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class PaperAction extends ActionSupport implements ModelDriven<PaperEntit
         queryMap.put("name", paperEntity.getName());
         List<PaperEntity> list = paperService.findPapersByProperties(queryMap);
         if (list == null) {
+            paperEntity.setType(2);
+            paperEntity.setDate(new Date(paperEntity.getDate().getTime() + 1000));
             paperService.addPaper(paperEntity);
             list = paperService.findPapersByProperties(queryMap);
             if(list == null){
@@ -67,7 +70,7 @@ public class PaperAction extends ActionSupport implements ModelDriven<PaperEntit
         if(list != null){
             PaperEntity paper = list.get(0);
             paper.setAddress(paperEntity.getAddress());
-            paper.setDate(paperEntity.getDate());
+            paper.setDate(new Date(paperEntity.getDate().getTime() + 1000));
             paperService.updatePaper(paper);
 
             list = paperService.findPapersByProperties(queryMap);

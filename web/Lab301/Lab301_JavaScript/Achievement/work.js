@@ -1,6 +1,6 @@
 window.onload = function () {
     $.ajax({
-        url : 'getAllWorks.action',
+        url : 'getWorks.action',
         type : 'post',
         scriptCharset : 'utf-8',
         success : function (result) {
@@ -17,7 +17,7 @@ window.onload = function () {
 
 function fillWorks() {
     var work = arguments[0];
-    
+    console.log(work);
     var body = document.getElementsByClassName('body')[0];
     var table = document.createElement('table');
     body.appendChild(table);

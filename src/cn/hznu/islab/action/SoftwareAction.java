@@ -34,6 +34,7 @@ public class SoftwareAction extends ActionSupport implements ModelDriven<Softwar
         queryMap.put("name", softwareEntity.getName());
         List<SoftwareEntity> list = softwareService.findSoftwaresByProperties(queryMap);
         if (list == null) {
+            softwareEntity.setType(4);
             softwareService.addSoftware(softwareEntity);
             list = softwareService.findSoftwaresByProperties(queryMap);
             if(list == null){

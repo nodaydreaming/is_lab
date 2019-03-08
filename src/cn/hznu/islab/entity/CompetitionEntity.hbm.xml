@@ -14,5 +14,6 @@
         <property name="instructor" column="instructor" not-null="false"/>
         <property name="teamMember" column="teamMember" not-null="false"/>
         <property name="date" column="date" not-null="false"/>
+        <property name="type" column="type" not-null="false"/>
     </class>
 </hibernate-mapping>

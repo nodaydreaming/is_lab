@@ -2,7 +2,7 @@ window.onload = function () {
     $.ajax({
         url : 'getInfo.action',
         type : 'post',
-        data : {"name" : ""},
+        data : {"name" : "achievementSummary"},
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null){
@@ -18,7 +18,7 @@ window.onload = function () {
 
 function fillContents() {
     var contents = arguments[0];
-    
+    console.log(contents);
     var body = document.getElementsByClassName('body')[0];
     var p = document.createElement('p');
     p.innerHTML = contents;

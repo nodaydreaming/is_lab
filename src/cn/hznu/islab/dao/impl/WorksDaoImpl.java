@@ -46,7 +46,7 @@ public class WorksDaoImpl extends HibernateDaoSupport implements WorksDao {
     @Override
     public List<WorksEntity> findAllWorks() {
         Session session = this.currentSession();
-        Query query = session.createQuery("from WorksEntity order by worksId");
+        Query query = session.createQuery("from WorksEntity order by worksId desc ");
 
         List<WorksEntity> list = query.list();
 

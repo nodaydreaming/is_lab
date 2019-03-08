@@ -1,8 +1,6 @@
 package cn.hznu.islab.entity;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,6 +12,7 @@ public class PatentEntity {
     private String number;
     private String principal;
     private Date date;
+    private Integer type;
 
     @Id
     @Column(name = "patentId")
@@ -65,13 +64,16 @@ public class PatentEntity {
         this.date = date;
     }
 
-    public void setDate(String date){
-        try {
-            this.date=(new SimpleDateFormat("yyyy-MM-dd").parse(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    @Basic
+    @Column(name = "type")
+    public Integer getType() {
+        return type;
     }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,11 +83,12 @@ public class PatentEntity {
                 Objects.equals(name, that.name) &&
                 Objects.equals(number, that.number) &&
                 Objects.equals(principal, that.principal) &&
-                Objects.equals(date, that.date);
+                Objects.equals(date, that.date) &&
+                Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(patentId, name, number, principal, date);
+        return Objects.hash(patentId, name, number, principal, date, type);
     }
 }

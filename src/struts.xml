@@ -16,6 +16,8 @@
     <package name="indexInfo" extends="struts-default, json-default">
         <action name="indexInfo" class="indexAction" method="indexInfo">
         </action>
+        <action name="getResults" class="indexAction" method="getResults">
+        </action>
     </package>
 
     <package name="user" extends="struts-default, json-default">

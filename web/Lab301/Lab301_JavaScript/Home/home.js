@@ -10,11 +10,18 @@
  */
 window.onload = function () {
     $.ajax({
-        url : 'index.action',
+        url : 'indexInfo.action',
         type : 'post',
         scriptCharset : 'utf-8',
         success : function (result) {
             if(result.message == null) {
+                console.log(result.cultureImages);
+                console.log(result.researchs);
+                console.log(result.works);
+                console.log(result.cultures);
+                //type: 1 ：竞赛；2 ：论文；3 ：专利；4 : 软著
+                console.log(result.results);
+
                 fillResearchs(result.researchs);
             }
         },

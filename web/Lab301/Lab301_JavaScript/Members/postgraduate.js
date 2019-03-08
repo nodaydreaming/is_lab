@@ -55,7 +55,7 @@ function fillStudents() {
             
             var stu = students[i];
             //正面
-            var img = document.createElement(img);
+            var img = document.createElement('img');
             img.src = stu.photo;
             img.alt = stu.name;
             front.appendChild(img);

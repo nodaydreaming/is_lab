@@ -41,7 +41,7 @@ function fillProhects() {
         tr.appendChild(td2);
         
         var td3 = document.createElement('td');
-        td3.innerHTML = new Date(pro.startdate).Format("yyy-MM-dd") + "-" + new Date(pro.enddate).Fromat("yyy-MM-dd");
+        td3.innerHTML = new Date(pro.startdate).Format("yyyy-MM-dd") + "-" + new Date(pro.enddate).Format("yyyy-MM-dd");
         tr.appendChild(td3);
         
         var td4 = document.createElement('td');

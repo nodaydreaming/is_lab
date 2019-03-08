@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,6 +45,8 @@ public class PatentAction extends ActionSupport implements ModelDriven<PatentEnt
         queryMap.put("number", patentEntity.getNumber());
         List<PatentEntity> list = patentService.findPatentsByProperties(queryMap);
         if(list == null){
+            patentEntity.setType(3);
+            patentEntity.setDate(new Date(patentEntity.getDate().getTime() + 2000));
             patentService.addPatent(patentEntity);
             list = patentService.findPatentsByProperties(queryMap);
             if(list == null){
@@ -79,7 +82,7 @@ public class PatentAction extends ActionSupport implements ModelDriven<PatentEnt
             PatentEntity p = list.get(0);
             p.setName(patentEntity.getName());
             p.setPrincipal(patentEntity.getPrincipal());
-            p.setDate(patentEntity.getDate());
+            p.setDate(new Date(patentEntity.getDate().getTime() + 2000));
             patentService.updatePatent(p);
         }
         MapToJSON.mapToJson(response, map);

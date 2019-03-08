@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +39,8 @@ public class CompetitionAction extends ActionSupport implements ModelDriven<Comp
         List<CompetitionEntity> list = competitionService.findCompetitionsByProperties(queryMap);
 
         if(list == null){
+            competitionEntity.setType(1);
+            competitionEntity.setDate(new Date(competitionEntity.getDate().getTime() + 3000));
             competitionService.addCompetition(competitionEntity);
             list = competitionService.findCompetitionsByProperties(queryMap);
             if(list == null){
@@ -73,10 +76,11 @@ public class CompetitionAction extends ActionSupport implements ModelDriven<Comp
 
         if(list != null){
             CompetitionEntity c = list.get(0);
+
             c.setTeamMember(competitionEntity.getTeamMember());
             c.setInstructor(competitionEntity.getInstructor());
             c.setAwardLevel(competitionEntity.getAwardLevel());
-            c.setDate(competitionEntity.getDate());
+            c.setDate(new Date(competitionEntity.getDate().getTime() + 3000));
 
             competitionService.updateCompetition(c);
             list.clear();

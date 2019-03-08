@@ -53,7 +53,6 @@
                 <value>cn/hznu/islab/entity/PatentEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/ProjectEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/WorksEntity.hbm.xml</value>
-                <value>cn/hznu/islab/entity/ResearchEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/PaperEntity.hbm.xml</value>
                 <value>cn/hznu/islab/entity/SoftwareEntity.hbm.xml</value>
             </list>
@@ -88,6 +87,8 @@
         <property name="patentService" ref="patentService"/>
         <property name="researchService" ref="researchService"/>
         <property name="worksService" ref="worksService"/>
+        <property name="softwareService" ref="softwareService"/>
+        <property name="paperService" ref="paperService"/>
     </bean>
     <bean id="userAction" class="cn.hznu.islab.action.UserAction">
         <property name="userService" ref="userService"/>
