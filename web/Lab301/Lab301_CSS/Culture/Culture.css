@@ -58,9 +58,6 @@ html {
 #left {
     margin-top: 20px;
     width: 300px;
-/*    导航栏固定*/
-    /*position: fixed;
-    display: block;*/
     float: left;
     
     position: -webkit-sticky;
@@ -68,7 +65,7 @@ html {
     top: 0px;
 }
 #left h2 {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #b8b4b4;
     width: 100%;
 }
 #left span {
@@ -82,7 +79,6 @@ html {
     width: 100%;
 }
 .nav li {
-/*    list-style-type: square;*/
     padding: 10px 0px;
     padding-left: 75px;
     background-color: white;
@@ -96,17 +92,15 @@ html {
 #right p {
     text-align: left;
     margin-top: 25px;
-/*    text-indent: 2em;*/
 }
 #right h2 {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #b8b4b4;
 }
 #right span {
     border-bottom: 1px solid black;
 }
 #right img {
-    float: left;
-    width: 200px;
+    /*float: left;*/
     height: 200px;
 }
 #right table {

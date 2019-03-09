@@ -1,57 +1,107 @@
+setTimeout(function () {
+    box=my$("box");
+    inner=box.children[0];
+    ulObj=inner.children[0];
+    list=ulObj.children;
+    olObj=inner.children[1];
+    arr=my$("arr");
+    imgWidth=inner.offsetWidth;
+    right=my$("right");
+    pic=0;
+    isAnimate = false;
+
+    for(var i=0;i<list.length;i++){
+        var liObj=document.createElement("li");
+
+        olObj.appendChild(liObj);
+//        liObj.innerText=(i+1);
+        liObj.setAttribute("index",i);
+
+        //为按钮注册mouseover事件
+        liObj.onmouseover=function () {
+            //先清除所有按钮的样式
+
+            for (var j=0;j<olObj.children.length;j++){
+                olObj.children[j].removeAttribute("class");
+            }
+            this.className="current";
+            pic=this.getAttribute("index");
+//            console.log(ulObj);
+            animate(ulObj,-pic*imgWidth,2);
+        }
+    }
+
+    //设置ol中第一个li有背景颜色
+    olObj.children[0].className = "current";
+//克隆一个ul中第一个li,加入到ul中的最后=====克隆
+    ulObj.appendChild(ulObj.children[0].cloneNode(true));
+
+    var timeId=setInterval(onmouseclickHandle,2000);
+//左右焦点实现点击切换图片功能
+    box.onmouseover=function () {
+        arr.style.display="block";
+        clearInterval(timeId);
+    };
+    box.onmouseout=function () {
+        arr.style.display="none";
+        timeId=setInterval(onmouseclickHandle,2000);
+    };
+}, 1000);
+
 function my$(id) {
     return document.getElementById(id);
 }
 
 //获取各元素，方便操作
-var box=my$("box");
-var inner=box.children[0];
-var ulObj=inner.children[0];
-var list=ulObj.children;
-var olObj=inner.children[1];
-var arr=my$("arr");
-var imgWidth=inner.offsetWidth;
-var right=my$("right");
-var pic=0;
-var isAnimate = false;
+// var box=my$("box");
+// var inner=box.children[0];
+// var ulObj=inner.children[0];
+// var list=ulObj.children;
+// var olObj=inner.children[1];
+// var arr=my$("arr");
+// var imgWidth=inner.offsetWidth;
+// var right=my$("right");
+// var pic=0;
+// var isAnimate = false;
 //    //图片速度
 //    var speed=2000;
 //根据li个数，创建小按钮
-for(var i=0;i<list.length;i++){
-    var liObj=document.createElement("li");
-
-    olObj.appendChild(liObj);
-//        liObj.innerText=(i+1);
-    liObj.setAttribute("index",i);
-
-    //为按钮注册mouseover事件
-    liObj.onmouseover=function () {
-        //先清除所有按钮的样式
-
-        for (var j=0;j<olObj.children.length;j++){
-            olObj.children[j].removeAttribute("class");
-        }
-        this.className="current";
-        pic=this.getAttribute("index");
-//            console.log(ulObj);
-        animate(ulObj,-pic*imgWidth,2);
-    }
-
-}
+// for(var i=0;i<list.length;i++){
+//     var liObj=document.createElement("li");
+//
+//     olObj.appendChild(liObj);
+// //        liObj.innerText=(i+1);
+//     liObj.setAttribute("index",i);
+//
+//     //为按钮注册mouseover事件
+//     liObj.onmouseover=function () {
+//         //先清除所有按钮的样式
+//
+//         for (var j=0;j<olObj.children.length;j++){
+//             olObj.children[j].removeAttribute("class");
+//         }
+//         this.className="current";
+//         pic=this.getAttribute("index");
+// //            console.log(ulObj);
+//         animate(ulObj,-pic*imgWidth,2);
+//     }
+//
+// }
 //设置ol中第一个li有背景颜色
-olObj.children[0].className = "current";
-//克隆一个ul中第一个li,加入到ul中的最后=====克隆
-ulObj.appendChild(ulObj.children[0].cloneNode(true));
-
-var timeId=setInterval(onmouseclickHandle,2000);
-//左右焦点实现点击切换图片功能
-box.onmouseover=function () {
-    arr.style.display="block";
-    clearInterval(timeId);
-};
-box.onmouseout=function () {
-    arr.style.display="none";
-    timeId=setInterval(onmouseclickHandle,2000);
-};
+// olObj.children[0].className = "current";
+// //克隆一个ul中第一个li,加入到ul中的最后=====克隆
+// ulObj.appendChild(ulObj.children[0].cloneNode(true));
+//
+// var timeId=setInterval(onmouseclickHandle,2000);
+// //左右焦点实现点击切换图片功能
+// box.onmouseover=function () {
+//     arr.style.display="block";
+//     clearInterval(timeId);
+// };
+// box.onmouseout=function () {
+//     arr.style.display="none";
+//     timeId=setInterval(onmouseclickHandle,2000);
+// };
 
 right.onclick=onmouseclickHandle;
 function onmouseclickHandle() {
