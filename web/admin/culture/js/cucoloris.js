@@ -1,6 +1,6 @@
 var cultureList;
 var culture;
-var ue;
+
 window.onload = function(){
     var listAForHover = document.getElementsByClassName("aHover");
     // console.log(listAForHover);
@@ -147,69 +147,119 @@ function changeCulture() {
 }
 
 function updateCulture(){
-    layer.open({
-        type: 1,
-        offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-        id: 'layerDemo1', //防止重复弹出
-        area: ['900px', '600px'],
-        content: '<form class="layui-form" method="post" enctype="multipart/form-data" style="margin-top: 30px; text-align: left">' +
-            '<div class="layui-form-item" style="margin-left: 20px">\n' +
-            '     <label class="layui-form-label">标题</label>\n' +
-            '     <div class="layui-input-block">\n' +
-            '         <input type="text" name="title" id="cultureTitle" autocomplete="off" disabled placeholder="请输入标题" class="layui-input layui-disabled" style="width: 350px;" value="'+culture.title+'" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
-            '     </div>\n' +
-            '</div>' +
-            '<div class="layui-form-item" style="padding-top: 20px;">\n' +
-            '     <div style="width: 100%; text-align: center;">\n' +
-            '          <script id="ueditor" type="text/plain" style="width: 90%; height: 400px; margin-left: 10%;">\n' +
-            '          </script>\n' +
-            '     </div>\n' +
-            '</div>\n' +
-            '</form>' +
-            '<script>' +
-            'layui.use(\'form\', function(){\n' +
-            '            var form = layui.form;\n' +
-            '            form.render();\n' +
-            '            form.verify();\n' +
-            '        });\n' +
-            '        ue = ue!=null ? ue : UE.getEditor("ueditor",{toolbars: [[\n' +
-            '                \'undo\', \'redo\', \'|\',\n' +
-            '                \'bold\', \'italic\', \'underline\', \'fontborder\', \'strikethrough\', \'superscript\', \'subscript\', \'removeformat\', \'formatmatch\', \'autotypeset\', \'blockquote\', \'pasteplain\', \'|\', \'forecolor\', \'backcolor\', \'insertorderedlist\', \'insertunorderedlist\', \'selectall\', \'cleardoc\', \'|\',\n' +
-            '                \'rowspacingtop\', \'rowspacingbottom\', \'lineheight\', \'|\',\n' +
-            '                \'customstyle\', \'paragraph\', \'fontfamily\', \'fontsize\', \'|\',\n' +
-            '                \'directionalityltr\', \'directionalityrtl\', \'indent\', \'|\',\n' +
-            '                \'justifyleft\', \'justifycenter\', \'justifyright\', \'justifyjustify\', \'|\', \'touppercase\', \'tolowercase\', \'|\',\n' +
-            '                \'link\', \'unlink\', \'anchor\', \'|\',\n' +
-            '                \'simpleupload\', \'insertimage\', \'emotion\', \'scrawl\', \'insertvideo\', \'|\',\n' +
-            '                \'horizontal\', \'date\', \'time\', \'spechars\', \'|\',\n' +
-            '                \'inserttable\', \'deletetable\', \'insertparagraphbeforetable\', \'insertrow\', \'deleterow\', \'insertcol\', \'deletecol\', \'mergecells\', \'mergeright\', \'mergedown\', \'splittocells\', \'splittorows\', \'splittocols\', \'charts\', \'|\',\n' +
-            '                \'searchreplace\'\n' +
-            '            ]]});\n' +
-            '</script>',
-        btn: ['确定','取消'],
-        btnAlign: 'c', //按钮居中
-        shade: 0.5, //不显示遮罩
-        title: "信息安全实验室",
-        success : function(){
-            ue.ready(function () {
-                ue.setContent(culture.content);
-            });
-        },
-        cancel: function(index, layero){
-            console.log(ue);
-            layer.close(index);
-            return false;
-        },
-        btn1 : function () {
-            updateculture();
-            return false;
-        },
-        btn2 : function () {
-            (ue.Editor).destroy();
-            console.log(ue);
-            layer.closeAll();
-        }
-    });
+    // layer.open({
+    //     type: 1,
+    //     offset: 'auto', //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+    //     id: 'layerDemo1', //防止重复弹出
+    //     area: ['900px', '600px'],
+    //     content: '<form class="layui-form" method="post" enctype="multipart/form-data" style="margin-top: 30px; text-align: left">' +
+    //         '<div class="layui-form-item" style="margin-left: 20px">\n' +
+    //         '     <label class="layui-form-label">标题</label>\n' +
+    //         '     <div class="layui-input-block">\n' +
+    //         '         <input type="text" name="title" id="cultureTitle" autocomplete="off" disabled placeholder="请输入标题" class="layui-input layui-disabled" style="width: 350px;" value="'+culture.title+'" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
+    //         '     </div>\n' +
+    //         '</div>' +
+    //         '<div class="layui-form-item" style="padding-top: 20px;">\n' +
+    //         '     <div style="width: 100%; text-align: center;">\n' +
+    //         '          <script id="ueditor" type="text/plain" style="width: 90%; height: 400px; margin-left: 10%;">\n' +
+    //         '          </script>\n' +
+    //         '     </div>\n' +
+    //         '</div>\n' +
+    //         '</form>' +
+    //         '<script>' +
+    //         'layui.use(\'form\', function(){\n' +
+    //         '            var form = layui.form;\n' +
+    //         '            form.render();\n' +
+    //         '            form.verify();\n' +
+    //         '        });\n' +
+    //         '        ue = ue!=null ? ue : UE.getEditor("ueditor",{toolbars: [[\n' +
+    //         '                \'undo\', \'redo\', \'|\',\n' +
+    //         '                \'bold\', \'italic\', \'underline\', \'fontborder\', \'strikethrough\', \'superscript\', \'subscript\', \'removeformat\', \'formatmatch\', \'autotypeset\', \'blockquote\', \'pasteplain\', \'|\', \'forecolor\', \'backcolor\', \'insertorderedlist\', \'insertunorderedlist\', \'selectall\', \'cleardoc\', \'|\',\n' +
+    //         '                \'rowspacingtop\', \'rowspacingbottom\', \'lineheight\', \'|\',\n' +
+    //         '                \'customstyle\', \'paragraph\', \'fontfamily\', \'fontsize\', \'|\',\n' +
+    //         '                \'directionalityltr\', \'directionalityrtl\', \'indent\', \'|\',\n' +
+    //         '                \'justifyleft\', \'justifycenter\', \'justifyright\', \'justifyjustify\', \'|\', \'touppercase\', \'tolowercase\', \'|\',\n' +
+    //         '                \'link\', \'unlink\', \'anchor\', \'|\',\n' +
+    //         '                \'simpleupload\', \'insertimage\', \'emotion\', \'scrawl\', \'insertvideo\', \'|\',\n' +
+    //         '                \'horizontal\', \'date\', \'time\', \'spechars\', \'|\',\n' +
+    //         '                \'inserttable\', \'deletetable\', \'insertparagraphbeforetable\', \'insertrow\', \'deleterow\', \'insertcol\', \'deletecol\', \'mergecells\', \'mergeright\', \'mergedown\', \'splittocells\', \'splittorows\', \'splittocols\', \'charts\', \'|\',\n' +
+    //         '                \'searchreplace\'\n' +
+    //         '            ]]});\n' +
+    //         '</script>',
+    //     btn: ['确定','取消'],
+    //     btnAlign: 'c', //按钮居中
+    //     shade: 0.5, //不显示遮罩
+    //     title: "信息安全实验室",
+    //     success : function(){
+    //         ue.ready(function () {
+    //             ue.setContent(culture.content);
+    //         });
+    //     },
+    //     cancel: function(index, layero){
+    //         console.log(ue);
+    //         layer.close(index);
+    //         return false;
+    //     },
+    //     btn1 : function () {
+    //         updateculture();
+    //         return false;
+    //     },
+    //     btn2 : function () {
+    //         (ue.Editor).destroy();
+    //         console.log(ue);
+    //         layer.closeAll();
+    //     }
+    // });
+    var body = document.getElementsByClassName('layui-body')[0];
+    body.innerHTML = "";
+    body.style.marginTop = "70px";
+    body.style.textAlign = "center";
+
+    body.innerHTML = '<p style="width: 100%;font-size: 36px; font-family: STXingkai;">更新实验室文化</p>\n' +
+        '        <form class="layui-form" action="" style="width: 100%; text-align: center;">\n' +
+        '            <div class="layui-form-item">' +
+        '                <label class="layui-form-label" style="margin-left: 100px">标题</label>\n' +
+        '                <div class="layui-input-block" style="margin-top: 20px">\n' +
+        '                    <input type="text" name="title" id="cultureTitle" autocomplete="off" placeholder="请输入标题" value="' + culture.title + '" class="layui-input" style="width: 350px;" onchange="inputLimit()" onkeydown="inputLimit()" onkeyup="inputLimit()">\n' +
+        '                </div>\n' +
+        '            </div>\n' +
+        '            <div class="layui-form-item" style="padding-top: 20px;">\n' +
+        '                <div style="width: 100%; text-align: center;">\n' +
+        '                    <script id="ueditor" type="text/plain" style="width: 90%; height: 400px; margin-left: 10%;">\n' +
+        '                    </script>\n' +
+        '                </div>\n' +
+        '            </div>\n' +
+        '            <div style="margin: 30px; text-align: center;">\n' +
+        '                <input type="button" value="确定" onclick="updateculture()" class="layui-btn layui-btn-fluid" style="width: 236px;">\n' +
+        '            </div>\n' +
+        '        </form>\n' +
+        '<script>\n' +
+        'layui.use(\'form\', function(){\n' +
+        '            var form = layui.form;\n' +
+        '            form.render();\n' +
+        '            form.verify();\n' +
+        '        });\n' +
+        'console.log(00);\n' +
+        'var ue = UE.getEditor("ueditor",{toolbars: [[\n' +
+        '        \'undo\', \'redo\', \'|\',\n' +
+        '        \'bold\', \'italic\', \'underline\', \'fontborder\', \'strikethrough\', \'superscript\', \'subscript\', \'removeformat\', \'formatmatch\', \'autotypeset\', \'blockquote\', \'pasteplain\', \'|\', \'forecolor\', \'backcolor\', \'insertorderedlist\', \'insertunorderedlist\', \'selectall\', \'cleardoc\', \'|\',\n' +
+        '        \'rowspacingtop\', \'rowspacingbottom\', \'lineheight\', \'|\',\n' +
+        '        \'customstyle\', \'paragraph\', \'fontfamily\', \'fontsize\', \'|\',\n' +
+        '        \'directionalityltr\', \'directionalityrtl\', \'indent\', \'|\',\n' +
+        '        \'justifyleft\', \'justifycenter\', \'justifyright\', \'justifyjustify\', \'|\', \'touppercase\', \'tolowercase\', \'|\',\n' +
+        '        \'link\', \'unlink\', \'anchor\', \'|\',\n' +
+        '        \'simpleupload\', \'insertimage\', \'emotion\', \'scrawl\', \'insertvideo\', \'|\',\n' +
+        '        \'horizontal\', \'date\', \'time\', \'spechars\', \'|\',\n' +
+        '        \'inserttable\', \'deletetable\', \'insertparagraphbeforetable\', \'insertrow\', \'deleterow\', \'insertcol\', \'deletecol\', \'mergecells\', \'mergeright\', \'mergedown\', \'splittocells\', \'splittorows\', \'splittocols\', \'charts\', \'|\',\n' +
+        '        \'searchreplace\'\n' +
+        '    ]]});\n' +
+        'console.log(01);' +
+        'ue.ready(function () {\n' +
+        'console.log(03);\n' +
+        '    ue.setContent(culture.content);\n' +
+        '});\n' +
+        'console.log(02);\n' +
+        '</script>';
 }
 
 Date.prototype.Format = function(fmt)

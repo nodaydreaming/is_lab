@@ -53,7 +53,7 @@ function fillStudents() {
                 continue;
             }
             
-            var stu = students[i];
+            var stu = students[number];
             //正面
             var img = document.createElement('img');
             img.src = stu.photo;

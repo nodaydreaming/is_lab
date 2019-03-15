@@ -96,7 +96,7 @@ function fillResults() {
         a.title = results[i].name;
         li.appendChild(a);
         span = document.createElement('span');
-        span.innerHTML = results[i].name;
+        span.innerHTML = cutString(results[i].name, 30);
         a.appendChild(span);
     }
 };
@@ -176,6 +176,30 @@ Date.prototype.Format = function(fmt)
             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
     return fmt;
 }
+
+function cutString(str, len) {
+    if(str.length*2 <= len) {
+        return str;
+    }
+    var strlen = 0;
+    var s = "";
+    for(var i = 0;i < str.length; i++) {
+        s = s + str.charAt(i);
+        if (str.charCodeAt(i) > 128) {
+            strlen = strlen + 2;
+            if(strlen >= len){
+                return s.substring(0,s.length-1) + "...";
+            }
+        } else {
+            strlen = strlen + 1;
+            if(strlen >= len){
+                return s.substring(0,s.length-2) + "...";
+            }
+        }
+    }
+    return s;
+}
+var iu = cutString("sflasj", 5);
 
 
 
