@@ -1,0 +1,76 @@
+#l1 {
+    background-color: #4F4F4F;
+}
+#l3 {
+    background-color: #46A3FF;
+}
+/*#l2 a:hover {
+    border-bottom: 3px solid black;
+}*/
+
+/*头部模块*/
+#achieve {
+    width: 100%;
+    height: 550px;
+}
+#achieve ul {
+    float: right;
+    width: 40%;
+    margin-right: 5%;
+    line-height: 45px;
+    font-size: 15px;
+}
+#achieve li {
+    display: inline;
+}
+#achieve a {
+    color: #7B7B7B;
+    margin: 0 25px;
+    padding-bottom: 2px;
+}
+#achieve a:hover {
+    border-bottom: 2px solid #00CACA;
+    color: #00CACA;
+}
+
+#achieve h1 {
+    float: left;
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    color: deepskyblue;
+}
+
+#achieve .body {
+    float: left;
+    width: 90%;
+    padding: 1% 5%;
+    margin-bottom: 10px;
+    /*下拉条*/
+/*    height: 445px;*/
+/*    overflow: auto;*/
+    background-color: #F0F0F0;
+}
+#achieve p {
+    text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

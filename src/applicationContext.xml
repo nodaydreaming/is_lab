@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 引入schema约束 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+<!-- 配置连接池 -->
+    <!-- 引入外部属性文件（jdbc.properties） -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!-- 配置c3p0连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- 配置hibernate相关属性 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <!-- 注入连接池 -->
+        <property name="dataSource" ref="dataSource">
+        </property>
+        <!-- 配置hibernate属性 -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/is_lab</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
+        <!-- 加载映射文件 -->
+        <property name="mappingResources">
+            <list>
+                <value>cn/hznu/islab/entity/UserEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/StudentEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/CultureEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/IntroductionEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/ResearchEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/TeacherEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/LinkEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/CompetitionEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/PatentEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/ProjectEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/WorksEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/PaperEntity.hbm.xml</value>
+                <value>cn/hznu/islab/entity/SoftwareEntity.hbm.xml</value>
+            </list>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>cn.hznu.islab.entity.CompetitionEntity</value>
+                <value>cn.hznu.islab.entity.CultureEntity</value>
+                <value>cn.hznu.islab.entity.IntroductionEntity</value>
+                <value>cn.hznu.islab.entity.LinkEntity</value>
+                <value>cn.hznu.islab.entity.PatentEntity</value>
+                <value>cn.hznu.islab.entity.ProjectEntity</value>
+                <value>cn.hznu.islab.entity.ResearchEntity</value>
+                <value>cn.hznu.islab.entity.StudentEntity</value>
+                <value>cn.hznu.islab.entity.TeacherEntity</value>
+                <value>cn.hznu.islab.entity.UserEntity</value>
+                <value>cn.hznu.islab.entity.WorksEntity</value>
+                <value>cn.hznu.islab.entity.PaperEntity</value>
+                <value>cn.hznu.islab.entity.SoftwareEntity</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Action的配置 -->
+    <bean id="indexAction" class="cn.hznu.islab.action.IndexAction">
+        <property name="competitionService" ref="competitionService"/>
+        <property name="cultureService" ref="cultureService"/>
+        <property name="patentService" ref="patentService"/>
+        <property name="researchService" ref="researchService"/>
+        <property name="worksService" ref="worksService"/>
+        <property name="softwareService" ref="softwareService"/>
+        <property name="paperService" ref="paperService"/>
+    </bean>
+    <bean id="userAction" class="cn.hznu.islab.action.UserAction">
+        <property name="userService" ref="userService"/>
+    </bean>
+    <bean id="researchAction" class="cn.hznu.islab.action.ResearchDirectionAction">
+        <property name="researchService" ref="researchService"/>
+    </bean>
+    <bean id="teacherAction" class="cn.hznu.islab.action.TeacherAction">
+        <property name="teacherService" ref="teacherService"/>
+    </bean>
+    <bean id="studentAction" class="cn.hznu.islab.action.StudentAction">
+        <property name="studentService" ref="studentService"/>
+    </bean>
+    <bean id="libInfoAction" class="cn.hznu.islab.action.LibInfoAction">
+        <property name="introductionService" ref="introductionService"/>
+    </bean>
+    <bean id="projectAction" class="cn.hznu.islab.action.ProjectAction">
+        <property name="projectService" ref="projectService"/>
+    </bean>
+    <bean id="worksAction" class="cn.hznu.islab.action.WorksAction">
+        <property name="worksService" ref="worksService"/>
+    </bean>
+    <bean id="patentAction" class="cn.hznu.islab.action.PatentAction">
+        <property name="patentService" ref="patentService"/>
+    </bean>
+    <bean id="competitionAction" class="cn.hznu.islab.action.CompetitionAction">
+        <property name="competitionService" ref="competitionService"/>
+    </bean>
+    <bean id="paperAction" class="cn.hznu.islab.action.PaperAction">
+        <property name="paperService" ref="paperService"/>
+    </bean>
+    <bean id="softwareAction" class="cn.hznu.islab.action.SoftwareAction">
+        <property name="softwareService" ref="softwareService"/>
+    </bean>
+    <bean id="cultureAction" class="cn.hznu.islab.action.CultureAction">
+        <property name="cultureService" ref="cultureService"/>
+    </bean>
+    <bean id="downloadFileAction" class="cn.hznu.islab.action.FileDownloadAction"></bean>
+    <bean id="uploadAction" class="cn.hznu.islab.action.FileUploadAction"></bean>
+    <!-- Service的配置 -->
+    <bean id="competitionService" class="cn.hznu.islab.service.impl.CompetitionServiceImpl">
+        <property name="competitionDao" ref="competitionDao"/>
+    </bean>
+    <bean id="cultureService" class="cn.hznu.islab.service.impl.CultureServiceImpl">
+        <property name="cultureDao" ref="cultureDao"/>
+    </bean>
+    <bean id="introductionService" class="cn.hznu.islab.service.impl.IntroductionServiceImpl">
+        <property name="introductionDao" ref="introductionDao"/>
+    </bean>
+    <bean id="linkService" class="cn.hznu.islab.service.impl.LinkServiceImpl">
+        <property name="linkDao" ref="linkDao"/>
+    </bean>
+    <bean id="patentService" class="cn.hznu.islab.service.impl.PatentServiceImpl">
+        <property name="patentDao" ref="patentDao"/>
+    </bean>
+    <bean id="projectService" class="cn.hznu.islab.service.impl.ProjectServiceImpl">
+        <property name="projectDao" ref="projectDao"/>
+    </bean>
+    <bean id="researchService" class="cn.hznu.islab.service.impl.ResearchServiceImpl">
+        <property name="researchDao" ref="researchDao"/>
+    </bean>
+    <bean id="studentService" class="cn.hznu.islab.service.impl.StudentServiceImpl">
+        <property name="studentDao" ref="studentDao"/>
+    </bean>
+    <bean id="teacherService" class="cn.hznu.islab.service.impl.TeacherServiceImpl">
+        <property name="teacherDao" ref="teacherDao"/>
+    </bean>
+    <bean id="userService" class="cn.hznu.islab.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="worksService" class="cn.hznu.islab.service.impl.WorksServiceImpl">
+        <property name="worksDao" ref="worksDao"/>
+    </bean>
+    <bean id="paperService" class="cn.hznu.islab.service.impl.PaperServiceImpl">
+        <property name="paperDao" ref="paperDao"/>
+    </bean>
+    <bean id="softwareService" class="cn.hznu.islab.service.impl.SoftwareServiceImpl">
+        <property name="softwareDao" ref="softwareDao"/>
+    </bean>
+    <!-- DAO的配置 -->
+    <bean id="competitionDao" class="cn.hznu.islab.dao.impl.CompetitionDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="cultureDao" class="cn.hznu.islab.dao.impl.CultureDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="introductionDao" class="cn.hznu.islab.dao.impl.IntroductionDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="linkDao" class="cn.hznu.islab.dao.impl.LinkDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="patentDao" class="cn.hznu.islab.dao.impl.PatentDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="projectDao" class="cn.hznu.islab.dao.impl.ProjectDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="researchDao" class="cn.hznu.islab.dao.impl.ResearchDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="studentDao" class="cn.hznu.islab.dao.impl.StudentDaoImpl" scope="prototype">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="teacherDao" class="cn.hznu.islab.dao.impl.TeacherDaoImpl" scope="prototype">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="userDao" class="cn.hznu.islab.dao.impl.UserDaoImpl" scope="prototype">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="worksDao" class="cn.hznu.islab.dao.impl.WorksDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="paperDao" class="cn.hznu.islab.dao.impl.PaperDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    <bean id="softwareDao" class="cn.hznu.islab.dao.impl.SoftwareDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- 开启注解事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

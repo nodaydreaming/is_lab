@@ -1,0 +1,70 @@
+#l1 {
+    background-color: #4F4F4F;
+}
+#l6 {
+    background-color: #46A3FF;
+}
+/*#l2 a:hover {
+    border-bottom: 3px solid black;
+}*/
+
+/*头部模块*/
+#intro {
+    width: 100%;
+    height: 550px;
+}
+#intro ul {
+    float: right;
+    width: 40%;
+    margin-right: 5%;
+    line-height: 45px;
+    font-size: 15px;
+}
+#intro li {
+    display: inline;
+}
+#intro a {
+    color: #7B7B7B;
+    margin: 0 25px;
+    padding-bottom: 2px;
+}
+#intro a:hover {
+    border-bottom: 2px solid #00CACA;
+    color: #00CACA;
+}
+
+#intro h1 {
+    float: left;
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    color: deepskyblue;
+}
+
+#intro .body {
+    float: left;
+    width: 90%;
+    padding: 1% 5%;
+    margin-bottom: 10px;
+    height: 445px;
+    overflow: auto;
+    background-color: #F0F0F0;
+}
+
+#intro .body p {
+    text-align: left;
+    line-height: 28px;
+/*    white-space: pre-line;*/
+}
+
+
+
+
+
+
+
+
+
+
+
+

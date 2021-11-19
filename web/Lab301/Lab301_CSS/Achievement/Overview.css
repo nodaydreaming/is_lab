@@ -1,0 +1,12 @@
+#achieve .a_1 {
+    color: #00CACA;
+    border-bottom: 2px solid;
+}
+#achieve .body {
+/*    height: 445px;*/
+}
+.body p {
+    text-align: left;
+    line-height: 28px;
+    text-indent: 2em;
+}

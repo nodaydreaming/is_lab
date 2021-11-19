@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>后台登陆</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.all.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/login.js"></script>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <p style="font-weight: 500; font-size: 46px; font-family: STXingkai;">杭州师范大学信息安全实验室后台系统</p>
+    </div>
+    <fieldset class="layui-elem-field site-demo-button" style="margin: 90px auto 0; width: 450px; height: 300px;">
+    <legend>登陆</legend>
+
+        <from class="layui-form" action="" style="text-align: center;">
+
+            <div class="layui-form-item" style="margin-top: 50px">
+                <label class="layui-form-label">账号：</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" type="text" id="username" placeholder="用户名或者手机号" style="width: 276px;">
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-top: 20px">
+                <label class="layui-form-label">密码：</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" type="password" id="password" placeholder="密码" style="width: 276px;">
+                </div>
+            </div>
+
+            <div style="width: 100%; margin-top: 30px; text-align: center;">
+                <input type="submit" value="登陆" id="btnLogin" onclick="btn_login()" class="layui-btn layui-btn-fluid" style="width: 236px;">
+            </div>
+        </from>
+    </fieldset>
+</body>
+</html>

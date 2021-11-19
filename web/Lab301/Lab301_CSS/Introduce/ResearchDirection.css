@@ -1,0 +1,22 @@
+#intro .a_2 {
+    color: #00CACA;
+    border-bottom: 2px solid;
+}
+
+.body tr {
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.body th {
+    width: 100%;
+    float: left;
+    margin-bottom: 5px;
+}
+.body .v_table {
+    margin: 0;
+}
+.body .v_table td {
+/*    text-indent: 2em;*/
+}

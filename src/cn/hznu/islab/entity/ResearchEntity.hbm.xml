@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.hznu.islab.entity.ResearchEntity" table="research" schema="is_lab">
+        <id name="researchId" column="researchId">
+            <generator class="native"/>
+        </id>
+        <property name="researchDirection" column="research_direction" not-null="false"/>
+        <property name="introduction" column="introduction" not-null="false"/>
+        <property name="priority" column="priority" not-null="false"/>
+    </class>
+</hibernate-mapping>

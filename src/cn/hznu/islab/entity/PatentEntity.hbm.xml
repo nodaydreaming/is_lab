@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.hznu.islab.entity.PatentEntity" table="patent" schema="is_lab">
+        <id name="patentId" column="patentId">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" not-null="false"/>
+        <property name="number" column="number" not-null="false"/>
+        <property name="principal" column="principal" not-null="false"/>
+        <property name="date" column="date" not-null="false"/>
+        <property name="type" column="type" not-null="false"/>
+    </class>
+</hibernate-mapping>

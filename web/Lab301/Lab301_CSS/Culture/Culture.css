@@ -1,0 +1,137 @@
+html {
+    
+}
+#l1 {
+    background-color: #4F4F4F;
+}
+#l5 {
+    background-color: #46A3FF;
+}
+/*#l2 a:hover {
+    border-bottom: 3px solid black;
+}*/
+
+/*头部模块*/
+#intro {
+    width: 100%;
+    height: 550px;
+}
+#intro .header{
+    float: right;
+    width: 40%;
+    margin-right: 5%;
+    line-height: 45px;
+    font-size: 15px;
+}
+#intro .header li {
+    display: inline;
+}
+#intro .header a {
+    color: #7B7B7B;
+    margin: 0 25px;
+    padding-bottom: 2px;
+}
+#intro a:hover {
+    border-bottom: 2px solid #00CACA;
+    color: #00CACA;
+}
+
+#intro h1 {
+    float: left;
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    color: deepskyblue;
+}
+
+#intro .body {
+    float: left;
+    width: 90%;
+    padding: 1% 5%;
+    margin-bottom: 10px;
+/*    height: 445px;*/
+/*    overflow: auto;*/
+    background-color: #F0F0F0;
+}
+
+/*下方左边导航栏*/
+#left {
+    margin-top: 20px;
+    width: 300px;
+    float: left;
+    
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+}
+#left h2 {
+    border-bottom: 1px solid #b8b4b4;
+    width: 100%;
+}
+#left span {
+    border-bottom: 1px solid black;
+}
+#left, #left h2,#left ul{
+    text-align: left;
+}
+#left ul {
+    margin-top: 10px;
+    width: 100%;
+}
+.nav li {
+    padding: 10px 0px;
+    padding-left: 75px;
+    background-color: white;
+}
+/*下方右边内容*/
+#right {
+    margin-top: 20px;
+    width: 60%;
+    float: right;
+}
+#right p {
+    text-align: left;
+    margin-top: 25px;
+}
+#right h2 {
+    border-bottom: 1px solid #b8b4b4;
+}
+#right span {
+    border-bottom: 1px solid black;
+}
+#right img {
+    /*float: left;*/
+    height: 200px;
+}
+#right table {
+    width: 100%;
+    margin-top: 20px;
+}
+#right .party {
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

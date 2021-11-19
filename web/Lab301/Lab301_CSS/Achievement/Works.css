@@ -1,0 +1,58 @@
+#achieve .a_3 {
+    color: #00CACA;
+    border-bottom: 2px solid;
+}
+
+.body img {
+    width: 200px;
+    height: 116px;
+}
+.body table {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+.body tr {
+/*    height: 100%;*/
+}
+.body td {}
+.body .td1 {
+    width: 200px;
+    padding: 15px 0;
+}
+.body .td2 {
+    width: 700px;
+    margin-left: 40px;
+    float: left;
+    text-align: left;
+}
+.body .td2 h3 {
+    padding-bottom: 10px;
+}
+.body .td2 p {
+    text-indent: 2em;
+    line-height: 1.6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

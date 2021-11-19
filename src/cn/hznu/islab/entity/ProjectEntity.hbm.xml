@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.hznu.islab.entity.ProjectEntity" table="project" schema="is_lab">
+        <id name="projectId" column="projectId">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" not-null="false"/>
+        <property name="number" column="number" not-null="false"/>
+        <property name="startdate" column="startdate" not-null="false"/>
+        <property name="enddate" column="enddate" not-null="false"/>
+        <property name="principal" column="principal" not-null="false"/>
+        <property name="type" column="type" not-null="false"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+#secBox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+/*    display: flex;*/
+    margin-top: 10px;
+}
+#secBox span {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    position: absolute;
+    font-size: 50px;
+    text-align: center;
+    line-height: 146px;
+    width: 30px;
+    cursor: pointer;
+/*    background-color: darkgray;*/
+}
+#secLeft {}
+#secRight {
+    margin-left: -29px;
+}
+#secShow {
+    width: 645px;
+    height: 146px;
+}
+#secInside {
+    width: 100%;
+    height: 146px;
+    position: relative;
+    overflow: hidden;
+    margin-left: 0;
+}
+#secInside img {
+    width: 195.5px;
+    height: 146px;
+    margin: 0 10px;
+}
+/*ul列表*/
+#secInside ul {
+    width: 1000%;
+    position: absolute;
+    list-style: none;
+    left: 0;
+    top: 0;
+}
+#secInside ul li {
+    float: left;
+    padding: 0;
+}

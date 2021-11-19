@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.hznu.islab.entity.StudentEntity" table="student" schema="is_lab">
+        <id name="studentId" column="studentId">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" not-null="false"/>
+        <property name="photo" column="photo" not-null="false"/>
+        <property name="gender" column="gender" not-null="false"/>
+        <property name="telephone" column="telephone" not-null="false"/>
+        <property name="research" column="research" not-null="false"/>
+        <property name="grade" column="grade" not-null="false"/>
+        <property name="homepage" column="homepage" not-null="false"/>
+        <property name="company" column="company" not-null="false"/>
+        <property name="post" column="post" not-null="false"/>
+        <property name="salary" column="salary" not-null="false"/>
+        <property name="intro" column="intro" not-null="false"/>
+        <property name="type" column="type" not-null="false"/>
+    </class>
+</hibernate-mapping>

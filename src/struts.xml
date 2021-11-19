@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--<constant name="struts.action.excludePattern" value="/ueditor/.*" />-->
+    <constant name="struts.action.excludePattern" value="/ueditor/.*" />
+    <!-- 上传文件的最大值 -->
+    <constant name="struts.multipart.maxSize" value="209715200" />
+    <!-- 使用struts的开发者模式 -->
+    <constant name="struts.devMode" value="true"/>
+    <!-- 存放临时文件的文件夹 -->
+    <constant name="struts.multipart.saveDir" value="/upload/tmp/"/>
+
+    <package name="indexInfo" extends="struts-default, json-default">
+        <action name="indexInfo" class="indexAction" method="indexInfo">
+        </action>
+        <action name="getResults" class="indexAction" method="getResults">
+        </action>
+    </package>
+
+    <package name="user" extends="struts-default, json-default">
+        <action name="user_login" class="userAction" method="login">
+        </action>
+        <action name="sign_out" class="userAction" method="signOut">
+        </action>
+        <action name="user_getLoginUser" class="userAction" method="getLoginUser">
+        </action>
+        <action name="user_update" class="userAction" method="updateUser">
+        </action>
+        <action name="user_updatePassword" class="userAction" method="updatePassword">
+        </action>
+        <action name="user_getAll" class="userAction" method="getAllUsers">
+        </action>
+        <action name="user_add" class="userAction" method="addUser">
+        </action>
+        <action name="user_delete" class="userAction" method="deleteUser">
+        </action>
+        <action name="getAdminInfo" class="userAction" method="getAdminInfo">
+        </action>
+    </package>
+
+    <package name="research" extends="struts-default, json-default">
+        <action name="getAllResearchs" class="researchAction" method="getAllResearch">
+        </action>
+        <action name="addResearch" class="researchAction" method="addResearch">
+        </action>
+        <action name="updateResearch" class="researchAction" method="updateResearch">
+        </action>
+        <action name="delResearch" class="researchAction" method="delResearch">
+        </action>
+    </package>
+
+    <package name="culture" extends="struts-default, json-default">
+        <action name="getCultureByType" class="cultureAction" method="getCultureByType">
+        </action>
+        <action name="addCulture" class="cultureAction" method="addCulture">
+        </action>
+        <action name="updateCulture" class="cultureAction" method="updateCulture">
+        </action>
+        <action name="delCulture" class="cultureAction" method="delCulture">
+        </action>
+    </package>
+
+    <package name="libInfo" extends="struts-default, json-default">
+        <action name="info_update" class="libInfoAction" method="updateInfo">
+        </action>
+        <action name="getInfo" class="libInfoAction" method="getInfoContent">
+        </action>
+    </package>
+
+    <package name="teacher" extends="struts-default, json-default">
+        <action name="getAllInstructors" class="teacherAction" method="getAllInstructors">
+        </action>
+        <action name="addInstructor" class="teacherAction" method="addTeacher">
+        </action>
+        <action name="updateInstructor" class="teacherAction" method="updateTeacher">
+        </action>
+        <action name="delInstructor" class="teacherAction" method="delTeacher">
+        </action>
+    </package>
+
+    <package name="project" extends="json-default, struts-default">
+        <action name="getAllProjects" class="projectAction" method="getAllProjects">
+        </action>
+        <action name="addProject" class="projectAction" method="addProject">
+        </action>
+        <action name="delProject" class="projectAction" method="delProject">
+        </action>
+        <action name="updateProject" class="projectAction" method="updateProject">
+        </action>
+    </package>
+
+    <package name="student" extends="json-default, struts-default">
+        <action name="getStudents" class="studentAction" method="getStudentsByType">
+        </action>
+        <action name="addStudent" class="studentAction" method="addStudent">
+        </action>
+        <action name="updateStudent" class="studentAction" method="updateStudent">
+        </action>
+        <action name="delStudent" class="studentAction" method="delStudent">
+        </action>
+    </package>
+
+    <package name="works" extends="json-default, struts-default">
+        <action name="addWorks" class="worksAction" method="addWorks">
+        </action>
+        <action name="updateWorks" class="worksAction" method="updateWorks">
+        </action>
+        <action name="getWorks" class="worksAction" method="getAllWorks">
+        </action>
+        <action name="delWorks" class="worksAction" method="delWorks">
+        </action>
+    </package>
+
+    <package name="patent" extends="struts-default,json-default">
+        <action name="addPatent" class="patentAction" method="addPatent">
+        </action>
+        <action name="getPatents" class="patentAction" method="getPatents">
+        </action>
+        <action name="updatePatent" class="patentAction" method="updatePatent">
+        </action>
+        <action name="delPatent" class="patentAction" method="delPatent">
+        </action>
+    </package>
+    <package name="competition" extends="json-default,json-default">
+        <action name="addCompetition" class="competitionAction" method="addCompetition">
+        </action>
+        <action name="getCompetitions" class="competitionAction" method="getCompetitions">
+        </action>
+        <action name="updateCompetition" class="competitionAction" method="updateCompetition">
+        </action>
+        <action name="delCompetition" class="competitionAction" method="delCompetition">
+        </action>
+    </package>
+    
+    <package name="paper" extends="json-default, json-default">
+        <action name="addPaper" class="paperAction" method="addPaper">
+        </action>
+        <action name="updatePaper" class="paperAction" method="updatePaper">
+        </action>
+        <action name="delPaper" class="paperAction" method="deletePaper">
+        </action>
+        <action name="getPapers" class="paperAction" method="getAllPapers">
+        </action>
+    </package>
+    
+    <package name="software" extends="json-default, json-default">
+        <action name="addSoftware" class="softwareAction" method="addSoftware">
+        </action>
+        <action name="updateSoftware" class="softwareAction" method="updateSoftware">
+        </action>
+        <action name="delSoftware" class="softwareAction" method="deleteSoftware">
+        </action>
+        <action name="getSoftwares" class="softwareAction" method="getAllSoftwares">
+        </action>
+    </package>
+    
+    <package name="upload" extends="struts-default, json-default">
+        <action name="uploadTeacherImg" class="uploadAction" method="uploadTeacherImg">
+        </action>
+        <action name="uploadStudentImg" class="uploadAction" method="uploadStudentImg">
+        </action>
+        <action name="uploadWorksImg" class="uploadAction" method="uploadWorksImg">
+        </action>
+        <action name="uploadUserImg" class="uploadAction" method="uploadUserImg">
+        </action>
+        <action name="uploadPaper" class="uploadAction" method="uploadPaper">
+        </action>
+        <action name="uploadSoft" class="uploadAction" method="uploadSoft">
+        </action>
+    </package>
+
+    <package name="download" extends="json-default, struts-default">
+        <action name="downFile" class="downloadFileAction" method="downFile">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream;charset=ISO-8859-1</param>
+                <!-- inputName 流对象名 —— 比如这里写inputStream，它就会自动去找Action中的getInputStream方法。 -->
+                <param name="inputName">inputStream</param>
+                <!-- contentDisposition 使用经过转码的文件名作为下载文件名 —— 默认格式是attachment;filename="${fileName}"，将调用该Action中的getFileName方法。 -->
+                <param name="contentDisposition">attachment;filename=${filename}</param>
+                <!-- bufferSize 下载文件的缓冲大小 -->
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+    </package>
+</struts>

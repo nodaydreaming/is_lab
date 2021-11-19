@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.hznu.islab.entity.WorksEntity" table="works" schema="is_lab">
+        <id name="worksId" column="worksId">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" not-null="false"/>
+        <property name="intro" column="intro" not-null="false"/>
+        <property name="photo" column="photo" not-null="false"/>
+    </class>
+</hibernate-mapping>
